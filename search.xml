@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title></title>
+      <link href="/2023/02/05/csapp-xue-xi-ji-lu/"/>
+      <url>/2023/02/05/csapp-xue-xi-ji-lu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CSAPP——第二章"><a href="#CSAPP——第二章" class="headerlink" title="CSAPP——第二章"></a>CSAPP——第二章</h1><p>时间：2023.02.05</p><h2 id="2-2整数表示"><a href="#2-2整数表示" class="headerlink" title="2.2整数表示"></a>2.2整数表示</h2><h3 id="2-2-2无符号数的编码"><a href="#2-2-2无符号数的编码" class="headerlink" title="2.2.2无符号数的编码"></a>2.2.2无符号数的编码</h3><p>无符号数编码的定义</p><p>对向量$ \vec{x} $:<br>$$<br>B2U_{w}(\vec{x})&#x3D;\sum_{i&#x3D;0}^{w-1} x_{i}2^{i} \text(Binary to Unsigned)<br>$$<br>函数$ B2U_w $将一个长度为w的0、1串映射到非负整数。</p><p>函数$  B2U_w $是一个双射。</p><h3 id="2-2-3补码编码"><a href="#2-2-3补码编码" class="headerlink" title="2.2.3补码编码"></a>2.2.3补码编码</h3><p>最常见的有符号数的计算机表示方式就是__补码__。在这个定义中，将字的最高有效为解释为负权。用函数$ B2T_w $表示。</p><p>补码编码的定义</p><p>对向量$ \vec{x} $:<br>$$<br>B2T_w(\vec{x})&#x3D;-x_{w-1}+\sum_{i&#x3D;0}^{w-2} x_i2^i \text(BinarytoTwo’s-complement)<br>$$<br>最高有效位成为符号位，权重为$ -2_{w-1} $。</p><p>符号位被设置为1，表示值为负；设置为0，值为正。</p><p>最小整数值是<br>$$<br>TMin_w&#x3D;-2^{w-1}<br>$$<br>最大整数值是<br>$$<br>TMax_w&#x3D;2^{w-1}-1<br>$$<br>补码的范围是不对称的<br>$$<br>|TMin|&#x3D;|TMax|+1<br>$$<br>也就是说，TMin没有与之对应的正数。</p><p>最大的无符号数值刚好比补码的最大值的两倍大一点<br>$$<br>UMax_w&#x3D;2TMax_w+1<br>$$<br>-1是一个全1的串，0是一个全0的串。</p><p>C库中的文件&lt;limit.h&gt;定义了常量INT_MAX,INT_MIN,UINT_MAX。对于一个补码的机器，这些常量就对应TMax,TMin,UMax的值。</p><blockquote><p>有符号数的其他表示方法</p><p>反码<br>$$<br>B2O_w(\vec{x})&#x3D;-x_{w-1}(2_{w-1}-1)+\sum_{i&#x3D;0}^{w-2}x_{i}2^i<br>$$<br>原码<br>$$<br>B2S_w(\vec{x})&#x3D;(-1)^{x_{w-1}}*(\sum_{i&#x3D;0}^{w-2}x_i2^i)<br>$$</p></blockquote><h3 id="2-2-4有符号数与无符号数的转换"><a href="#2-2-4有符号数与无符号数的转换" class="headerlink" title="2.2.4有符号数与无符号数的转换"></a>2.2.4有符号数与无符号数的转换</h3><p>强制类型转换的结果保持位值不变，只是改变了解释这些位的方式。</p><p>对于大多数C语言的实现，处理同样字长的有符号数和无符号数之间相互转换的一般规则是：数值可能会改变，但是位模式不变。</p><p>补码转换为无符号数</p><p>对满足TMin&lt;&#x3D;x&lt;&#x3D;TMax的x有<br>$$<br>T2U_w(x)&#x3D;x+2^w,x&lt;0<br>$$</p><p>$$<br>T2U_w(x)&#x3D;x,x&gt;&#x3D;0<br>$$</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>美赛绘图介绍</title>
       <link href="/2023/02/05/mei-sai-hui-tu-jie-shao/"/>
       <url>/2023/02/05/mei-sai-hui-tu-jie-shao/</url>
