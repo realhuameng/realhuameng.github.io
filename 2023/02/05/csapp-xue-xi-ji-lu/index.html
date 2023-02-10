@@ -5,9 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="CSAPP学习记录, Hexo">
-    <meta name="description" content="CSAPP——第二章时间：2023.02.05
-2.2整数表示2.2.2无符号数的编码无符号数编码的定义
-对向量$ \vec{x} $:$$B2U_{w}(\vec{x})&amp;#x3D;\sum_{i&amp;#x3D;0}^{w-1} x_{i}2">
+    <meta name="description" content="CSAPP——第二章2.2整数表示2.2.2无符号数的编码无符号数编码的定义
+对向量$ \vec{x} $:$$B2U_{w}(\vec{x})&amp;#x3D;\sum_{i&amp;#x3D;0}^{w-1} x_{i}2^{i} \text(Bin">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -391,7 +390,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    521
+                    1.2k
                 </div>
                 
 
@@ -411,8 +410,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="CSAPP——第二章"><a href="#CSAPP——第二章" class="headerlink" title="CSAPP——第二章"></a>CSAPP——第二章</h1><p>时间：2023.02.05</p>
-<h2 id="2-2整数表示"><a href="#2-2整数表示" class="headerlink" title="2.2整数表示"></a>2.2整数表示</h2><h3 id="2-2-2无符号数的编码"><a href="#2-2-2无符号数的编码" class="headerlink" title="2.2.2无符号数的编码"></a>2.2.2无符号数的编码</h3><p>无符号数编码的定义</p>
+                <h1 id="CSAPP——第二章"><a href="#CSAPP——第二章" class="headerlink" title="CSAPP——第二章"></a>CSAPP——第二章</h1><h2 id="2-2整数表示"><a href="#2-2整数表示" class="headerlink" title="2.2整数表示"></a>2.2整数表示</h2><h3 id="2-2-2无符号数的编码"><a href="#2-2-2无符号数的编码" class="headerlink" title="2.2.2无符号数的编码"></a>2.2.2无符号数的编码</h3><p>无符号数编码的定义</p>
 <p>对向量$ \vec{x} $:<br>$$<br>B2U_{w}(\vec{x})&#x3D;\sum_{i&#x3D;0}^{w-1} x_{i}2^{i} \text(Binary to Unsigned)<br>$$<br>函数$ B2U_w $将一个长度为w的0、1串映射到非负整数。</p>
 <p>函数$  B2U_w $是一个双射。</p>
 <h3 id="2-2-3补码编码"><a href="#2-2-3补码编码" class="headerlink" title="2.2.3补码编码"></a>2.2.3补码编码</h3><p>最常见的有符号数的计算机表示方式就是__补码__。在这个定义中，将字的最高有效为解释为负权。用函数$ B2T_w $表示。</p>
@@ -431,6 +429,26 @@
 <p>补码转换为无符号数</p>
 <p>对满足TMin&lt;&#x3D;x&lt;&#x3D;TMax的x有<br>$$<br>T2U_w(x)&#x3D;x+2^w,x&lt;0<br>$$</p>
 <p>$$<br>T2U_w(x)&#x3D;x,x&gt;&#x3D;0<br>$$</p>
+<p>当一个有符号数映射为它相应的无符号数时，负数就被转换成了大的正数，而非负数会保持不变。</p>
+<p>无符号数转换为补码</p>
+<p>对满足0&lt;&#x3D;u&lt;&#x3D;UMax的u有<br>$$<br>U2T_w(u)&#x3D;u,u&lt;&#x3D;TMax_w<br>$$</p>
+<p>$$<br>U2T_w(u)&#x3D;u-2^w,u&gt;TMax_w<br>$$</p>
+<p>对于小的数(&lt;&#x3D;TMax),从无符号数到有符号数的转换将保留数字的原值。</p>
+<p>对于大的数( &gt;TMax),数字将被转换为一个负数值。</p>
+<p><strong>考虑无符号与补码表示之间相互转换的结果</strong></p>
+<p>对于在范围0&lt;&#x3D;x&lt;&#x3D;TMax之内的值x而言，我们得到T2U(x)&#x3D;x和U2T(x)&#x3D;x。也就是说，在这个范围内的数字有相同的无符号和补码表示。</p>
+<p>对于这个范围以外的数字，转换需要加上或者减去$ 2_w $</p>
+<h3 id="2-2-5C语言中的有符号数与无符号数"><a href="#2-2-5C语言中的有符号数与无符号数" class="headerlink" title="2.2.5C语言中的有符号数与无符号数"></a>2.2.5C语言中的有符号数与无符号数</h3><p>当执行一个运算时，如果它的一个运算数是有符号的而另一个是无符号的，那么C语言会隐式地将有符号参数强制类型转换为无符号数，并假设这两个数都是非负的，来执行这个运算。</p>
+<p>这种方法对于标准的算数运算来说并无多大差异，但是对于&lt;&gt;这样的关系运算符来说，它会导致非直观的结果。</p>
+<h3 id="2-2-6扩展一个数字的位表示"><a href="#2-2-6扩展一个数字的位表示" class="headerlink" title="2.2.6扩展一个数字的位表示"></a>2.2.6扩展一个数字的位表示</h3><p>要将一个无符号数转换为一个更大的数据类型，只要简单的在表示的开头添加0，这种运算被称为零扩展。</p>
+<p>要将补码数字转换为一个更大的数据类型，可以执行一个符号扩展（将符号位填补前面空余位）。</p>
+<p>数据类型转换时，要先转换大小，再完成符号的转换。</p>
+<h3 id="2-2-7截断数字"><a href="#2-2-7截断数字" class="headerlink" title="2.2.7截断数字"></a>2.2.7截断数字</h3><p>截断无符号数<br>$$<br>x^<code>=xmod2^k $$ 截断补码数值 $$ x^</code>&#x3D;U2T_k(xmod2^k)<br>$$</p>
+<h3 id="2-2-8关于有符号数与无符号数的建议"><a href="#2-2-8关于有符号数与无符号数的建议" class="headerlink" title="2.2.8关于有符号数与无符号数的建议"></a>2.2.8关于有符号数与无符号数的建议</h3><h2 id="2-3整数运算"><a href="#2-3整数运算" class="headerlink" title="2.3整数运算"></a>2.3整数运算</h2><h3 id="2-3-1无符号加法"><a href="#2-3-1无符号加法" class="headerlink" title="2.3.1无符号加法"></a>2.3.1无符号加法</h3><p><strong>无符号加法</strong></p>
+<p>对满足$ 0&lt;&#x3D;x,y&lt;2_w $的x和y有：<br>$$<br>x+y&#x3D;x+y,  x+y&lt;2^w<br>$$</p>
+<p>$$<br>x+y&#x3D;x+y-2^w,2^w&lt;&#x3D;x+y&lt;&#x3D;2^{w+1}<br>$$</p>
+<p><strong>检测无符号数加法中的溢出</strong></p>
+<p>对在范围0&lt;&#x3D;x,y&lt;&#x3D;UMax,中的x和y，令s&#x3D;x+y。当且仅当s&lt;x(或者等价的s&lt;y)时发生了溢出。</p>
 
                 
             </div>
@@ -571,18 +589,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/05/csapp-xue-xi-ji-lu/">
+                <a href="/2023/02/10/suan-fa-shua-ti-ji-lu-shu-zu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="CSAPP学习记录">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">CSAPP学习记录</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -592,9 +609,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-05
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-10
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -603,7 +620,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -825,7 +841,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">617</span>
+                        class="white-color">2.4k</span>
             
             
             
