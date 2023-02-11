@@ -4,12 +4,18 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="美赛绘图介绍, Hexo">
-    <meta name="description" content="美赛绘图介绍配色colorspace
-图片素材freepic
-python画图seaborn库
-绘图网站bioladder
-">
+    <meta name="keywords" content="Hexo">
+    <meta name="description" content="
+title:算法刷题记录—链表203.移除链表元素力扣题目链接
+
+直接使用原来的链表进行删除操作
+
+设置一个虚拟头节点在进行操作
+
+
+class Solution &amp;#123;
+public:
+    ListNode* removeEl">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +27,7 @@ python画图seaborn库
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>美赛绘图介绍 | Hexo</title>
+    <title>Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -338,12 +344,12 @@ python画图seaborn库
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">美赛绘图介绍</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -379,21 +385,21 @@ python画图seaborn库
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-05
+                    2023-02-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-06
+                    2023-02-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    23
+                    433
                 </div>
                 
 
@@ -413,10 +419,106 @@ python画图seaborn库
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="美赛绘图介绍"><a href="#美赛绘图介绍" class="headerlink" title="美赛绘图介绍"></a>美赛绘图介绍</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="配色"><a href="#配色" class="headerlink" title="配色"></a>配色</h3><p><a target="_blank" rel="noopener" href="https://mycolor.space/">colorspace</a></p>
-<h3 id="图片素材"><a href="#图片素材" class="headerlink" title="图片素材"></a>图片素材</h3><p><a target="_blank" rel="noopener" href="https://www.freepik.com/">freepic</a></p>
-<h3 id="python画图"><a href="#python画图" class="headerlink" title="python画图"></a>python画图</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/81553421?utm_source=wechat_session">seaborn库</a></p>
-<h3 id="绘图网站"><a href="#绘图网站" class="headerlink" title="绘图网站"></a>绘图网站</h3><p><a target="_blank" rel="noopener" href="https://www.bioladder.cn/web/#/pro/index">bioladder</a></p>
+                <hr>
+<h2 id="title-算法刷题记录—链表"><a href="#title-算法刷题记录—链表" class="headerlink" title="title:算法刷题记录—链表"></a>title:算法刷题记录—链表</h2><h3 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203.移除链表元素"></a>203.移除链表元素</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/">力扣题目链接</a></p>
+<ul>
+<li><p><strong>直接使用原来的链表进行删除操作</strong></p>
+</li>
+<li><p><strong>设置一个虚拟头节点在进行操作</strong></p>
+</li>
+</ul>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
+public:
+    ListNode* removeElements(ListNode* head, int val) &#123;
+        ListNode* dummyHead &#x3D; new ListNode(0); &#x2F;&#x2F; 设置一个虚拟头结点
+        dummyHead-&gt;next &#x3D; head; &#x2F;&#x2F; 将虚拟头结点指向head，这样方面后面做删除操作
+        ListNode* cur &#x3D; dummyHead;
+        while (cur-&gt;next !&#x3D; NULL) &#123;
+            if(cur-&gt;next-&gt;val &#x3D;&#x3D; val) &#123;
+                ListNode* tmp &#x3D; cur-&gt;next;
+                cur-&gt;next &#x3D; cur-&gt;next-&gt;next;
+                delete tmp;
+            &#125; else &#123;
+                cur &#x3D; cur-&gt;next;
+            &#125;
+        &#125;
+        head &#x3D; dummyHead-&gt;next;
+        delete dummyHead;
+        return head;
+    &#125;
+&#125;;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="707-设计链表"><a href="#707-设计链表" class="headerlink" title="707.设计链表"></a>707.设计链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/">力扣题目链接</a></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;定义链表结构体
+struct LinkedNode&#123;
+    int val;
+    LinkedNode* next;
+    LinkedNode(int val):val(val),next(nullptr)&#123;&#125;
+    
+&#125;;
+MyLinkedList()&#123;
+    _dummyhead &#x3D; new LinkedNode(0);
+    _size&#x3D;0;
+&#125;
+int get(int index)&#123;
+    if(index &gt; (_size - 1)||index&lt;0)&#123;
+        return -1;
+    &#125;
+    LinkedNode* cur &#x3D; _dummyhead-&gt;next;
+    while(index--)&#123;
+        cur &#x3D; cur-&gt;next;
+    &#125;
+    return cur-&gt;val;
+&#125;
+void addAtHead(int val)&#123;
+    LinkedNode* newnode &#x3D; new LinkedNode(val);
+    newnode-&gt;next&#x3D;_dummyhead-&gt;next;
+    _dummyhead-&gt;next&#x3D;newnode;
+    _size++;
+&#125;
+void addAtTail(int val)&#123;
+    LinkedNode* newnode &#x3D; new LinkedNode(val);
+    LinkedNode* cur &#x3D; _dummyhead;
+    whlie(cur-&gt;next !&#x3D; nullptr)&#123;
+        cur &#x3D; cur-&gt;next;
+    &#125;
+    cur-&gt;next &#x3D; newnode;
+   _size++; 
+&#125;
+void addAtIndex(int index, int val)&#123;
+    if(index &gt; _size) return;
+    if(index &lt; 0) index&#x3D;0;
+    LinkedNode* newnode &#x3D; new LinkedNode(val);
+    LinkedNode* cur &#x3D; _dummyhead;
+    whlie(index--)&#123;
+        cur&#x3D;cur-&gt;next;
+    &#125;
+    newnode-&gt;next &#x3D; cur-&gt;next;
+    cur-&gt;next &#x3D; newnode;
+    _size++;
+    
+&#125;
+void deleteAtIndex(int index)&#123;
+    if(index &gt;&#x3D; _size || index &lt; 0)&#123;
+        return;
+    &#125;
+    LinkedNode* cur &#x3D; _dunnyhead;
+    while(index--)&#123;
+        cur&#x3D;cur-&gt;next;
+    &#125;
+    LinkedNode* tmp &#x3D; cur-&gt;next;
+    cur-&gt;next &#x3D; cur-&gt;next-&gt;next;
+    delete tmp;
+    _size--;
+&#125;
+private:
+ int _size;
+ LinkedNode* _dummyhead;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206.反转链表"></a>206.反转链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">力扣题目链接</a></p>
+<p><strong>双指针法</strong></p>
+<p><strong>递归法</strong></p>
 
                 
             </div>
@@ -443,7 +545,7 @@ python画图seaborn库
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://realhuameng.github.io/2023/02/05/mei-sai-hui-tu-jie-shao/">http://realhuameng.github.io/2023/02/05/mei-sai-hui-tu-jie-shao/</a>
+                    <a href="http://realhuameng.github.io/2023/02/11/suan-fa-shua-ti-ji-lu-lian-biao/">http://realhuameng.github.io/2023/02/11/suan-fa-shua-ti-ji-lu-lian-biao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -557,54 +659,18 @@ python画图seaborn库
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/02/05/csapp-xue-xi-ji-lu/">
+                <a href="/2023/02/11/suan-fa-shua-ti-ji-lu-lian-biao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="CSAPP学习记录(1)">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">CSAPP学习记录(1)</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-05
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/02/03/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -615,7 +681,45 @@ python画图seaborn库
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/10/suan-fa-shua-ti-ji-lu-shu-zu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="算法刷题基础—数组">
+                        
+                        <span class="card-title">算法刷题基础—数组</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-10
                             </span>
                         <span class="publish-author">
                             
@@ -782,13 +886,6 @@ python画图seaborn库
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 
