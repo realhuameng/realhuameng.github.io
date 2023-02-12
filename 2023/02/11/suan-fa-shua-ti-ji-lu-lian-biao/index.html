@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hexo">
-    <meta name="description" content="
-title:算法刷题记录—链表203.移除链表元素力扣题目链接
+    <meta name="keywords" content="算法刷题记录—链表, Hexo">
+    <meta name="description" content="203.移除链表元素力扣题目链接
 
 直接使用原来的链表进行删除操作
 
@@ -15,7 +14,7 @@ title:算法刷题记录—链表203.移除链表元素力扣题目链接
 
 class Solution &amp;#123;
 public:
-    ListNode* removeEl">
+    ListNode* removeElements(ListNode*">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,7 +26,7 @@ public:
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hexo</title>
+    <title>算法刷题记录—链表 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -344,12 +343,12 @@ public:
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">算法刷题记录—链表</h1>
                 </div>
             </div>
         </div>
@@ -392,14 +391,14 @@ public:
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-11
+                    2023-02-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    433
+                    939
                 </div>
                 
 
@@ -419,8 +418,7 @@ public:
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<h2 id="title-算法刷题记录—链表"><a href="#title-算法刷题记录—链表" class="headerlink" title="title:算法刷题记录—链表"></a>title:算法刷题记录—链表</h2><h3 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203.移除链表元素"></a>203.移除链表元素</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/">力扣题目链接</a></p>
+                <h3 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203.移除链表元素"></a>203.移除链表元素</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/">力扣题目链接</a></p>
 <ul>
 <li><p><strong>直接使用原来的链表进行删除操作</strong></p>
 </li>
@@ -518,7 +516,99 @@ private:
 
 <h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206.反转链表"></a>206.反转链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">力扣题目链接</a></p>
 <p><strong>双指针法</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">LinkNode* reverseList(ListNode* head)&#123;
+    ListNode* temp;
+    ListNode* cur &#x3D; head;
+    ListNode* pre &#x3D; nullptr;
+    while(cur)&#123;
+        temp &#x3D; cur-&gt;next;
+        pre &#x3D; cur;
+        cur &#x3D; temp;
+    &#125;
+    return pre;
+
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><strong>递归法</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">ListNode* reverse(ListNOde* pre, ListNode* cur)&#123;
+    if(cur&#x3D;&#x3D;nullptr) return pre
+    ListNode* temp &#x3D; cur-&gt;next;
+    cur-&gt;next &#x3D; pre;
+    return reverse(cur, temp);
+&#125;
+ListNode* reverseList(ListNode* head)
+&#123;
+    return reverse(nullptr,head);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="19-删除链表倒数第n个结点"><a href="#19-删除链表倒数第n个结点" class="headerlink" title="19.删除链表倒数第n个结点"></a>19.删除链表倒数第n个结点</h3><p><strong>双指针法</strong></p>
+<p>添加虚拟头节点</p>
+<p>fast指针向后移动n+1步</p>
+<p>fast和slow同时移动至fast指针指向末尾</p>
+<p>删除slow后面的节点</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">ListNode* dummyhead&#x3D;new ListNode(0);
+dummyhead-&gt;next&#x3D;head;
+ListNode* fast&#x3D;dummyhead;
+ListNode* slow&#x3D;dummyhead;
+while(n-- &amp;&amp; fast!&#x3D;nullptr)
+&#123;
+    fast&#x3D;fast-&gt;next;
+&#125;
+fast-fast-&gt;next;
+while(fast!&#x3D;nullptr)
+&#123;
+    fast&#x3D;fast-&gt;next;
+    slow&#x3D;slow-&gt;next;
+&#125;
+slow-&gt;next&#x3D;slow-&gt;next-&gt;next;
+return dummyhead-&gt;next;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24.两两交换链表中的节点"></a>24.两两交换链表中的节点</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/">力扣题目链接</a></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">ListNode* dummyhead&#x3D;new ListNode(0);
+dummyhead-&gt;next&#x3D;head;
+ListNode* cur&#x3D;dummyhead;
+while(cur-&gt;next !&#x3D; nullptr &amp;&amp; cur-&gt;next-&gt;next !&#x3D; nuulptr)
+&#123;
+    ListNode* temp1&#x3D;cur-&gt;next;  ListNode* temp2&#x3D;cur-&gt;next-&gt;next-&gt;next;
+    cur-&gt;next&#x3D;cur-&gt;next-&gt;next;
+    cur-&gt;next-&gt;next&#x3D;temp1;
+    cur-&gt;next-&gt;next-&gt;next&#x3D;temp2;
+    
+&#125;
+return dummyhead-&gt;next;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="160-链表相交"><a href="#160-链表相交" class="headerlink" title="160.链表相交"></a>160.链表相交</h3><p>计算两链表的长度</p>
+<p>求出长度差值</p>
+<p>让指针移动到末尾对其的位置</p>
+<p>比较两指针是否相同，不相同则后移</p>
+<p>直至两指针相等</p>
+<h3 id="142-环形链表"><a href="#142-环形链表" class="headerlink" title="142.环形链表"></a>142.环形链表</h3><p><strong>双指针法</strong></p>
+<p>fast走两个节点，slow走一个节点</p>
+<p><strong>fast指针先进入环中，fast与slow一定在换环中相遇。</strong></p>
+<p><strong>相对于slow来说，fast是一步步靠近slow的</strong></p>
+<h4 id="如何找到环的入口"><a href="#如何找到环的入口" class="headerlink" title="如何找到环的入口"></a>如何找到环的入口</h4><p>从头节点出发一个指针，从相遇节点也出发一个指针，每次均走一个节点，两个指针相遇时就是环形入口的节点。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">ListNode* fast&#x3D;head;
+ListNode* slow&#x3D;head;
+while(fast!&#x3D;nullptr&amp;&amp;fast-&gt;next!&#x3D;nullptr)
+&#123;
+    slow&#x3D;slow-&gt;next;
+    fast&#x3D;fast-&gt;next-&gt;next;
+    if(slow&#x3D;&#x3D;fast)
+    &#123;
+        ListNode* index1&#x3D;fast;
+        ListNode* index2&#x3D;head;
+        while(index1!&#x3D;index2)
+        &#123;
+            index1&#x3D;index1-&gt;next;
+            index2&#x3D;index2-&gt;next;
+        &#125;
+        return index2;
+    &#125;
+&#125;
+return NULL;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -659,18 +749,17 @@ private:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/11/suan-fa-shua-ti-ji-lu-lian-biao/">
+                <a href="/2023/02/12/suan-fa-shua-ti-ji-lu-ha-xi-biao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="算法刷题记录-哈希表">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">算法刷题记录-哈希表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -680,9 +769,9 @@ private:
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -691,7 +780,6 @@ private:
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -906,7 +994,7 @@ private:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">2.8k</span>
+                        class="white-color">3.4k</span>
             
             
             
