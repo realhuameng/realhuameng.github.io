@@ -384,14 +384,14 @@ $$hashFunction &amp;#x3D; hashCode(name)%tablesize$$
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-12
+                    2023-02-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    64
+                    1.1k
                 </div>
                 
 
@@ -423,6 +423,186 @@ $$hashFunction &amp;#x3D; hashCode(name)%tablesize$$
 <li><p>map</p>
 </li>
 </ul>
+<p>unordered_set&#x2F;unordered_map底层实现为哈希表，set&#x2F;map和multiset&#x2F;multimap底层实现是红黑树，key值是有序的，只能删除和增加。</p>
+<p>要使用集合解决哈希问题时，优先使用unordered_set，因为它的查询增删效率最优。</p>
+<p>如果需要集合是有序的 ，那么就用set。</p>
+<p>如果不仅要求有序还要有重复数据的话，那么就用multiset.</p>
+<h3 id="242-有效的字母异位词"><a href="#242-有效的字母异位词" class="headerlink" title="242.有效的字母异位词"></a>242.有效的字母异位词</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-anagram/">力扣题目链接</a></p>
+<p>利用s[i]-‘a’来确定字母在数组中的位置。</p>
+<h3 id="1002-查找常用字符"><a href="#1002-查找常用字符" class="headerlink" title="1002.查找常用字符"></a>1002.查找常用字符</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-common-characters/">力扣题目链接</a></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;string&gt; commonChars(vector&lt;string&gt;&amp; A)&#123;
+    vector&lt;string&gt; result;
+    if(A.size()&#x3D;&#x3D;0) return result;
+    int hash[26]&#x3D;&#123;0&#125;;
+    for(int i&#x3D;0;i&lt;A[0].size();i++)&#123;
+        hash[A[0][i]-&#39;a&#39;]++;
+    &#125;
+    int hashOtherStr[26]&#x3D;&#123;0&#125;;
+    for(int i&#x3D;1;i&lt;A.size(),i++)&#123;
+        memset(hashOtherStr,0,26*sizeof(int));
+        for(int j&#x3D;0;j&lt;A[i].size();j++)&#123;
+            hashOtherStr[A[i][j]-&#39;a&#39;]++;
+        &#125;
+        for(int k&#x3D;0;k&lt;26;k++)&#123;
+            hash[k]&#x3D;min(hash[k],hashOtherStr[k]);
+        &#125;
+    &#125;
+    for(int i&#x3D;0;i&lt;26;i++)&#123;
+        while(hash[i]!&#x3D;0)&#123;
+            string s(1,i+&#39;a&#39;);
+            result.push_back(s);
+            hash[i]--;
+        &#125;
+    &#125;
+    return result;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="349-两个数组的交集"><a href="#349-两个数组的交集" class="headerlink" title="349.两个数组的交集"></a>349.两个数组的交集</h3><p>使用unordered_set</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;int&gt; intersection(vector&lt;int&gt;&amp; nums1,vector&lt;int&gt;&amp; nums2)
+&#123;
+    unordered_set result;
+    unordered_set nums(nums1.begin(),nums1.end())
+        for(int num:nums2)&#123;
+            if(nums.find(num)!&#x3D;nums.end())
+            &#123;
+                result.insert(num);
+            &#125;
+        &#125;
+    return vector&lt;int&gt;(result.begin(),result.end());
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="202-快乐数"><a href="#202-快乐数" class="headerlink" title="202.快乐数"></a>202.快乐数</h3><p>当我们要快速判断一个元素是否出现在集合中时，可以考虑哈希法。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int getsum(int n)&#123;
+    int sum&#x3D;0;
+    while(n)&#123;
+        sum+&#x3D;(n%10)*(n%10);
+        n&#x2F;&#x3D;10;
+    &#125;
+&#125;
+bool ishappy(int n)&#123;
+    unordered_set&lt;int&gt; set;
+    while(1)&#123;
+        int sum &#x3D; getsum(n);
+        if(sum&#x3D;&#x3D;1) return true;
+        if(set.find(sum)!&#x3D;set.end())&#123;
+            return false;
+        &#125;else&#123;
+            set.insert(sum);
+        &#125;
+        n&#x3D;sum;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1.两数之和"></a>1.两数之和</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">std::unordered_map map;
+for(int i&#x3D;0;i&lt;nums.size(),i++)
+&#123;
+    auto iter&#x3D;map.find(target&#x3D;nums[i]);
+    if(iter!&#x3D;map.end())
+    &#123;
+        return &#123;iter-&gt;second,i&#125;;
+    &#125;
+    map.insert(pair&lt;int,int&gt;(nums[i],i));
+&#125;
+return &#123;&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="454-四数相加Ⅱ"><a href="#454-四数相加Ⅱ" class="headerlink" title="454.四数相加Ⅱ"></a>454.四数相加Ⅱ</h3><p>首先定义一个unordered_map，key放ab两数之和，value放出现次数。</p>
+<p>遍历AB两数组，统计两数组元素之和和出现的次数。</p>
+<p>遍历CD数组，找到如果0-(c+d)在map中出现过的话，统计次数。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int foursumcount(vector&lt;int&gt;&amp;A ,vector&lt;int&gt;&amp;B, vector&lt;int&gt;&amp;C ,vector&lt;int&gt;&amp;D)
+&#123;
+    unordered_map&lt;int,int&gt; map;
+    for(int a:A)
+    &#123;
+        for(int b:B)
+        &#123;
+            map[a+b]++;
+        &#125;
+            
+    &#125;
+    int count&#x3D;0;
+    for(int c:C)
+    &#123;
+        for(int d:D)
+        &#123;
+            if(map.find(0-(c+d))!&#x3D;map.end())
+            &#123;
+                count+&#x3D;map[0-(c+d)];
+            &#125;
+            
+        &#125;
+    &#125;
+    return count;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="383-赎金信"><a href="#383-赎金信" class="headerlink" title="383.赎金信"></a>383.赎金信</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">bool canConstruct(string ransomNote, string magazine)
+&#123;
+    int record[26]&#x3D;&#123;0&#125;;
+    if(ransomNote.size()&gt;magazine.size())
+        return false;
+    for(int i&#x3D;0;i&lt;magazine.size();i++)
+    &#123;
+        record[magazine[i]-&#39;a&#39;]++;
+    &#125;
+    for(int j&#x3D;0;j&lt;ransomNote.size();j++)
+    &#123;
+        record[ransomNote[j]-&#39;a&#39;]--;
+        if(record[ransomNote[j]-&#39;a&#39;]&lt;0)
+            return false;
+    &#125;
+    return true;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15.三数之和"></a>15.三数之和</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums)&#123;
+    vector&lt;vector&lt;int&gt;&gt; result;
+    sort(nums.begin(),nums.end());
+    for(int i&#x3D;0;i&lt;nums.size();i++)
+    &#123;
+        if(nums[i]&gt;0) break;
+        if(i&gt;0 &amp;&amp; nums[i]&#x3D;&#x3D;nums[i-1]) contunue;
+        unordered_set&lt;int&gt; set;
+        for(int j&#x3D;i+1;j&lt;nums.size();j++)&#123;
+            if(j&gt;i+2&amp;&amp;nums[j]&#x3D;&#x3D;nums[j-1]&amp;&amp;nums[j-1]&#x3D;&#x3D;nums[j-2])
+                contunue;
+            int c&#x3D;0-(nums[i]+nums[j]);
+            if(set.find(c)!&#x3D;set.end())&#123;
+                result.push_back(&#123;nums[i],nums[j],c&#125;);
+                set.erese(c);
+            &#125;else&#123;
+                set.insert(nums[j]);
+            &#125;
+        &#125;
+    &#125;
+    return result;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>双指针法</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums)&#123;
+    vector&lt;vector&lt;int&gt;&gt; result;
+    sort(nums.begin(),nums.end());
+    for(int i&#x3D;0;i&lt;nums.size();i++)
+    &#123;
+        if(nums[i]&gt;0&amp;&amp;i&#x3D;0) return result;
+        if(i&gt;0&amp;&amp;nums[i]&#x3D;&#x3D;nums[i-1]) continue;
+        
+    &#125;
+    int left&#x3D;i+1;
+    int right&#x3D;nums.size()-1;
+    while(right&gt;left)
+    &#123;
+        if(nums[i]+nums[left]+nums[right]&gt;0) right--;
+        else if(nums[i]+nums[left]+nums[right]&lt;0) left++;
+        else&#123;
+            result.push_back(vector&lt;int&gt;&#123;nums[i],nums[left],nums[right]&#125;);
+            whlie(right&gt;left &amp;&amp; nums[right]&#x3D;&#x3D;nums[right-1]) right--;
+            whlie(right&gt;left &amp;&amp; nums[left]&#x3D;&#x3D;nums[left++]) left++;
+            
+            right--;
+            left++;
+            
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -563,18 +743,17 @@ $$hashFunction &amp;#x3D; hashCode(name)%tablesize$$
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/12/suan-fa-shua-ti-ji-lu-ha-xi-biao/">
+                <a href="/2023/02/12/ji-suan-ji-wang-luo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="算法刷题记录-哈希表">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="计算机网络">
                         
-                        <span class="card-title">算法刷题记录-哈希表</span>
+                        <span class="card-title">计算机网络</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -584,9 +763,9 @@ $$hashFunction &amp;#x3D; hashCode(name)%tablesize$$
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-12
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -595,7 +774,6 @@ $$hashFunction &amp;#x3D; hashCode(name)%tablesize$$
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -810,7 +988,7 @@ $$hashFunction &amp;#x3D; hashCode(name)%tablesize$$
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">3.4k</span>
+                        class="white-color">4.6k</span>
             
             
             

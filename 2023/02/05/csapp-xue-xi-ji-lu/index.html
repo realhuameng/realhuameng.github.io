@@ -383,14 +383,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-10
+                    2023-02-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.3k
                 </div>
                 
 
@@ -448,7 +448,11 @@
 <p>对满足$ 0&lt;&#x3D;x,y&lt;2_w $的x和y有：<br>$$<br>x+y&#x3D;x+y,  x+y&lt;2^w<br>$$</p>
 <p>$$<br>x+y&#x3D;x+y-2^w,2^w&lt;&#x3D;x+y&lt;&#x3D;2^{w+1}<br>$$</p>
 <p><strong>检测无符号数加法中的溢出</strong></p>
-<p>对在范围0&lt;&#x3D;x,y&lt;&#x3D;UMax,中的x和y，令s&#x3D;x+y。当且仅当s&lt;x(或者等价的s&lt;y)时发生了溢出。</p>
+<p>对在范围0&lt;&#x3D;x,y&lt;&#x3D;UMax,中的x和y，令s&#x3D;x+y。当且仅当s&lt;x(或者等价的s&lt;y)时发生了溢出。   </p>
+<h3 id="2-3-2补码加法"><a href="#2-3-2补码加法" class="headerlink" title="2.3.2补码加法"></a>2.3.2补码加法</h3><p>当和x+y超过TMax时，我们说发生了正溢出，截断的结果是从和数中减去$ 2_w $；当和x+y小于TMin时，我们说发生了负溢出，截断的结果是把和数加上$ 2_w $。</p>
+<p><strong>检测补码加法中的溢出</strong></p>
+<p>对满足TMin&lt;&#x3D;x,y&lt;&#x3D;TMax的x和y，令s&#x3D;x+y，当且仅当x&gt;0,y&gt;0,但s&lt;&#x3D;0时，计算s发生了正溢出。当且仅当x&lt;0,y&lt;0,但s&gt;&#x3D;0时，计算s发生了负溢出。</p>
+<h3 id="2-3-3补码的非"><a href="#2-3-3补码的非" class="headerlink" title="2.3.3补码的非"></a>2.3.3补码的非</h3><p>对w位的补码加法来说，TMin是自己的加法的逆。而对其他任何数值x都有-x作为其加法的逆。</p>
 
                 
             </div>
@@ -841,7 +845,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">3.4k</span>
+                        class="white-color">4.6k</span>
             
             
             
