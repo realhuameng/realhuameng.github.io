@@ -4,8 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="计算机网络, Hexo">
-    <meta name="description" content="计算机网络第1章：概论1.1 什么是Internet?">
+    <meta name="keywords" content="Hexo">
+    <meta name="description" content="
+title:算法刷题记录—字符串算法刷题记录—字符串151.翻转字符串里的单词关键代码：
+去掉多余的空格
+void removeExtraSpaces(string&amp;amp; s)
+&amp;#123;
+    int slow&amp;#x3D;0;
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>计算机网络 | Hexo</title>
+    <title>Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +340,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">计算机网络</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -375,21 +381,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-12
+                    2023-02-24
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-12
+                    2023-02-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    16
+                    467
                 </div>
                 
 
@@ -409,7 +415,73 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="第1章：概论"><a href="#第1章：概论" class="headerlink" title="第1章：概论"></a>第1章：概论</h2><h3 id="1-1-什么是Internet"><a href="#1-1-什么是Internet" class="headerlink" title="1.1 什么是Internet?"></a>1.1 什么是Internet?</h3>
+                <hr>
+<h2 id="title-算法刷题记录—字符串"><a href="#title-算法刷题记录—字符串" class="headerlink" title="title:算法刷题记录—字符串"></a>title:算法刷题记录—字符串</h2><h1 id="算法刷题记录—字符串"><a href="#算法刷题记录—字符串" class="headerlink" title="算法刷题记录—字符串"></a>算法刷题记录—字符串</h1><h3 id="151-翻转字符串里的单词"><a href="#151-翻转字符串里的单词" class="headerlink" title="151.翻转字符串里的单词"></a>151.翻转字符串里的单词</h3><p>关键代码：</p>
+<p>去掉多余的空格</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void removeExtraSpaces(string&amp; s)
+&#123;
+    int slow&#x3D;0;
+    for(int i&#x3D;0;i&lt;s.size();++i)
+    &#123;
+        if(s[i]!&#x3D;&#39; &#39;)
+        &#123;
+            if(slow!&#x3D;0) s[slow++]&#x3D;&#39; &#39;;
+            while(i&lt;s.size() &amp;&amp; s[i]!&#x3D;&#39; &#39;)
+                s[slow++] &#x3D; s[i++];
+        &#125;
+    &#125;
+    s.resize(slow);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="剑指offer-58-左旋转字符串"><a href="#剑指offer-58-左旋转字符串" class="headerlink" title="剑指offer 58:左旋转字符串"></a>剑指offer 58:左旋转字符串</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">string reverseLeftWords(string s,int n)
+&#123;
+    reverse(s.begin(), s.begin()+n);
+    reverse(s.begin()+n,s.end());
+    reverse(s.begin(),s.end());
+    return s;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h3><p><strong>前缀表（prefix table）：记录了模式串与主串（文本串不匹配的时候，模式串应该从哪里开始匹配）</strong></p>
+<p><strong>记录下标i之前（包括i）的字符串中，有多大长度的相同前缀后缀</strong></p>
+<h4 id="最长公共前后缀"><a href="#最长公共前后缀" class="headerlink" title="最长公共前后缀"></a>最长公共前后缀</h4><p>前缀是指不包含最后一个字符的所有以第一个字符开头的连续子串</p>
+<p>后缀是指不包含第一个字符的所有以最后一个字符结尾的连续子串</p>
+<p>前缀表要求的就是相同前后缀的长度</p>
+<h4 id="使用next数组来匹配"><a href="#使用next数组来匹配" class="headerlink" title="使用next数组来匹配"></a>使用next数组来匹配</h4><p><strong>初始化</strong></p>
+<p>定义两个指针，j指向前缀末尾位置，i指向后缀末尾位置。</p>
+<p><strong>处理前后缀不相同的情况</strong></p>
+<p>遍历模式串下标j要从1开始</p>
+<p>如果s[i] s[j+1]不相同，也就是 前后缀末尾不相同的情况，要向前回退。</p>
+<p><strong>处理前后缀相同的情况</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">if(s[i] &#x3D;&#x3D; s[j+1])&#123;
+    j++:
+&#125;
+next[i]&#x3D;j;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>构建next数组的函数代码</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void getNext(int* next,const string&amp; s)&#123;
+    int j&#x3D;-1;
+    next[0]&#x3D;j;
+    for(int i&#x3D;1;i&lt;s.size();i++)&#123;
+        while(j&gt;&#x3D;0 &amp;&amp; s[i] !&#x3D; s[j+1])&#123;
+            j &#x3D; next[j];
+        &#125;
+        if(s[i] &#x3D;&#x3D; s[j+1])
+            j++;
+        next[i]&#x3D;j;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
                 
             </div>
             <hr/>
@@ -435,7 +507,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://realhuameng.github.io/2023/02/12/ji-suan-ji-wang-luo/">http://realhuameng.github.io/2023/02/12/ji-suan-ji-wang-luo/</a>
+                    <a href="http://realhuameng.github.io/2023/02/24/suan-fa-shua-ti-ji-lu-zi-fu-chuan/">http://realhuameng.github.io/2023/02/24/suan-fa-shua-ti-ji-lu-zi-fu-chuan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -549,18 +621,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/12/ji-suan-ji-wang-luo/">
+                <a href="/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="计算机网络">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="汇编语言（第三版）王爽——实验一">
                         
-                        <span class="card-title">计算机网络</span>
+                        <span class="card-title">汇编语言（第三版）王爽——实验一</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -570,9 +641,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-12
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-04
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -581,7 +652,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -796,7 +866,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.6k</span>
+                        class="white-color">5.8k</span>
             
             
             
