@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>汇编语言（第三版）王爽—实验二</title>
+      <link href="/2023/03/11/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-er/"/>
+      <url>/2023/03/11/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-er/</url>
+      
+        <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="debug的使用"><a href="#debug的使用" class="headerlink" title="debug的使用"></a>debug的使用</h2><p><strong>关于D命令</strong></p><p>debug在执行如d 段地址：偏移地址这种D命令时，将段地址送入ds中比较方便</p><p><strong>在E,A,U命令中使用段寄存器</strong></p><p>debug的T命令在执行修改寄存器SS的指令时，下一条指令也紧接着被执行</p><h2 id="实验任务"><a href="#实验任务" class="headerlink" title="实验任务"></a>实验任务</h2><p>(1)使用debug将程序段写入内存中，并逐条执行</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_211335.png" alt="输入指令"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>汇编语言（第三版）王爽——实验一</title>
       <link href="/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/"/>
       <url>/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/</url>
