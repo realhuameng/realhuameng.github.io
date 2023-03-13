@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>汇编语言（第三版）王爽—实验三</title>
+      <link href="/2023/03/13/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-san/"/>
+      <url>/2023/03/13/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-san/</url>
+      
+        <content type="html"><![CDATA[<h1 id="实验3-编程、编译、连接"><a href="#实验3-编程、编译、连接" class="headerlink" title="实验3 编程、编译、连接"></a>实验3 编程、编译、连接</h1><p>（1）将书中给出的程序保存为t1.asm文件，将其生成可执行文件t1.exe</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20203934.png" alt="在edit中输入程序"></p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20204305.png" alt="编译t1.asm文件"></p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20204454.png" alt="连接目标文件，生成可执行文件"></p><p>（2）用debug跟踪t1.exe的执行过程，写出每一步执行后，相关寄存器中的内容和栈顶的内容</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20204616.png" alt="查看各个寄存器的设置情况"></p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20204725.png" alt="分别执行每一条指令"></p><p><strong>执行至int 21H时，用p指令结束程序</strong></p><p><strong>显示”program terminated normally”表示程序已正常执行完毕</strong></p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20204818.png" alt="所有指令执行完毕"></p><p>（3）PSP的头两个字节是CD20，用debug加载t1.exe，查看PSP的内容</p><p>利用r命令查看寄存器内容</p><p>查看075a</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20205248.png"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>汇编语言（第三版）王爽—第四章</title>
+      <link href="/2023/03/13/hui-bian-yu-yan-di-san-ban-wang-shuang-di-si-zhang/"/>
+      <url>/2023/03/13/hui-bian-yu-yan-di-san-ban-wang-shuang-di-si-zhang/</url>
+      
+        <content type="html"><![CDATA[<h1 id="4-3编辑源程序"><a href="#4-3编辑源程序" class="headerlink" title="4.3编辑源程序"></a>4.3编辑源程序</h1><p>（1）进入DOS，运行edit</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20190805.png"></p><p>（2）在edit中编辑程序</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20191012.png"></p><p>（3）将程序保存为c:\1.asm后退出edit</p><h1 id="4-4编译"><a href="#4-4编译" class="headerlink" title="4.4编译"></a>4.4编译</h1><p><strong>（1）进入DOS，c:\masm，运行masm.exe</strong></p><p>默认文件扩展名为ASM，如果源程序不是以asm为扩展名，就要输入它的全名</p><p>输入文件名时还要指明路径</p><p><strong>（2）输入源程序文件名后，系统提示输入目标文件名</strong></p><p>默认目标文件名与源程序名相同</p><p>也可指定目标文件所在的目录</p><p><strong>（3）忽略列表文件和交叉引用文件的生成</strong></p><p><strong>（4）对源程序的编译结束</strong></p><p>最后两行提示我们无警告和必须要改正的错误</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20191453.png"></p><p>编译过程中，我们提供了一个输入，即源程序文件。</p><p>最多可得到三个输出文件：目标文件(.obj)，列表文件(.lst)，交叉引用文件(.crf)</p><h1 id="4-5连接"><a href="#4-5连接" class="headerlink" title="4.5连接"></a>4.5连接</h1><p>  对源程序进行编译得到目标文件后，我们需要对目标文件进行连接，从而得到可执行文件</p><p>（1）进入DOS，运行link</p><p>（2）输入目标文件名</p><p>（3）忽略可执行文件名，忽略映像生成文件</p><p>（4）连接程序提示输入库文件的名称，这里直接忽略</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20192525.png"></p><p><strong>连接的作用</strong></p><p>（1）连接多个源程序</p><p>（2）连接库文件和目标文件</p><h1 id="4-6以简化的方式进行编译和连接"><a href="#4-6以简化的方式进行编译和连接" class="headerlink" title="4.6以简化的方式进行编译和连接"></a>4.6以简化的方式进行编译和连接</h1><p><strong>简化的编译：</strong></p><p>masm + 源程序文件的路径和文件名，并在结尾加上分号</p><p>过程中自动忽略中间文件的生成</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20193339.png" alt="简化编译"></p><p><strong>简化的连接：</strong></p><p>link + 目标文件的路径和文件名，并在结尾加上分号</p><p>过程中自动忽略中间文件的生成</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20193554.png" alt="简化连接"></p><h1 id="4-9程序执行过程的跟踪"><a href="#4-9程序执行过程的跟踪" class="headerlink" title="4.9程序执行过程的跟踪"></a>4.9程序执行过程的跟踪</h1><p>输入debug 1.exe跟踪程序的执行</p><p>使用R命令查看各个寄存器的设置情况</p><p>cx中存放的是程序的长度</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20200013.png" alt="debug的过程"></p><p><strong>DOS系统中.exe文件的加载</strong></p><p>找到一段起始地址SA:1000</p><p>在这段内存的前256个字节中，创建一个程序段前缀(PSP)</p><p>从这段内存区的256字节处开始，将程序装入，地址为SA+10H:0</p><p>将段地址存入ds中，初始化其它相关寄存器后，设置CS:IP指向程序的入口</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>汇编语言（第三版）王爽—实验二</title>
       <link href="/2023/03/11/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-er/"/>
       <url>/2023/03/11/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-er/</url>
