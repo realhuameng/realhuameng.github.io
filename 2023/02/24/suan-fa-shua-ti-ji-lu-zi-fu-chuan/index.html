@@ -387,14 +387,14 @@ void removeExtraSpaces(string&amp;amp; s)
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-12
+                    2023-03-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    926
+                    1.3k
                 </div>
                 
 
@@ -540,6 +540,75 @@ public:
     
     
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="459-重复的字符串"><a href="#459-重复的字符串" class="headerlink" title="459.重复的字符串"></a>459.重复的字符串</h3><h4 id="移动匹配"><a href="#移动匹配" class="headerlink" title="移动匹配"></a>移动匹配</h4><p>如果字符串由重复的子串组成，则s+s中必定出现一个s</p>
+<p>其中需要用到find库函数</p>
+<p>下面是使用方法</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20215137.png"></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123; 
+public:     
+    bool repeatedSubstringPattern(string s) &#123;         
+        string t&#x3D;s+s;         
+        t.erase(t.begin());         
+        t.erase(t.end()-1);                        if(t.find(s)!&#x3D;std::string::npos)         
+            return true;          
+        return false;     
+    &#125; &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="KMP解法"><a href="#KMP解法" class="headerlink" title="KMP解法"></a>KMP解法</h4><p>当一个字符串由重复子串组成，最长相等前后缀不包含的字串就是最小重复子串</p>
+<p>假设字符串s使用多个重复字串组成，重复出现的子字符串长度是x</p>
+<p>所以s由n*x组成</p>
+<p>因为字符串的最长相同前后缀长度一定是不包含s本身</p>
+<p>所以最长相同前后缀长度必然是m*x</p>
+<p>且n-m&#x3D;1</p>
+<p>如果nx%(n-m)x&#x3D;0</p>
+<p>就可以判定由重复出现的字符串</p>
+<p>如果len%(len-(next[len-1]+1))&#x3D;&#x3D;0</p>
+<p>说明数组长度可以被（数组长度-最长相等前后缀长度）整除</p>
+<p><strong>数组长度减去最长相同前后缀的长度相当于是一个周期的长度</strong></p>
+<p>前缀表统一减一的代码实现</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution
+&#123;
+public:
+    void getNext(int* next,string&amp; s)
+    &#123;
+        next[0]&#x3D;-1;
+        int j&#x3D;-1;
+        for(int i&#x3D;1;i&lt;s.size();i++)
+        &#123;
+            while(j&gt;&#x3D;0 &amp;&amp; s[i]!&#x3D;s[j+1])
+            &#123;
+                j&#x3D;next[j];
+            &#125;
+            if(s[i]&#x3D;&#x3D;s[j+1])
+            &#123;
+                j++;
+            &#125;
+            next[i]&#x3D;j;
+   bool repeatSubstringPattern(string s)
+   &#123;
+       if(s.size()&#x3D;&#x3D;0)
+       &#123;
+           return false;
+       &#125;
+       int next[s.size()-1];
+       int len&#x3D;s.size()-1;
+       getNext(next,s);
+       if(next[len-1]!&#x3D;-1 &amp;&amp; len%(len-(next[len-1]+1)&#x3D;&#x3D;0)
+          &#123;
+              return true;
+          &#125;
+          return false;
+   &#125;
+                
+        &#125;
+           
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -926,7 +995,7 @@ public:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">7.1k</span>
+                        class="white-color">8.5k</span>
             
             
             
