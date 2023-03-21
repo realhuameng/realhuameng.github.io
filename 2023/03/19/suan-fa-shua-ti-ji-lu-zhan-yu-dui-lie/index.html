@@ -384,14 +384,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-19
+                    2023-03-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    174
+                    345
                 </div>
                 
 
@@ -422,6 +422,53 @@
 <p>队列的情况也是一样的</p>
 <p>不允许有遍历行为，不提供迭代器</p>
 <p>SGI STL中也是以deque缺省情况下的底部结构</p>
+<h3 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20.有效的括号"></a>20.有效的括号</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution
+&#123;
+public:
+    bool isValid(string s)
+    &#123;
+        stack&lt;char&gt; ss;
+        if(s.size()%2 !&#x3D; 0) return false;
+        
+        for(int i&#x3D;0;i&lt;s.size();i++)
+        &#123;
+            if(s[i]&#x3D;&#x3D;&#39;(&#39;) ss.push(&#39;)&#39;);
+            else if(s[i]&#x3D;&#x3D;&#39;[&#39;) ss.push(&#39;]&#39;);
+            else if(s[i]&#x3D;&#x3D;&#39;&#123;&#39;) ss.push(&#39;&#125;&#39;);
+            else if(ss.empty() || ss.top!&#x3D;s[i]) return false;
+            else ss.pop();
+        &#125;
+        return ss.empty();
+            
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="1047-删除字符串中的相邻重复项"><a href="#1047-删除字符串中的相邻重复项" class="headerlink" title="1047.删除字符串中的相邻重复项"></a>1047.删除字符串中的相邻重复项</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution 
+&#123; 
+public:     
+    string removeDuplicates(string s) 
+    &#123;         
+        stack&lt;char&gt; ss;         
+        for(char a:s)         
+        &#123;             
+            if(ss.empty() || a!&#x3D;ss.top())            
+            &#123;          ss.push(a);          &#125;  
+            else             
+            &#123;                
+                ss.pop();             &#125;         
+            &#125;          
+        string result&#x3D;&quot;&quot;;         
+        while(!ss.empty())         
+        &#123;         
+            result+&#x3D;ss.top();             
+            ss.pop();         
+        &#125;         
+        reverse(result.begin(),result.end());         
+        return result;      
+    
+ &#125; 
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -809,7 +856,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">8.5k</span>
+                        class="white-color">8.7k</span>
             
             
             
