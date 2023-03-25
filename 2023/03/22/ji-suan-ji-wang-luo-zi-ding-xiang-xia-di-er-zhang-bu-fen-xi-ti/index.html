@@ -4,14 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="算法刷题基础—数组, Hexo">
-    <meta name="description" content="704.二分查找力扣题目链接
-二分法的两种写法：
-
-定义target在左闭右闭的区间里
-class Solution &amp;#123;
-public:
-    int search(vector&amp;lt;int&amp;gt;&amp;amp; nums, in">
+    <meta name="keywords" content="计算机网络自顶向下—第二章部分习题, Hexo">
+    <meta name="description" content="P7.假定你在浏览器中点击一条超链接获得web页面。相关联的URL的IP地址没有缓存在本地主机上，因此必须使用DNSlookup以获得该IP地址。如果主机从DNS得到IP地址之前已经访问了n个DNS服务器；相继产生的RTT依次为RTT1,…">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +17,7 @@ public:
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>算法刷题基础—数组 | Hexo</title>
+    <title>计算机网络自顶向下—第二章部分习题 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -340,12 +334,12 @@ public:
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">算法刷题基础—数组</h1>
+                    <h1 class="description center-align post-title">计算机网络自顶向下—第二章部分习题</h1>
                 </div>
             </div>
         </div>
@@ -381,21 +375,21 @@ public:
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-10
+                    2023-03-22
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-10
+                    2023-03-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    994
                 </div>
                 
 
@@ -415,162 +409,31 @@ public:
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704.二分查找"></a>704.二分查找</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">力扣题目链接</a></p>
-<p>二分法的两种写法：</p>
-<ul>
-<li><p>定义target在左闭右闭的区间里</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
-public:
-    int search(vector&lt;int&gt;&amp; nums, int target) &#123;
-        int low &#x3D; 0;
-        int high &#x3D; nums.size() - 1; 
-        while (low &lt;&#x3D; high) 
-        &#123; 
-            int middle &#x3D; low + ((high - low) &#x2F; 2);&#x2F;&#x2F; 防止溢出 
-            if (nums[middle] &gt; target) &#123;
-                high &#x3D; middle - 1;
-            &#125; else if (nums[middle] &lt; target) &#123;
-                left &#x3D; middle + 1; 
-            &#125; else
-            &#123;
-                return middle; 
-            &#125;
-        &#125;
-        
-        return -1;
-    &#125;
-&#125;;
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>定义target在一个左闭右开的区间里</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
-public:
-    int search(vector&lt;int&gt;&amp; nums, int target) &#123;
-        int low &#x3D; 0;
-        int high &#x3D; nums.size(); 
-        while (low &lt; high) &#123; 
-            int middle &#x3D; low + ((high - low) &gt;&gt; 1);
-            if (nums[middle] &gt; target) &#123;
-                high &#x3D; middle; 
-            &#125; else if (nums[middle] &lt; target) &#123;
-                low &#x3D; middle + 1; 
-            &#125; else &#123; 
-                return middle; 
-            &#125;
-        &#125;
-      
-        return -1;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h3 id="74-移除元素"><a href="#74-移除元素" class="headerlink" title="74.移除元素"></a>74.移除元素</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">力扣题目链接</a></p>
-<ul>
-<li><p>暴力求解</p>
-</li>
-<li><p>双指针法：通过一个快指针和慢指针在一个for循环下完成两个for循环的工作</p>
-<p>快指针：寻找新数组的元素，新数组就是不含有目标元素的数组。</p>
-<p>慢指针：指向更新新数组下标的位置。</p>
-<p>时间复杂度：O(n)</p>
-<p>空间复杂度：O(1)</p>
-<p><strong>双指针法</strong></p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
-public:
-    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;
-        int slowIndex &#x3D; 0;
-        for (int fastIndex &#x3D; 0; fastIndex &lt; nums.size(); fastIndex++) &#123;
-            if (val !&#x3D; nums[fastIndex]) &#123;
-                nums[slowIndex++] &#x3D; nums[fastIndex];
-            &#125;
-        &#125;
-        return slowIndex;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>相向双指针法</strong></p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
-public:
-    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;
-        int leftIndex &#x3D; 0;
-        int rightIndex &#x3D; nums.size() - 1;
-        while (leftIndex &lt;&#x3D; rightIndex) &#123;
-            &#x2F;&#x2F; 找左边等于val的元素
-            while (leftIndex &lt;&#x3D; rightIndex &amp;&amp; nums[leftIndex] !&#x3D; val)&#123;
-                ++leftIndex;
-            &#125;
-            &#x2F;&#x2F; 找右边不等于val的元素
-            while (leftIndex &lt;&#x3D; rightIndex &amp;&amp; nums[rightIndex] &#x3D;&#x3D; val) &#123;
-                -- rightIndex;
-            &#125;
-            &#x2F;&#x2F; 将右边不等于val的元素覆盖左边等于val的元素
-            if (leftIndex &lt; rightIndex) &#123;
-                nums[leftIndex++] &#x3D; nums[rightIndex--];
-            &#125;
-        &#125;
-        return leftIndex;   &#x2F;&#x2F; leftIndex一定指向了最终数组末尾的下一个元素
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h3 id="977-有序数组的平方"><a href="#977-有序数组的平方" class="headerlink" title="977.有序数组的平方"></a>977.有序数组的平方</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">力扣题目链接</a></p>
-<p><strong>双指针法</strong></p>
-<p>定义一个新数组result，和A数组一样的大小，让k指向result数组终止位置。</p>
-<p>如果<code>A[i] * A[i] &lt; A[j] * A[j]</code> 那么<code>result[k--] = A[j] * A[j];</code> 。</p>
-<p>如果<code>A[i] * A[i] &gt;= A[j] * A[j]</code> 那么<code>result[k--] = A[i] * A[i];</code> 。</p>
-<p>2</p>
-<h2 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209.长度最小的子数组"></a>209.长度最小的子数组</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">力扣题目链接</a></p>
-<p><strong>滑动窗口</strong></p>
-<p>不断的调节子序列的起始位置和终止位置，从而得出结果。</p>
-<h3 id="59-螺旋矩阵"><a href="#59-螺旋矩阵" class="headerlink" title="59.螺旋矩阵"></a>59.螺旋矩阵</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">力扣题目链接</a></p>
-<p><strong>四条边要坚持左闭右开或者左开右闭的原则</strong></p>
-<p>完整代码如下</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
-public:
-    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) &#123;
-        vector&lt;vector&lt;int&gt;&gt; res(n, vector&lt;int&gt;(n, 0)); &#x2F;&#x2F; 使用vector定义一个二维数组
-        int startx &#x3D; 0, starty &#x3D; 0; &#x2F;&#x2F; 定义每循环一个圈的起始位置
-        int loop &#x3D; n &#x2F; 2; &#x2F;&#x2F; 每个圈循环几次，例如n为奇数3，那么loop &#x3D; 1 只是循环一圈，矩阵中间的值需要单独处理
-        int mid &#x3D; n &#x2F; 2; &#x2F;&#x2F; 矩阵中间的位置，例如：n为3， 中间的位置就是(1，1)，n为5，中间位置为(2, 2)
-        int count &#x3D; 1; &#x2F;&#x2F; 用来给矩阵中每一个空格赋值
-        int offset &#x3D; 1; &#x2F;&#x2F; 需要控制每一条边遍历的长度，每次循环右边界收缩一位
-        int i,j;
-        while (loop --) &#123;
-            i &#x3D; startx;
-            j &#x3D; starty;
-
-            &#x2F;&#x2F; 下面开始的四个for就是模拟转了一圈
-            &#x2F;&#x2F; 模拟填充上行从左到右(左闭右开)
-            for (j &#x3D; starty; j &lt; n - offset; j++) &#123;
-                res[startx][j] &#x3D; count++;
-            &#125;
-            &#x2F;&#x2F; 模拟填充右列从上到下(左闭右开)
-            for (i &#x3D; startx; i &lt; n - offset; i++) &#123;
-                res[i][j] &#x3D; count++;
-            &#125;
-            &#x2F;&#x2F; 模拟填充下行从右到左(左闭右开)
-            for (; j &gt; starty; j--) &#123;
-                res[i][j] &#x3D; count++;
-            &#125;
-            &#x2F;&#x2F; 模拟填充左列从下到上(左闭右开)
-            for (; i &gt; startx; i--) &#123;
-                res[i][j] &#x3D; count++;
-            &#125;
-
-            &#x2F;&#x2F; 第二圈开始的时候，起始位置要各自加1， 例如：第一圈起始位置是(0, 0)，第二圈起始位置是(1, 1)
-            startx++;
-            starty++;
-
-            &#x2F;&#x2F; offset 控制每一圈里每一条边遍历的长度
-            offset +&#x3D; 1;
-        &#125;
-
-        &#x2F;&#x2F; 如果n为奇数的话，需要单独给矩阵最中间的位置赋值
-        if (n % 2) &#123;
-            res[mid][mid] &#x3D; count;
-        &#125;
-        return res;
-    &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+                <p><strong>P7.假定你在浏览器中点击一条超链接获得web页面。相关联的URL的IP地址没有缓存在本地主机上，因此必须使用DNSlookup以获得该IP地址。如果主机从DNS得到IP地址之前已经访问了n个DNS服务器；相继产生的RTT依次为RTT1,…,RTTn。进一步假定与链路相关的web页面只包含一个对象，即由少量的HTML文本组成。令RTT0表示本地主机和包含对象的服务器之间的RTT值。假定该对象传输时间为零，则从该客户点击该超链接到它接收到该对象需要多长时间？</strong></p>
+<p>从DNS获得服务器的IP地址所需要的时间：<br>$$<br>RTT_1+…+RTT_n<br>$$<br>建立TCP连接，发送对象所需的时间<br>$$<br>2RTT_0<br>$$<br><strong>P8.参照习题P7，假定在同一服务器上某HTML文件引用了8个非常小的对象。忽略发送时间，在下列情况下需要多长时间</strong></p>
+<p><strong>a.没有并行TCP连接的非持续HTTP</strong></p>
+<p><strong>b.配置有5个并行连接的非持续HTTP</strong>、</p>
+<p><strong>c.持续HTTP</strong></p>
+<p>a.传输引用对象<br>$$<br>2<em>8RTT_0<br>$$<br>传输HTML基本文件<br>$$<br>2RTT_0<br>$$<br>总时间<br>$$<br>18RTT_0+RTT_1+…+RTT_n<br>$$<br>b.传输引用对象<br>$$<br>2</em>2RTT_0<br>$$<br>传输HTML基本文件<br>$$<br>2RTT_0<br>$$<br>总时间<br>$$<br>6RTT_0+RTT_1+…+RTT_n<br>$$<br>c.有管线连接<br>$$<br>RTT_0+RTT_1+…+RTT_n<br>$$<br>无管线连接<br>$$<br>10RTT_0+RTT_1+…+RTT_n<br>$$</p>
+<p><strong>P9.考虑图2-12，其中有一个机构的网络和因特网相连。假定对象的平均长度为850 000比特，从这个机构网的浏览器到初始服务器的平均请求是每秒16个请求。还假定从接入链路的因特网一侧的路由器转发一个HTTP请求开始，到接收到其响应的平均时间是3秒。将总的平均响应时间建模为平均接入时延（即从因特网路由器到机构路由器的时延）和平均因特网时延之和了。对于平均接入时延，使用∆&#x2F;（1-∆β），∆是跨越接入链路发送一个对象的平均时间，β是对象对该接入链路的平均到达率。</strong></p>
+<p><strong>a.求出总的平均响应时间</strong></p>
+<p><strong>b.现在假定在这个机构LAN中安装了一个缓存器。假定命中率为0.4，求出总的响应时间</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230322223604.jpg"></p>
+<p>a.<br>$$<br>∆&#x3D;0.85Mb&#x2F;15Mbps&#x3D;0.0567s<br>$$</p>
+<p>$$<br>β&#x3D;16&#x2F;s<br>$$</p>
+<p>$$<br>平均接入时延&#x3D;0.0567&#x2F;(1-0.0567*16)&#x3D;0.611s<br>$$</p>
+<p>$$<br>总平均响应时间&#x3D;3+0.611&#x3D;3.611s<br>$$</p>
+<p>b.<br>$$<br>β&#x3D;16*0.6<br>$$</p>
+<p>$$<br>平均接入时延&#x3D;0.0567&#x2F;(1-0.0567*9.6)&#x3D;0.124s<br>$$</p>
+<p>$$<br>命中总响应时间&#x3D;0.85Mb&#x2F;100Mb&#x3D;0.0085s<br>$$</p>
+<p>$$<br>总平均响应时间&#x3D;0.0085<em>0.4+3.124</em>0.6&#x3D;1.8778s<br>$$</p>
+<p><strong>P10.考虑一条10米短链路，某发送方经过它能够以150bps速率双向传输。假定包含数据的分组是100 000比特长，仅包含控制（如ACK或握手）的分组是200比特长。假定N个并行连接每个都获得1&#x2F;N的链路带宽。现在考虑HTTP协议，并且假定每个下载对象是100kb长，这些初始下载对象包含10个来自相同发送方的引用对象。在这种情况下，经非持续HTTP的并行实例的并行下载有意义吗？现在考虑持续HTTP。你期待这比非持续的情况有很大增益吗？评价并解释你的答案。</strong></p>
+<p>发送方需与对方进行三次握手</p>
+<p>若利用非持续HTTP进行下载：</p>
+<p>前两次握手：<br>$$<br>控制分组传输+RTT<br>$$<br>总时间：<br>$$<br>(200&#x2F;150+Tp+200&#x2F;150+Tp+200&#x2F;150+Tp+100000&#x2F;150+Tp)+((200&#x2F;(150&#x2F;10)+Tp)*3+100000&#x2F;(150&#x2F;10)+Tp)<br>$$</p>
+<p>若利用持续HTTP进行下载：</p>
+<p>前两次握手所需时间与非持续HTTP相同</p>
+<p>总时间为：<br>$$<br>(200&#x2F;150+Tp+200&#x2F;150+Tp+200&#x2F;150+Tp+100000&#x2F;150+Tp)+10*(200&#x2F;150+Tp+100000&#x2F;150+Tp)<br>$$</p>
 
                 
             </div>
@@ -597,7 +460,7 @@ public:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://realhuameng.github.io/2023/02/10/suan-fa-shua-ti-ji-lu-shu-zu/">http://realhuameng.github.io/2023/02/10/suan-fa-shua-ti-ji-lu-shu-zu/</a>
+                    <a href="http://realhuameng.github.io/2023/03/22/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-bu-fen-xi-ti/">http://realhuameng.github.io/2023/03/22/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-bu-fen-xi-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -715,13 +578,13 @@ public:
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/11/suan-fa-shua-ti-ji-lu-lian-biao/">
+                <a href="/2023/03/24/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-tao-jie-zi-bian-cheng-zuo-ye/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="算法刷题记录—链表">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="计算机网络自顶向下—第二章—套接字编程作业">
                         
-                        <span class="card-title">算法刷题记录—链表</span>
+                        <span class="card-title">计算机网络自顶向下—第二章—套接字编程作业</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -732,7 +595,7 @@ public:
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-11
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-24
                         </span>
                         <span class="publish-author">
                             
@@ -752,13 +615,13 @@ public:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/05/csapp-xue-xi-ji-lu/">
+                <a href="/2023/03/19/suan-fa-shua-ti-ji-lu-zhan-yu-dui-lie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="CSAPP学习记录(1)">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="算法刷题记录—栈与队列">
                         
-                        <span class="card-title">CSAPP学习记录(1)</span>
+                        <span class="card-title">算法刷题记录—栈与队列</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -769,7 +632,7 @@ public:
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-19
                             </span>
                         <span class="publish-author">
                             
