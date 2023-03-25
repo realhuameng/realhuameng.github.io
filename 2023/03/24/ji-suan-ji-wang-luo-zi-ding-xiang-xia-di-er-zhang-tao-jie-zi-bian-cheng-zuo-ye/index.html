@@ -390,7 +390,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.9k
                 </div>
                 
 
@@ -521,6 +521,231 @@ clientSocket<span class="token punctuation">.</span>close<span class="token punc
 <h1 id="作业2：UDP-ping程序"><a href="#作业2：UDP-ping程序" class="headerlink" title="作业2：UDP ping程序"></a>作业2：UDP ping程序</h1><p><strong>在这个编程作业中，你将用python编写一个客户ping程序。该客户将发送一个简单的ping报文，接受一个从服务器返回的对应pong报文，并确定从该客户发送ping报文到接收到pong报文为止的时延。该时延称为往返时延（RTT）。由该客户和服务器提供的功能类似于在现代操作系统中可用的标准ping程序。然而，标准的ping使用互联网控制报文协议（ICMP）。此时我们将创建一个非标准（但简单的）基于UDP的ping程序。</strong></p>
 <p><strong>你的ping程序经UDP向目标服务器发送10个ping报文。对于每个报文，当对应的pong报文返回时，你的客户要确定和打印RTT。因为UDP是一个不可靠的协议，由客户发送的分组可能会丢失。为此，客户不能无限期地等待对ping报文的回答。客户等待服务器回答的时间至多为一秒；如果没有收到回答，客户假定该分组丢失并相应的打印一条报文。</strong></p>
 <p><strong>在此作业中，你将给出服务器的完整代码，你的任务是编写客户代码，可以随意地从服务器代码中剪贴代码行。</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#UDPserver.py</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> random <span class="token comment">#随机数生成</span>
+
+serverSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+serverSocket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span> <span class="token number">1111</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+                  rand <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
+                  message<span class="token punctuation">,</span> address <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+                  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"收到来自 %s 的报文：（%s）"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>address<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"随机数是：%d"</span> <span class="token operator">%</span> rand<span class="token punctuation">)</span>
+                  message <span class="token operator">=</span> message<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                  
+                  <span class="token keyword">if</span> rand <span class="token operator">&lt;</span> <span class="token number">4</span>
+                     comtinue
+                  serverSocket<span class="token punctuation">.</span>sendto<span class="token punctuation">(</span>message<span class="token punctuation">,</span> address<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#UDPclient.py</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> time
+
+serverName <span class="token operator">=</span> <span class="token string">'localhost'</span>
+serverPort <span class="token operator">=</span> <span class="token number">1111</span>
+
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        time_start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">#开始计时</span>
+        message <span class="token operator">=</span> <span class="token string">'Ping *'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>time_start<span class="token punctuation">)</span> <span class="token comment">#要发送的ping报文</span>
+        clientSocket<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">#超时处理时间设置为1s</span>
+        clientSocket<span class="token punctuation">.</span>sendto<span class="token punctuation">(</span>message<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span><span class="token number">1111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            modified<span class="token punctuation">,</span> serveraddress <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+            Time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> time_start <span class="token comment">#计算RTT</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'cost'</span><span class="token punctuation">,</span> Time<span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span> timeout<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Request Time Out'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            
+clientSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>编写程序时遇到的问题与解决方法：</p>
+<p>1.将服务器端代码与客户端代码运行后，客户端收到的消息一直为“Request Time Out”，将except后错误类型改为timeout解决</p>
+<p><strong>可选练习</strong></p>
+<p>**1.目前，程序计算每个数据包的往返时间（RTT），并单独打印出来。请按照标准ping程序的模式修改。您需要在客户端每次ping后显示最小，最大和平均RTT。另外，还需计算丢包率（百分比）。 **</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span> 
+<span class="token keyword">import</span> time  
+serverName <span class="token operator">=</span> <span class="token string">'localhost'</span> 
+serverPort <span class="token operator">=</span> <span class="token number">1111</span> 
+recvnum<span class="token operator">=</span><span class="token number">0</span> 
+<span class="token builtin">max</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> 
+<span class="token builtin">min</span> <span class="token operator">=</span> <span class="token number">2</span> 
+aver <span class="token operator">=</span> <span class="token number">0</span> 
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span> 
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>     
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">:</span>              
+        time_start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>             
+        message <span class="token operator">=</span> <span class="token string">'Ping *'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>time_start<span class="token punctuation">)</span>            
+        clientSocket<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>             
+        clientSocket<span class="token punctuation">.</span>sendto<span class="token punctuation">(</span>message<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span> <span class="token number">1111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>              
+        <span class="token keyword">try</span><span class="token punctuation">:</span>                 
+            modified<span class="token punctuation">,</span> serveraddress <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>                   
+            Time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span> time_start                 
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'cost'</span><span class="token punctuation">,</span> Time<span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">)</span>                 
+            recvnum<span class="token operator">+=</span><span class="token number">1</span>                 
+            aver <span class="token operator">+=</span>Time                
+            <span class="token keyword">if</span><span class="token punctuation">(</span>Time<span class="token operator">></span><span class="token builtin">max</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                     
+                <span class="token builtin">max</span><span class="token operator">=</span>Time                 
+            <span class="token keyword">if</span><span class="token punctuation">(</span>Time<span class="token operator">&lt;</span><span class="token builtin">min</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                     
+                <span class="token builtin">min</span><span class="token operator">=</span>Time              
+         <span class="token keyword">except</span> timeout<span class="token punctuation">:</span>                 
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Request Time Out'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"丢失率"</span><span class="token punctuation">,</span><span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token operator">-</span>recvnum<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span><span class="token operator">/</span>recvnum<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%"</span><span class="token punctuation">)</span> 
+<span class="token keyword">if</span><span class="token punctuation">(</span>recvnum<span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"最短"</span><span class="token punctuation">,</span> <span class="token builtin">min</span><span class="token punctuation">,</span> <span class="token string">"最长"</span><span class="token punctuation">,</span> <span class="token builtin">max</span><span class="token punctuation">,</span> <span class="token string">"平均"</span><span class="token punctuation">,</span> aver<span class="token operator">/</span>recvnum<span class="token punctuation">)</span>  
+clientSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>2.  UDP Ping的另一个类似的应用是UDP Heartbeat。心跳可用于检查应用程序是否已启动并运行，并报告单向丢包。客户端在UDP数据包中将一个序列号和当前时间戳发送给正在监听客户端心跳的服务器。服务器收到数据包后，计算时差，报告丢包（若发生）。如果心跳数据包在指定的一段时间内丢失，我们可以假设客户端应用程序已经停止。实现UDP Heartbeat（客户端和服务器端）。您需要修改给定的UDPPingerServer.py和您自己的UDP ping客户端。</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#server</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+serverSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+serverSocket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span> <span class="token number">1111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    message<span class="token punctuation">,</span> address <span class="token operator">=</span> serverSocekt<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    message <span class="token operator">=</span> message<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    message <span class="token operator">=</span> message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    timeDiff <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">float</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"RTT is"</span><span class="token punctuation">,</span> timeDiff<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#client</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> time
+serverName <span class="token operator">=</span> <span class="token string">'localhost'</span>
+serverPort <span class="token operator">=</span> <span class="token number">1111</span>
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    time1 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    outputdata <span class="token operator">=</span> <span class="token string">'Heartbeat'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>time1<span class="token punctuation">)</span>
+    clientSocket<span class="token punctuation">.</span>seendto<span class="token punctuation">(</span>outputdata<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>serverName<span class="token punctuation">,</span> serverPort<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="作业三：邮件客户"><a href="#作业三：邮件客户" class="headerlink" title="作业三：邮件客户"></a>作业三：邮件客户</h1><p><strong>这个编程作业的目的是创建一个向任何接收方发送电子邮件的简单邮件客户。你的客户将必须与邮件服务器（如谷歌的电子邮件服务器）创建一个TCP连接，使用SMTP协议与邮件服务器进行交谈，经该邮件服务器向某接收方（如你的朋友）发送一个电子邮件报文，最后关闭与该邮件服务器的TCP连接。</strong></p>
+<p><strong>对本作业，配套的web站点为你的客户提供了框架代码。你的任务是完善该代码并通过向不同的用户账户发送电子邮件来测试你的客户。你也可以尝试通过不同的服务器（例如谷歌的邮件服务器和你所在的大学的邮件服务器）进行发送</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socekt <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> base64
+mailserver <span class="token operator">=</span> <span class="token string">'smtp.qq.com'</span> <span class="token comment">#你所用邮件服务器的地址</span>
+mailUser <span class="token operator">=</span> <span class="token string">'aaa'</span>
+mailFromAddress <span class="token operator">=</span> <span class="token string">'aaa@qq.com'</span>
+mailPassword <span class="token operator">=</span> <span class="token string">'******'</span> <span class="token comment">#可以在邮箱设置授权码，使用授权码登录</span>
+mailToAddress <span class="token operator">=</span> <span class="token string">'bbb@163.com'</span>
+
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>
+clientSocket<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>mailserver<span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#qq的smtp端口号</span>
+
+recv <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+<span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'220'</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"220 reply not received from server"</span><span class="token punctuation">)</span>
+    
+    
+helloCommand <span class="token operator">=</span> <span class="token string">'HELO mailserver\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>helloCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv1 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv1 <span class="token operator">=</span> recv1<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv1<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv1<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span>
+    	<span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        
+loginCommand <span class="token operator">=</span> <span class="token string">'AUTH LOGIN\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>loginCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'334'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+userCommand <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>mailUser<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">b'\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span>：
+	clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>userCommand<span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'334'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+passCommand <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>mailPassword<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">b'\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>passCommand<span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> client<span class="token punctuation">.</span>socket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+	recv <span class="token operator">=</span> recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'235'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+mailfromCommand <span class="token operator">=</span> <span class="token string">'MAIL FROM: &lt;aaa@qq.com>\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>mailfromCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv2 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv2 <span class="token operator">=</span> recv2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv2<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv2<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+rcptCommand <span class="token operator">=</span> <span class="token string">'RCPT TO: &lt;bbb@163.com>\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>rcptCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv3 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv3 <span class="token operator">=</span> recv3<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv3<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv3<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+dataCommand <span class="token operator">=</span> <span class="token string">'DATA\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>DataCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv4 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv4 <span class="token operator">=</span> recv4<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv4<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv4<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'354'</span>
+    	<span class="token keyword">break</span>
+        
+        
+messageCommand <span class="token operator">=</span> <span class="token string">'\r\ni am doing my computer networking homework\r\n:)\r\n'</span>
+clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>messageCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+endCommand <span class="token operator">=</span> <span class="token string">'\r\n.\r\n'</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>endCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv5 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv5 <span class="token operator">=</span> recv5<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv5<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv5<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+quitCommand <span class="token operator">=</span> <span class="token string">'QUIT\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocekt<span class="token punctuation">.</span>send<span class="token punctuation">(</span>quitCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv6 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv6 <span class="token operator">=</span> recv6<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv6<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv5<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'221'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+
+clientSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-25%20230712.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-25%20233953.png"></p>
 
                 
             </div>
@@ -908,7 +1133,7 @@ clientSocket<span class="token punctuation">.</span>close<span class="token punc
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">11.3k</span>
+                        class="white-color">12.5k</span>
             
             
             
