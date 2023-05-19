@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="汇编语言（第三版）王爽——实验一, Hexo">
-    <meta name="description" content="查看CPU和内存，用机器指令和汇编指令编程debug的使用安装DOSBOX进行实验R命令查看改变CPU寄存器内容
-
-在所有寄存器的下方，debug还列出了CS:IP所指向的内存单元处所存放的机器码，并将它翻译为机器指令。
-此处CS:IP所指">
+    <meta name="keywords" content="python-numpy库详解, Hexo">
+    <meta name="description" content="参考CSDN博主「ZSYL」的原创文章，遵循CC 4.0 BY-SA版权协议
+ 原文链接：https://blog.csdn.net/qq_46092061/article/details/118410838
+numpy介绍Numpy（Nu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>汇编语言（第三版）王爽——实验一 | Hexo</title>
+    <title>python-numpy库详解 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -337,12 +336,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">汇编语言（第三版）王爽——实验一</h1>
+                    <h1 class="description center-align post-title">python-numpy库详解</h1>
                 </div>
             </div>
         </div>
@@ -378,21 +377,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-03-04
+                    2023-04-03
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-04
+                    2023-04-03
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    786
+                    612
                 </div>
                 
 
@@ -412,57 +411,90 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="查看CPU和内存，用机器指令和汇编指令编程"><a href="#查看CPU和内存，用机器指令和汇编指令编程" class="headerlink" title="查看CPU和内存，用机器指令和汇编指令编程"></a>查看CPU和内存，用机器指令和汇编指令编程</h1><h2 id="debug的使用"><a href="#debug的使用" class="headerlink" title="debug的使用"></a>debug的使用</h2><h3 id="安装DOSBOX进行实验"><a href="#安装DOSBOX进行实验" class="headerlink" title="安装DOSBOX进行实验"></a>安装DOSBOX进行实验</h3><p><strong>R命令查看改变CPU寄存器内容</strong></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_193445.png" alt="DOSBOX界面"></p>
-<p>在所有寄存器的下方，debug还列出了CS:IP所指向的内存单元处所存放的机器码，并将它翻译为机器指令。</p>
-<p>此处CS:IP所指向的内存单元为073F:0100.此处存放的及机器码为 0000 ，对应的汇编指令为 ADD [BX+SI],AL。</p>
-<p>还可以利用R指令修改寄存器中的内容</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_194422.png" alt="使用R命令修改AX中的内容"></p>
-<p><strong>D命令查看内存中的内容</strong></p>
-<p>d 段地址：偏移地址</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_195008.png" alt="D命令查看内存1000:0处的内容"></p>
-<p>debug将列出从指定内存单元往后128个内存单元的内容（1000:0~1000:F）</p>
-<p>也可以指定查看的范围 d 段地址:起始偏移地址 结尾偏移地址</p>
-<p><strong>用D命令改写内存内容</strong></p>
-<p>e 起始地址 数据 数据 数据 数据…</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_200320.png" alt="用E指令修改1000：0开始的4个单元的内容"></p>
-<p>也可以采用提问的方式来逐个的修改内存的内容</p>
-<p><strong>用E命令向内存中写入机器码，用U命令查看内存中机器码的含义，用T命令执行内存中的机器码</strong></p>
-<p>写入机器码</p>
-<p>mov ax,0001</p>
-<p>mov cx,0002</p>
-<p>add ax,cx</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_202323.png" alt="将机器码写入内存"></p>
-<p>使用U命令翻译</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_202645.png" alt="用U命令将内存单元中的内容翻译为汇编指令显示"></p>
-<p>简单的使用T命令可以执行CS:IP指向的指令</p>
-<p>若要用T命令控制CPU执行某个指令，必须先让CS:IP指向该指令</p>
-<p>可用R命令修改CS:IP中的内容，使CS:IP指向指定的内容</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_203550.png" alt="修改CS:IP指向的内容"></p>
-<p>再使用T命令执行指令</p>
-<p>注意，指令执行后，AX中的内容被改写为1，IP改变为IP+3，CS:IP指向下一条指令</p>
-<p><strong>A命令以汇编指令的形式在内存中写入机器指令</strong></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_204150.png" alt="用A命令向从1000：0开始的内存单元中写入指令"></p>
-<h3 id="本次实验中需要用到的命令"><a href="#本次实验中需要用到的命令" class="headerlink" title="本次实验中需要用到的命令"></a>本次实验中需要用到的命令</h3><p>查看修改CPU寄存器的内容：R命令</p>
-<p>查看内存中的内容：D命令</p>
-<p>修改内存中的内容：E命令（可以写入数据指令）</p>
-<p>将内存中的内容解释为机器指令和对应的汇编指令：U命令</p>
-<p>执行CS:IP指向的内存单元处的指令：T命令</p>
-<p>以汇编指令的形式向内存中写入指令：A命令</p>
-<h3 id="实验任务"><a href="#实验任务" class="headerlink" title="实验任务"></a>实验任务</h3><p>（1）使用debug，将下面的程序写入内存，逐条执行，观察每条指令(此处指令省略)执行后CPU中相关寄存器中内容的变化。</p>
-<p>提示：可用E命令和A命令以两种方式将指令写入内存</p>
-<p>（2）将下面3条指令写入从2000：0开始的内存单元中，利用这3条指令计算2的8次方。</p>
-<p>mov ax,1</p>
-<p>add ax,ax</p>
-<p>jmp 2000:0003</p>
-<p>（3）查看内存中的内容</p>
-<p>（4）向内存从B8100H开始的单元中填写数据</p>
-<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p>（1）使用debug，将下面的程序写入内存，逐条执行，观察每条指令(此处指令省略)执行后CPU中相关寄存器中内容的变化。</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_205601.png" alt="写入内存"></p>
-<p>（2）将下面3条指令写入从2000：0开始的内存单元中，利用这3条指令计算2的8次方。</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_210154.png" alt="用A命令写入指令"></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_211335.png"></p>
-<p>执行八次即可得到2的8次方</p>
+                <p>参考CSDN博主「ZSYL」的原创文章，遵循CC 4.0 BY-SA版权协议</p>
+<p> 原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46092061/article/details/118410838">https://blog.csdn.net/qq_46092061/article/details/118410838</a></p>
+<h1 id="numpy介绍"><a href="#numpy介绍" class="headerlink" title="numpy介绍"></a>numpy介绍</h1><p>Numpy（Numerical Python）是一个开源的Python科学计算库，用于快速处理任意维度的数组，并且支持常见的数组和矩阵操作。</p>
+<h2 id="ndarray"><a href="#ndarray" class="headerlink" title="ndarray"></a>ndarray</h2><p>ndarray是numpy提供的一个N维数组类型，它描述了相同类型的 items 的集合</p>
+<p>使用示例</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+testarray <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>
+   <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+testarray
+<span class="token comment">#返回结果</span>
+testarray<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>ndarray比python原生的list计算速度要快很多</strong></p>
+<h3 id="创建array"><a href="#创建array" class="headerlink" title="创建array"></a>创建array</h3><p>numpy中的array函数可以生成多维数组</p>
+<p>通过ndarray类的shape属性可以获得每一维的元素个数，也可以通过shape[n]形式获得每一维的元素个数（n是维度，从0开始）</p>
+<blockquote>
+<p>常用array参数：</p>
+<p>ndmin：指定生成数组的最小维度</p>
+<p>dtype：数组元素的数据类型</p>
+</blockquote>
+<h3 id="ndarray的属性"><a href="#ndarray的属性" class="headerlink" title="ndarray的属性"></a>ndarray的属性</h3><blockquote>
+<p>ndarray.shape：数组维度的元组</p>
+<p>ndarray.ndim：数组维数</p>
+<p>ndarray.size：数组中元素的数量</p>
+<p>ndarray.itemsize：一个数组元素的长度（字节）</p>
+<p>ndarray.dtype：数组元素的类型</p>
+</blockquote>
+<h3 id="ndarray的shape函数"><a href="#ndarray的shape函数" class="headerlink" title="ndarray的shape函数"></a>ndarray的shape函数</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">a <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+a<span class="token punctuation">.</span>shape
+b<span class="token punctuation">.</span>shape
+
+<span class="token comment">#输出结果</span>
+<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="生成数组"><a href="#生成数组" class="headerlink" title="生成数组"></a>生成数组</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#生成0 1数组</span>
+np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span>shape<span class="token punctuation">,</span> dtype<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>a<span class="token punctuation">,</span> dtype<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>shape<span class="token punctuation">,</span> dtype<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>zeros_like<span class="token punctuation">(</span>a<span class="token punctuation">,</span> dtype<span class="token punctuation">)</span>
+
+<span class="token comment">#np.empty():创建一个指定形状、数据类型且未初始化的数组，里面的元素的值是之前内存的值</span>
+<span class="token comment">#order中，C表示行优先，F表示列优先</span>
+np<span class="token punctuation">.</span>empty<span class="token punctuation">(</span>shape<span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token builtin">float</span><span class="token punctuation">,</span> order<span class="token operator">=</span><span class="token string">'C'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 从现有的数组当中创建 </span>
+a <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>   
+a1 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment">#深拷贝，在地址中重新创建对象  </span>
+a2 <span class="token operator">=</span> np<span class="token punctuation">.</span>asarray<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment">#浅拷贝，指针指向同一对象</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#生成固定范围的数组</span>
+<span class="token comment">#start, stop：序列的起始值和终止值</span>
+<span class="token comment">#num：要生成的等间隔样例数量，默认为50</span>
+<span class="token comment">#endpoint：是否包含stop值</span>
+<span class="token comment">#retstep：是否显示间距</span>
+np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span>start<span class="token punctuation">,</span> stop<span class="token punctuation">,</span> num<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">,</span> endpoint<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> retstep<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span>
+array<span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token number">0.</span><span class="token punctuation">,</span> <span class="token number">10.</span><span class="token punctuation">,</span> <span class="token number">20.</span><span class="token punctuation">,</span> <span class="token number">30.</span><span class="token punctuation">,</span> <span class="token number">40.</span><span class="token punctuation">,</span> <span class="token number">50.</span><span class="token punctuation">,</span> <span class="token number">60.</span><span class="token punctuation">,</span> <span class="token number">70.</span><span class="token punctuation">,</span> <span class="token number">80.</span><span class="token punctuation">,</span> <span class="token number">90.</span><span class="token punctuation">,</span> <span class="token number">100.</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">#step：步长，默认为1</span>
+np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>start<span class="token punctuation">,</span> stop<span class="token punctuation">,</span> step<span class="token punctuation">,</span> dtype<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">50</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">,</span> <span class="token number">38</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">,</span> <span class="token number">44</span><span class="token punctuation">,</span> <span class="token number">46</span><span class="token punctuation">,</span> <span class="token number">48</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">#num:要生成的等比数列数量，默认为50</span>
+np<span class="token punctuation">.</span>logspace<span class="token punctuation">(</span>start<span class="token punctuation">,</span> stop<span class="token punctuation">,</span> num<span class="token punctuation">)</span>
+np<span class="token punctuation">.</span>logspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+array<span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token number">1.</span><span class="token punctuation">,</span> <span class="token number">10.</span><span class="token punctuation">,</span> <span class="token number">100.</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 
                 
             </div>
@@ -489,7 +521,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://realhuameng.github.io/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/">http://realhuameng.github.io/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/</a>
+                    <a href="http://realhuameng.github.io/2023/04/03/python-numpy-ku-xiang-jie/">http://realhuameng.github.io/2023/04/03/python-numpy-ku-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -607,13 +639,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/11/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-er/">
+                <a href="/2023/04/10/ji-suan-ji-wang-luo-zi-ding-xiang-xia-wireshark-shi-yan-http-he-dns/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="汇编语言（第三版）王爽—实验二">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="计算机网络：自顶向下—Wireshark实验：HTTP和DNS">
                         
-                        <span class="card-title">汇编语言（第三版）王爽—实验二</span>
+                        <span class="card-title">计算机网络：自顶向下—Wireshark实验：HTTP和DNS</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -624,7 +656,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-11
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-10
                         </span>
                         <span class="publish-author">
                             
@@ -644,13 +676,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/24/suan-fa-shua-ti-ji-lu-zi-fu-chuan/">
+                <a href="/2023/03/27/suan-fa-shua-ti-ji-lu-dong-tai-gui-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="算法刷题记录—字符串">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="算法刷题记录-动态规划">
                         
-                        <span class="card-title">算法刷题记录—字符串</span>
+                        <span class="card-title">算法刷题记录-动态规划</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -661,7 +693,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-27
                             </span>
                         <span class="publish-author">
                             

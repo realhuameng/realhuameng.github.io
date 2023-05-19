@@ -4,11 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="汇编语言（第三版）王爽——实验一, Hexo">
-    <meta name="description" content="查看CPU和内存，用机器指令和汇编指令编程debug的使用安装DOSBOX进行实验R命令查看改变CPU寄存器内容
-
-在所有寄存器的下方，debug还列出了CS:IP所指向的内存单元处所存放的机器码，并将它翻译为机器指令。
-此处CS:IP所指">
+    <meta name="keywords" content="字节前端初阶训练营—计算机网络概论, Hexo">
+    <meta name="description" content="01.简介分析方法自底向上
+由简单到复杂
+由局部到整体
+自顶向下
+由复杂到简单
+将复杂的系统问题模块化处理
+02.通过蟹堡王案例来理解计算机网络系统蟹老板要管理遍布全国的蟹堡王分店需要很多基础设施，其中比较重要的一项为通信。
+为了开通外卖服">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +24,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>汇编语言（第三版）王爽——实验一 | Hexo</title>
+    <title>字节前端初阶训练营—计算机网络概论 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -337,12 +341,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">汇编语言（第三版）王爽——实验一</h1>
+                    <h1 class="description center-align post-title">字节前端初阶训练营—计算机网络概论</h1>
                 </div>
             </div>
         </div>
@@ -378,21 +382,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-03-04
+                    2023-04-13
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-04
+                    2023-04-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    786
+                    3.1k
                 </div>
                 
 
@@ -412,57 +416,337 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="查看CPU和内存，用机器指令和汇编指令编程"><a href="#查看CPU和内存，用机器指令和汇编指令编程" class="headerlink" title="查看CPU和内存，用机器指令和汇编指令编程"></a>查看CPU和内存，用机器指令和汇编指令编程</h1><h2 id="debug的使用"><a href="#debug的使用" class="headerlink" title="debug的使用"></a>debug的使用</h2><h3 id="安装DOSBOX进行实验"><a href="#安装DOSBOX进行实验" class="headerlink" title="安装DOSBOX进行实验"></a>安装DOSBOX进行实验</h3><p><strong>R命令查看改变CPU寄存器内容</strong></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_193445.png" alt="DOSBOX界面"></p>
-<p>在所有寄存器的下方，debug还列出了CS:IP所指向的内存单元处所存放的机器码，并将它翻译为机器指令。</p>
-<p>此处CS:IP所指向的内存单元为073F:0100.此处存放的及机器码为 0000 ，对应的汇编指令为 ADD [BX+SI],AL。</p>
-<p>还可以利用R指令修改寄存器中的内容</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_194422.png" alt="使用R命令修改AX中的内容"></p>
-<p><strong>D命令查看内存中的内容</strong></p>
-<p>d 段地址：偏移地址</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_195008.png" alt="D命令查看内存1000:0处的内容"></p>
-<p>debug将列出从指定内存单元往后128个内存单元的内容（1000:0~1000:F）</p>
-<p>也可以指定查看的范围 d 段地址:起始偏移地址 结尾偏移地址</p>
-<p><strong>用D命令改写内存内容</strong></p>
-<p>e 起始地址 数据 数据 数据 数据…</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_200320.png" alt="用E指令修改1000：0开始的4个单元的内容"></p>
-<p>也可以采用提问的方式来逐个的修改内存的内容</p>
-<p><strong>用E命令向内存中写入机器码，用U命令查看内存中机器码的含义，用T命令执行内存中的机器码</strong></p>
-<p>写入机器码</p>
-<p>mov ax,0001</p>
-<p>mov cx,0002</p>
-<p>add ax,cx</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_202323.png" alt="将机器码写入内存"></p>
-<p>使用U命令翻译</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_202645.png" alt="用U命令将内存单元中的内容翻译为汇编指令显示"></p>
-<p>简单的使用T命令可以执行CS:IP指向的指令</p>
-<p>若要用T命令控制CPU执行某个指令，必须先让CS:IP指向该指令</p>
-<p>可用R命令修改CS:IP中的内容，使CS:IP指向指定的内容</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_203550.png" alt="修改CS:IP指向的内容"></p>
-<p>再使用T命令执行指令</p>
-<p>注意，指令执行后，AX中的内容被改写为1，IP改变为IP+3，CS:IP指向下一条指令</p>
-<p><strong>A命令以汇编指令的形式在内存中写入机器指令</strong></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_204150.png" alt="用A命令向从1000：0开始的内存单元中写入指令"></p>
-<h3 id="本次实验中需要用到的命令"><a href="#本次实验中需要用到的命令" class="headerlink" title="本次实验中需要用到的命令"></a>本次实验中需要用到的命令</h3><p>查看修改CPU寄存器的内容：R命令</p>
-<p>查看内存中的内容：D命令</p>
-<p>修改内存中的内容：E命令（可以写入数据指令）</p>
-<p>将内存中的内容解释为机器指令和对应的汇编指令：U命令</p>
-<p>执行CS:IP指向的内存单元处的指令：T命令</p>
-<p>以汇编指令的形式向内存中写入指令：A命令</p>
-<h3 id="实验任务"><a href="#实验任务" class="headerlink" title="实验任务"></a>实验任务</h3><p>（1）使用debug，将下面的程序写入内存，逐条执行，观察每条指令(此处指令省略)执行后CPU中相关寄存器中内容的变化。</p>
-<p>提示：可用E命令和A命令以两种方式将指令写入内存</p>
-<p>（2）将下面3条指令写入从2000：0开始的内存单元中，利用这3条指令计算2的8次方。</p>
-<p>mov ax,1</p>
-<p>add ax,ax</p>
-<p>jmp 2000:0003</p>
-<p>（3）查看内存中的内容</p>
-<p>（4）向内存从B8100H开始的单元中填写数据</p>
-<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p>（1）使用debug，将下面的程序写入内存，逐条执行，观察每条指令(此处指令省略)执行后CPU中相关寄存器中内容的变化。</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_205601.png" alt="写入内存"></p>
-<p>（2）将下面3条指令写入从2000：0开始的内存单元中，利用这3条指令计算2的8次方。</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_210154.png" alt="用A命令写入指令"></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_211335.png"></p>
-<p>执行八次即可得到2的8次方</p>
+                <h1 id="01-简介"><a href="#01-简介" class="headerlink" title="01.简介"></a>01.简介</h1><h3 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h3><p><strong>自底向上</strong></p>
+<p>由简单到复杂</p>
+<p>由局部到整体</p>
+<p><strong>自顶向下</strong></p>
+<p>由复杂到简单</p>
+<p>将复杂的系统问题模块化处理</p>
+<h1 id="02-通过蟹堡王案例来理解计算机网络系统"><a href="#02-通过蟹堡王案例来理解计算机网络系统" class="headerlink" title="02.通过蟹堡王案例来理解计算机网络系统"></a>02.通过蟹堡王案例来理解计算机网络系统</h1><p>蟹老板要管理遍布全国的蟹堡王分店需要很多基础设施，其中比较重要的一项为通信。</p>
+<p>为了开通外卖服务，扩大服务范围，蟹堡王需要建立专属于蟹堡王的通信网络。</p>
+<p>蟹堡王的服务模式与现实中的计算机网络系统有许多相近之处</p>
+<ul>
+<li><p>比奇堡外卖</p>
+</li>
+<li><p>北京和上海分店</p>
+</li>
+<li><p>全国分店和通信网络</p>
+</li>
+<li><p><strong>蟹堡王顾客：客户端</strong></p>
+</li>
+<li><p><strong>蟹堡王分店：服务端</strong></p>
+</li>
+<li><p><strong>小区转发点和蟹堡王城市转发分店：路由器</strong></p>
+</li>
+<li><p><strong>转发表格网络协议</strong></p>
+</li>
+</ul>
+<h1 id="03-计算机网络基础"><a href="#03-计算机网络基础" class="headerlink" title="03.计算机网络基础"></a>03.计算机网络基础</h1><p><strong>网络组成部分</strong></p>
+<ul>
+<li><p>主机：客户端和服务端</p>
+</li>
+<li><p>路由器</p>
+</li>
+<li><p>网络协议</p>
+</li>
+</ul>
+<p><strong>网络结构：网络的网络</strong></p>
+<ul>
+<li><p>比奇堡和小区网络：本地网络</p>
+</li>
+<li><p>北京和上海分店+比奇堡：三个本地网络节点的网络</p>
+</li>
+<li><p>全国通信网络：本地网络的网络</p>
+</li>
+</ul>
+<p>以上三种网络可以称为区域网络，城域网，广域网</p>
+<blockquote>
+<p>区域网络（Local area network，简称LAN）是连接住宅、学校、实验室、大学校园或办公大楼等有限区域内计算机的计算机网络。</p>
+<p>城域网又称都会网络，指大型的计算机网络，是介于LAN和WAN之间能传输语音与资料的公用网络，这些网络通常涵盖一个大学校园或一座城市。 一些常用于城市区网的技术包含：异步传输模式（ATM）、光纤分布数据接口（FDDI）、千兆乙太网。</p>
+<p>广域网（英语：Wide Area Network，缩写为WAN），又称外网、公网。 是连接不同地区局域网或城域网计算机通信的远程网。 通常跨接很大的物理范围，所覆盖的范围从几十公里到几千公里，它能连接多个地区、城市和国家，或横跨几个洲并能提供远距离通信，形成国际性的远程网络。 广域网并不等同于互联网。</p>
+</blockquote>
+<p><strong>信息交换的方式一般有两种：电路交换&amp;分组交换</strong></p>
+<blockquote>
+<p>电路交换（Circuit Switching）是相对于封包交换（或称分组交换）的一个概念。 电路交换要求必须首先在通信双方之间建立连接通道。 在连接建立成功之后，双方的通信活动才能开始。 通信双方需要传递的信息都是通过已经建立好的连接来进行传递的，而且这个连接也将一直被维持到双方的通信结束。</p>
+<p>分组交换（Packet switching）是一种相对于电路交换的通信范例，分组（又称消息、或消息碎片）在节点间单独路由，不需要在传输前先建立通信路径。 分组交换是数据通信中一种新的且重要的概念，现在是世界上互联网通讯、数据和语音通信中最重要的基础。</p>
+</blockquote>
+<p><strong>网络分层</strong></p>
+<p>计算机网络分为五层</p>
+<p>从低到高为</p>
+<p>物理层 链路层 网络层 运输层 应用层</p>
+<p>每一层都有各自的职责，并对自身层级的内容进行分装，这些内容对于上一层几乎是黑盒的</p>
+<p>类比于现实中的例子</p>
+<ul>
+<li><p>快递员不关心包裹内容</p>
+</li>
+<li><p>卡车司机不关心车厢里拉的是什么</p>
+</li>
+<li><p>高速公路不关心开的什么车</p>
+</li>
+</ul>
+<p><strong>协议</strong></p>
+<p>协议的存在依赖于连接</p>
+<p>协议定义了在两个或多个通信实体之间交换的<strong>报文格式和顺序</strong>，以及报文发送和&#x2F;或接受一条报文或其他事件所采取的动作</p>
+<p><strong>标头(header)和载荷(payload)</strong></p>
+<blockquote>
+<p>HTTP 标头（header）允许客户端和服务器通过 HTTP 请求（request）或者响应（response）传递附加信息。一个 HTTP 标头由它的名称（不区分大小写）后跟随一个冒号（:），冒号后跟随它具体的值。该值之前的空格 (en-US)会被忽略。  </p>
+</blockquote>
+<p><strong>报文的组成：链路层头部+IP协议头部+TCP头部+HTTP头部+HTTP正文</strong></p>
+<p><strong>http协议</strong></p>
+<p>在http&#x2F;1.1中，头部和载荷通过两个换行符和两个回车符进行分割(\r\n\r\n)</p>
+<p><strong>TCP协议</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20214828.png"></p>
+<p>TCP协议中，最前面的2个字节是源端口号，往后的2个字节是目标端口号</p>
+<p>接下来的8个字节分别是序列号（4字节）、ACK号（4字节）</p>
+<p>TCP中头部和载荷的分割依靠图中Data offset部分（13~14字节）</p>
+<p>在HTTP协议中，需要对ASCII码进行解析，得到二进制数据，发现有连续的换行符和回车符即为头部与载荷的分割</p>
+<p><strong>小结</strong></p>
+<ul>
+<li><p>网络组成部分：由主机、路由器、交换机组成</p>
+</li>
+<li><p>网络结构：网络的网络</p>
+</li>
+<li><p>信息交换方式：电路交换和分组交换</p>
+</li>
+<li><p>网络分层：分清职责，物理层、链路层、网络层、运输层和应用层</p>
+</li>
+<li><p>网络协议：标头和载荷</p>
+</li>
+</ul>
+<h1 id="04-Web中的网络"><a href="#04-Web中的网络" class="headerlink" title="04.Web中的网络"></a>04.Web中的网络</h1><p><strong>HTTP协议</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20220157.png"></p>
+<p>在这个示例中，红色的是请求，蓝色的是响应</p>
+<p><strong>HTTP请求</strong></p>
+<ul>
+<li>第一行：GET &#x2F; HTTP&#x2F;1.1</li>
+</ul>
+<p>这三项分别代表请求的方法、资源路径、HTTP版本</p>
+<ul>
+<li>其他几行：头部</li>
+</ul>
+<p>每一行代表一个头部，头部的名称和头部的值用冒号分割</p>
+<p>头部名称不区分大小写</p>
+<ul>
+<li>正文与头部间隔一行（此示例中没有头部）</li>
+</ul>
+<p><strong>HTTP响应</strong></p>
+<ul>
+<li>第一行：HTTP&#x2F;1.1 200 OK</li>
+</ul>
+<p>状态行</p>
+<p>这三项分别代表HTTP版本、状态码、状态信息（可以自定义）</p>
+<ul>
+<li><p>其他几行：头部（与HTTP请求类似）</p>
+</li>
+<li><p>正文与头部间隔一行</p>
+</li>
+</ul>
+<p><strong>HTTP连接模型（请求响应模型）</strong></p>
+<p>当客户端发起第一个请求后，需要等待服务端发送第一个的完整响应，客户端才可以发出第二个请求</p>
+<p>缺点：无法进行多路复用</p>
+<p>Short-lived connections（HTTP&#x2F;1.0）：</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20221026.png"></p>
+<p>Persistent connection（HTTP&#x2F;1.1）:</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20221457.png"></p>
+<p>HTTP Pipeling:</p>
+<p>允许客户端发送多个请求，服务器按顺序响应</p>
+<p>但对于解决队头堵塞几乎没有帮助</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20221617.png"></p>
+<p>为解决队头堵塞问题，最常用的方案是同时建立多个HTTP连接，将请求分散在多个HTTP连接上</p>
+<p>浏览器一般会限制HTTP连接的数量，通常是6个</p>
+<p><strong>HTTP1.1：无法多路复用</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">body<span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">color</span><span class="token operator">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果按行交错发送，客户端收到的内容将会是</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">body<span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token literal-property property">color</span><span class="token operator">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>无法判断流中的哪一行都是属于哪个请求，因此无法实现多路复用</p>
+<p><strong>HTTP2：帧</strong></p>
+<p>将多个HTTP请求拆分到帧中，每个帧可以携带来自不同HTTP请求的数据（此处的帧和链路层的帧并非同一种，只是原理类似）</p>
+<p>可以标识哪个数据包来自哪个请求，进而实现多路复用</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">request=style.css<span class="token punctuation">,</span> content=<span class="token string">'body&#123;'</span>
+request=main.js<span class="token punctuation">,</span> content-<span class="token string">'console.log('</span>hello world<span class="token string">')'</span>
+request=style.css<span class="token punctuation">,</span> content=<span class="token string">' color: red;'</span>
+request=style.css<span class="token punctuation">,</span> content=<span class="token string">'&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>HTTP帧的结构</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20222953.png"></p>
+<p>最开始的3个字节：帧的长度</p>
+<p>第4个字节：帧的类型</p>
+<p>第5个字节：当前帧的状态</p>
+<p>第6个字节：第1位是保留位，后面的31位代表这个帧所属流的ID</p>
+<p>后面为帧的载荷</p>
+<p><strong>HTTP2：帧带来的额外好处</strong></p>
+<ul>
+<li><p>调整响应传输的优先级</p>
+</li>
+<li><p>头部压缩</p>
+</li>
+<li><p>Server Push</p>
+</li>
+</ul>
+<p><strong>HTTP 2：队头堵塞，但是在TCP上</strong></p>
+<p>由于TCP对上层数据缺乏必要的信息（包1不影响包0、2、3），导致队头堵塞</p>
+<p>这个问题很难再已有的TCP协议上解决</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20224128.png"></p>
+<p><strong>HTTP 2：3RTT启动</strong></p>
+<p>TCP连接建立需要一个RTT</p>
+<p>TLS连接建立需要两个RTT</p>
+<p>效率很低</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20224317.png"></p>
+<p><strong>HTTP 3：QUIC</strong></p>
+<p>QUIC将TLS作为自身的一部分，吸取HTTP 2中流的概念</p>
+<p>同时引入新的机制，实现首次1 RTT，后续连接0 RTT的特性</p>
+<ul>
+<li><p>Quick UDP Internet Connection</p>
+</li>
+<li><p>现存网络设备对TCP和UDP支持已经僵化</p>
+</li>
+<li><p>UDP不靠谱但是QUIC靠谱</p>
+</li>
+<li><p>QUIC可以为除HTTP协议以外的应用层协议提供支持</p>
+</li>
+</ul>
+<p><strong>HTTP 3：QUIC-1 RTT</strong></p>
+<p>QUIC实现首次1 RTT，后续连接0 RTT的过程</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20224949.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20225129.png"></p>
+<p><strong>除HTTP外，还有很多因素会影响浏览器的性能</strong></p>
+<p><strong>CDN：你无法突破的物理极限</strong></p>
+<p>超远距离因素无法克服</p>
+<p>流量越大，花销越大</p>
+<p>服务器承载网络流量有限</p>
+<p>CDN可以承担内容分发的任务</p>
+<p><strong>CDN：DNS劫持</strong></p>
+<ul>
+<li><p>域名解析一般由网站自己处理</p>
+</li>
+<li><p>要加速的域名则重定向到CDN厂商的域名解析服务处理</p>
+</li>
+<li><p>CDN厂商根据来源确定最近的CDN服务器的IP</p>
+</li>
+<li><p>用户直接访问最近的CDN服务器</p>
+</li>
+</ul>
+<p><strong>CDN：如何选择CDN服务器</strong></p>
+<p>一种比较简单的策略是，根据DNS查询来源IP的地理位置，确定最近的CDN服务器</p>
+<p>但这并不是最好的策略</p>
+<p><strong>CDN：拉策略和推策略</strong></p>
+<blockquote>
+<p>CDN 加速策略有两种方式，分别是<strong>「推模式」和「拉模式」</strong>。   </p>
+<p> 大部分 CDN 加速策略采用的是「拉模式」，当用户就近访问的 CDN 节点没有缓存请求的数据时，CDN 会主动从源服务器下载数据，并更新到这个 CDN 节点的缓存中。    </p>
+<p>可以看出，拉模式属于被动缓存的方式，与之相反的 「推模式」就属于主动缓存的方式。   </p>
+<p> 如果想要把资源在还没有用户访问前缓存到 CDN 节点，则可以采用「推模式」，这种方式也叫 CDN 预热。   </p>
+<p> 通过 CDN 服务提供的 API 接口，把需要预热的资源地址和需要预热的区域等信息提交上去，CDN 收到后，就会触发这些区域的 CDN 节点进行回源来实现资源预热。</p>
+</blockquote>
+<p>CDN可以从物理层面解决HTTP无法解决的问题，进而提升web应用的性能</p>
+<p><strong>WebSocket</strong></p>
+<p>WebSocket有以下特点：</p>
+<ul>
+<li><p>有状态的持久连接</p>
+</li>
+<li><p>服务端可以主动推送消息</p>
+</li>
+<li><p>发送消息延迟比HTTP低</p>
+</li>
+</ul>
+<p>使用websocket协议需要在HTTP协议的基础上，双方进行协商</p>
+<p><strong>WebSocket：示例</strong></p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">//服务端代码
+const</span> <span class="token punctuation">&#123;</span> WebSocketServer <span class="token punctuation">&#125;</span> = <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'ws'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token selector">const wss = new WebSocketServer(</span><span class="token punctuation">&#123;</span> <span class="token property">port</span><span class="token punctuation">:</span> 8080<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token selector">wss.on('connection', function connection(ws)</span> <span class="token punctuation">&#123;</span>
+    <span class="token selector">//有新连接时监听来自客户端的消息
+    ws.on('message', function message(data)</span> <span class="token punctuation">&#123;</span>
+        //打印收到的消息，再把消息原封不动地发回客户端
+        console.<span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'received: %s'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ws.<span class="token function">send</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">//客户端代码
+const WebSocket = <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'ws'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const ws = new <span class="token function">WebSocket</span><span class="token punctuation">(</span><span class="token string">'ws://localhost:8080'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token selector">ws.on('open', function open()</span> <span class="token punctuation">&#123;</span>
+    //当连接建立时，向服务器端发送一条消息
+    ws.<span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token selector">ws.on('message', function message(data)</span> <span class="token punctuation">&#123;</span>
+    //当收到来自服务器端的消息时，打印出来
+    console.<span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'received: %s'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>升级HTTP为WebSocket</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20233020.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20233056.png"></p>
+<p><strong>WebSocket：发送消息</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20233231.png"></p>
+<p><strong>小结</strong></p>
+<ul>
+<li><p>HTTP1、2、3的演进历史</p>
+</li>
+<li><p>CDN解决了HTTP协议以外的问题</p>
+</li>
+<li><p>WebSocket从HTTP协议升级而来</p>
+</li>
+</ul>
+<h1 id="05-网络安全"><a href="#05-网络安全" class="headerlink" title="05.网络安全"></a>05.网络安全</h1><p><strong>网络安全：三要素</strong></p>
+<ul>
+<li><p>机密性</p>
+</li>
+<li><p>完整性</p>
+</li>
+<li><p>身份验证</p>
+</li>
+</ul>
+<p><strong>网络安全：对称加密和非对称加密</strong></p>
+<ul>
+<li><p>对称加密：加密、解密用同样的密钥</p>
+</li>
+<li><p>非对称加密：加密、解密使用不同的密钥（公钥和私钥），而且公钥加密只能用私钥解密、私钥加密只能用公钥解密</p>
+</li>
+</ul>
+<p><strong>网络安全：密码散列函数（哈希函数）</strong></p>
+<ul>
+<li><p>输入：任意长度的内容</p>
+</li>
+<li><p>输出：固定长度的哈希值</p>
+</li>
+<li><p>性质：找到两个不同输入使之经过密码散列函数后有相同的哈希值，在计算上是不可能的</p>
+</li>
+</ul>
+<p><strong>网络安全：机密性</strong></p>
+<ul>
+<li><p>加密需要加密算法和密钥等信息（秘密信息）</p>
+</li>
+<li><p>网络是明文的，不安全</p>
+</li>
+</ul>
+<p><strong>网络安全：完整性和身份验证</strong></p>
+<p>完整性和身份验证相关联</p>
+<p><strong>网络安全：如何实现机密性</strong></p>
+<p>想要通过明文通信交换秘密信息，通信双方需要先有秘密信息</p>
+<p><strong>网络安全：如何实现完整性</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20234140.png"><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20234149.png"></p>
+<p><strong>网络安全：如何实现身份验证</strong></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20234252.png"></p>
+<p>（未完待续）</p>
+<p>让我先把当天的笔记发上去，有时间补上后面的</p>
 
                 
             </div>
@@ -489,7 +773,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://realhuameng.github.io/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/">http://realhuameng.github.io/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/</a>
+                    <a href="http://realhuameng.github.io/2023/04/13/zi-jie-qian-duan-chu-jie-xun-lian-ying-ji-suan-ji-wang-luo-gai-lun/">http://realhuameng.github.io/2023/04/13/zi-jie-qian-duan-chu-jie-xun-lian-ying-ji-suan-ji-wang-luo-gai-lun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -607,13 +891,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/11/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-er/">
+                <a href="/2023/04/14/zi-jie-qian-duan-chu-jie-xun-lian-ying-linux-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="汇编语言（第三版）王爽—实验二">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="字节前端初阶训练营—Linux基础">
                         
-                        <span class="card-title">汇编语言（第三版）王爽—实验二</span>
+                        <span class="card-title">字节前端初阶训练营—Linux基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -624,7 +908,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-11
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-14
                         </span>
                         <span class="publish-author">
                             
@@ -644,13 +928,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/24/suan-fa-shua-ti-ji-lu-zi-fu-chuan/">
+                <a href="/2023/04/10/ji-suan-ji-wang-luo-zi-ding-xiang-xia-wireshark-shi-yan-http-he-dns/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="算法刷题记录—字符串">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="计算机网络：自顶向下—Wireshark实验：HTTP和DNS">
                         
-                        <span class="card-title">算法刷题记录—字符串</span>
+                        <span class="card-title">计算机网络：自顶向下—Wireshark实验：HTTP和DNS</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -661,7 +945,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-10
                             </span>
                         <span class="publish-author">
                             

@@ -6,7 +6,8 @@
     <meta charset="utf-8">
     <meta name="keywords" content="计算机网络自顶向下—第二章—套接字编程作业, Hexo">
     <meta name="description" content="网站http://www.pearsonhighered.com/cs-resource可以找到作业的全面细节
-作业1：Web服务器在这个编程作业中，你将用Python语言开发一个简单的Web服务器，它仅能处理一个请求。具体而言，你的Web">
+作业文档翻译以及解答参考
+https://github.com/jzplp/Computer-Network-A-Top-Dow">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -383,14 +384,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-25
+                    2023-03-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.9k
+                    3.6k
                 </div>
                 
 
@@ -411,6 +412,8 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><strong>网站<a target="_blank" rel="noopener" href="http://www.pearsonhighered.com/cs-resource%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0%E4%BD%9C%E4%B8%9A%E7%9A%84%E5%85%A8%E9%9D%A2%E7%BB%86%E8%8A%82">http://www.pearsonhighered.com/cs-resource可以找到作业的全面细节</a></strong></p>
+<p>作业文档翻译以及解答参考</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jzplp/Computer-Network-A-Top-Down-Approach-Answer">https://github.com/jzplp/Computer-Network-A-Top-Down-Approach-Answer</a></p>
 <h1 id="作业1：Web服务器"><a href="#作业1：Web服务器" class="headerlink" title="作业1：Web服务器"></a>作业1：Web服务器</h1><p><strong>在这个编程作业中，你将用Python语言开发一个简单的Web服务器，它仅能处理一个请求。具体而言，你的Web服务器将：（1）当一个客户（浏览器）联系时创建一个连接套接字；（2）从这个连接接收HTTP请求；（3）解释该请求以确定所请求的特定文件；（4）从服务器的文件系统获得请求的文件；（5）创建一个由请求的文件组成的HTTP响应报文，报文前面有首部行；（6）经TCP连接向请求的浏览器发送响应。如果浏览器请求一个在该服务器中不存在的文件，服务器应当返回一个“404 Not Found”差错报文。在配套网站中，我们提供了用于该服务器的框架代码。你的任务是完善该代码，运行你的服务器，通过在不同主机上运行的浏览器发送请求来测试服务器。如果运行你服务器的主机上已经有一个Web服务器在运行，你应当为该Web服务器使用一个不同于80端口的其他端口。</strong></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
 serverSocket <span class="token operator">=</span>socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span> 
@@ -746,6 +749,99 @@ clientSocket<span class="token punctuation">.</span>close<span class="token punc
 
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-25%20230712.png"></p>
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-25%20233953.png"></p>
+<p><strong>可选练习：</strong></p>
+<p><strong>1.类似Google邮件的服务器（如地址：smtp.gmail.com，端口：587））要求您的客户端在发送MAIL FROM命令之前，需要为了身份验证和安全原因添加传输层安全（TLS）或安全套接字层（SSL）。将TLS &#x2F; SSL命令添加到现有的命令中，并使用上述地址和端口为Google邮件服务器实现客户端。</strong></p>
+<p>代码部分只需在上一题基础上稍作更改</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#导入ssl模块</span>
+<span class="token keyword">import</span> ssl
+<span class="token comment">#创建套接字</span>
+context <span class="token operator">=</span> ssl<span class="token punctuation">.</span>create_default_context<span class="token punctuation">(</span><span class="token punctuation">)</span>
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>
+clientSocket<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>mailserver<span class="token punctuation">,</span> <span class="token number">465</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+clientSocketSSL <span class="token operator">=</span> context<span class="token punctuation">.</span>wrap_socket<span class="token punctuation">(</span>clientSocket<span class="token punctuation">,</span> server_hostname<span class="token operator">=</span>mailserver<span class="token punctuation">)</span>
+
+<span class="token comment">#套接字变成clientSocketSSL</span>
+<span class="token comment">#需要更改的部分</span>
+recv <span class="token operator">=</span> clientSocketSSL<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+clientSocketSSL<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token operator">**</span><span class="token operator">*</span>Command<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+clientSocketSSL<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>2.您当前的SMTP邮件客户端只能在电子邮件正文中发送文本消息。修改您的客户端，使其可以发送包含文本和图像的电子邮件。</strong></p>
+<h1 id="作业四：多线程web代理服务器"><a href="#作业四：多线程web代理服务器" class="headerlink" title="作业四：多线程web代理服务器"></a>作业四：多线程web代理服务器</h1><p><strong>在这个编程作业中，你将研发一个简单的web代理服务器。当你的代理服务器从一个浏览器接收到对某对象的HTTP请求，它生成对相同对象的一个新的HTTP请求并向初始服务器发送。当该代理服务器从初始服务器接收到具有该对象的HTTP响应时，它生成一个包括该对象的新HTTP响应，并发送给该客户。这个代理将是多线程的，使其在相同时间能够处理多个请求。</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os 
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span> 
+<span class="token keyword">import</span> sys  
+
+<span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">:</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server'</span> <span class="token punctuation">)</span>     
+    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> 
+
+<span class="token comment">#创建服务器套接字，与端口绑定，保持倾听 </span>
+tcpSerSock <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span> 
+tcpSerPort <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tcpSerSock<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> tcpSerPort<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+tcpSerSock<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>  
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'ready to serve...'</span><span class="token punctuation">)</span>     
+    tcpCliSock<span class="token punctuation">,</span> addr <span class="token operator">=</span> tcpSerSock<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'received a connection from:'</span><span class="token punctuation">,</span> addr<span class="token punctuation">)</span>    
+    message <span class="token operator">=</span> tcpCliSock<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"message: "</span><span class="token punctuation">,</span> message<span class="token punctuation">)</span>     
+    <span class="token keyword">if</span><span class="token punctuation">(</span>message <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">)</span>         
+    	<span class="token keyword">continue</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    
+    filename <span class="token operator">=</span> message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>partition<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> 
+    <span class="token keyword">print</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span>     
+    fileExist <span class="token operator">=</span> <span class="token string">'false'</span>     
+    filetouse <span class="token operator">=</span> <span class="token string">"/"</span> <span class="token operator">+</span> filename     
+    <span class="token keyword">print</span><span class="token punctuation">(</span>filetouse<span class="token punctuation">)</span>     
+    <span class="token keyword">try</span><span class="token punctuation">:</span>         
+        f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"WEB/"</span><span class="token punctuation">,</span> filetouse<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span>         
+        outputdata <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>         
+        fileExist <span class="token operator">=</span> <span class="token string">"true"</span>        
+        tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"HTTP/1.0 200 OK \r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>         
+        tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"Content-type:text/html\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>         
+        tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span>         
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'read from cache'</span><span class="token punctuation">)</span>      
+    <span class="token keyword">except</span> IOError<span class="token punctuation">:</span>         
+        <span class="token keyword">if</span> fileExist <span class="token operator">==</span> <span class="token string">'false'</span><span class="token punctuation">:</span>             
+            c <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>            
+            hosten <span class="token operator">=</span> filename<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"www."</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>             
+            <span class="token keyword">print</span><span class="token punctuation">(</span>hosten<span class="token punctuation">)</span>             
+            <span class="token keyword">try</span><span class="token punctuation">:</span>                 
+                serverName <span class="token operator">=</span> hosten<span class="token punctuation">.</span>partition<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>                 
+                serverPort <span class="token operator">=</span> <span class="token number">80</span>                 
+                c<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>serverName<span class="token punctuation">,</span> serverPort<span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                askfile <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>filename<span class="token punctuation">.</span>partition<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>                 
+                fileobj <span class="token operator">=</span> c<span class="token punctuation">.</span>makefile<span class="token punctuation">(</span><span class="token string">'rwb'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>                 
+                fileobj<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> askfile<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"HTTP/1.0\r\nHost: "</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\r\n\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                serverRespnse <span class="token operator">=</span> fileobj<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>                  
+                filename <span class="token operator">=</span> <span class="token string">"WEB/"</span> <span class="token operator">+</span> filename                 
+                filesplit <span class="token operator">=</span> filename<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>                 
+                <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>filesplit<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                     
+                   <span class="token keyword">if</span> notos<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>filesplit<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>filesplit<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                 tmpFile <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">"wb"</span><span class="token punctuation">)</span>                 
+                 <span class="token keyword">print</span><span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>                 
+                 serverResponse <span class="token operator">=</span> serverResponse<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">b'\r\n\r\n'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>                 
+                 <span class="token keyword">print</span><span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>                 
+                 tmpFile<span class="token punctuation">.</span>write<span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>                 
+                 tmpFile<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                 
+                 tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"HTTP/1.1 200 OK\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                 tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"Content-Type:text/html\r\n\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                    tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>             
+              <span class="token keyword">except</span><span class="token punctuation">:</span>                 
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"illegal request"</span><span class="token punctuation">)</span>             
+                c<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>         
+            <span class="token keyword">else</span><span class="token punctuation">:</span>             
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"net error"</span><span class="token punctuation">)</span>     
+          tcpCliSock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+  tcpCliSock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -886,18 +982,17 @@ clientSocket<span class="token punctuation">.</span>close<span class="token punc
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/24/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-tao-jie-zi-bian-cheng-zuo-ye/">
+                <a href="/2023/03/27/suan-fa-shua-ti-ji-lu-dong-tai-gui-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="计算机网络自顶向下—第二章—套接字编程作业">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="算法刷题记录-动态规划">
                         
-                        <span class="card-title">计算机网络自顶向下—第二章—套接字编程作业</span>
+                        <span class="card-title">算法刷题记录-动态规划</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -907,9 +1002,9 @@ clientSocket<span class="token punctuation">.</span>close<span class="token punc
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-24
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-27
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -918,7 +1013,6 @@ clientSocket<span class="token punctuation">.</span>close<span class="token punc
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -1133,7 +1227,7 @@ clientSocket<span class="token punctuation">.</span>close<span class="token punc
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">12.5k</span>
+                        class="white-color">23k</span>
             
             
             

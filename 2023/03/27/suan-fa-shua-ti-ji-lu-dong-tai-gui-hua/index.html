@@ -4,11 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="汇编语言（第三版）王爽——实验一, Hexo">
-    <meta name="description" content="查看CPU和内存，用机器指令和汇编指令编程debug的使用安装DOSBOX进行实验R命令查看改变CPU寄存器内容
-
-在所有寄存器的下方，debug还列出了CS:IP所指向的内存单元处所存放的机器码，并将它翻译为机器指令。
-此处CS:IP所指">
+    <meta name="keywords" content="算法刷题记录-动态规划, Hexo">
+    <meta name="description" content="理论基础什么是动态规划（Dynamic Programming）动态规划用于解决有很多子问题的问题
+动态规划中每一个状态一定是由上一个状态推导出来的
+解题步骤1.确定dp数组以及下标的含义
+2.确定递推公式
+3.dp数组如何初始化
+4.确定">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>汇编语言（第三版）王爽——实验一 | Hexo</title>
+    <title>算法刷题记录-动态规划 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -337,12 +339,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">汇编语言（第三版）王爽——实验一</h1>
+                    <h1 class="description center-align post-title">算法刷题记录-动态规划</h1>
                 </div>
             </div>
         </div>
@@ -378,21 +380,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-03-04
+                    2023-03-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-04
+                    2023-03-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    786
+                    2.4k
                 </div>
                 
 
@@ -412,57 +414,301 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="查看CPU和内存，用机器指令和汇编指令编程"><a href="#查看CPU和内存，用机器指令和汇编指令编程" class="headerlink" title="查看CPU和内存，用机器指令和汇编指令编程"></a>查看CPU和内存，用机器指令和汇编指令编程</h1><h2 id="debug的使用"><a href="#debug的使用" class="headerlink" title="debug的使用"></a>debug的使用</h2><h3 id="安装DOSBOX进行实验"><a href="#安装DOSBOX进行实验" class="headerlink" title="安装DOSBOX进行实验"></a>安装DOSBOX进行实验</h3><p><strong>R命令查看改变CPU寄存器内容</strong></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_193445.png" alt="DOSBOX界面"></p>
-<p>在所有寄存器的下方，debug还列出了CS:IP所指向的内存单元处所存放的机器码，并将它翻译为机器指令。</p>
-<p>此处CS:IP所指向的内存单元为073F:0100.此处存放的及机器码为 0000 ，对应的汇编指令为 ADD [BX+SI],AL。</p>
-<p>还可以利用R指令修改寄存器中的内容</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_194422.png" alt="使用R命令修改AX中的内容"></p>
-<p><strong>D命令查看内存中的内容</strong></p>
-<p>d 段地址：偏移地址</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_195008.png" alt="D命令查看内存1000:0处的内容"></p>
-<p>debug将列出从指定内存单元往后128个内存单元的内容（1000:0~1000:F）</p>
-<p>也可以指定查看的范围 d 段地址:起始偏移地址 结尾偏移地址</p>
-<p><strong>用D命令改写内存内容</strong></p>
-<p>e 起始地址 数据 数据 数据 数据…</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_200320.png" alt="用E指令修改1000：0开始的4个单元的内容"></p>
-<p>也可以采用提问的方式来逐个的修改内存的内容</p>
-<p><strong>用E命令向内存中写入机器码，用U命令查看内存中机器码的含义，用T命令执行内存中的机器码</strong></p>
-<p>写入机器码</p>
-<p>mov ax,0001</p>
-<p>mov cx,0002</p>
-<p>add ax,cx</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_202323.png" alt="将机器码写入内存"></p>
-<p>使用U命令翻译</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_202645.png" alt="用U命令将内存单元中的内容翻译为汇编指令显示"></p>
-<p>简单的使用T命令可以执行CS:IP指向的指令</p>
-<p>若要用T命令控制CPU执行某个指令，必须先让CS:IP指向该指令</p>
-<p>可用R命令修改CS:IP中的内容，使CS:IP指向指定的内容</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_203550.png" alt="修改CS:IP指向的内容"></p>
-<p>再使用T命令执行指令</p>
-<p>注意，指令执行后，AX中的内容被改写为1，IP改变为IP+3，CS:IP指向下一条指令</p>
-<p><strong>A命令以汇编指令的形式在内存中写入机器指令</strong></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_204150.png" alt="用A命令向从1000：0开始的内存单元中写入指令"></p>
-<h3 id="本次实验中需要用到的命令"><a href="#本次实验中需要用到的命令" class="headerlink" title="本次实验中需要用到的命令"></a>本次实验中需要用到的命令</h3><p>查看修改CPU寄存器的内容：R命令</p>
-<p>查看内存中的内容：D命令</p>
-<p>修改内存中的内容：E命令（可以写入数据指令）</p>
-<p>将内存中的内容解释为机器指令和对应的汇编指令：U命令</p>
-<p>执行CS:IP指向的内存单元处的指令：T命令</p>
-<p>以汇编指令的形式向内存中写入指令：A命令</p>
-<h3 id="实验任务"><a href="#实验任务" class="headerlink" title="实验任务"></a>实验任务</h3><p>（1）使用debug，将下面的程序写入内存，逐条执行，观察每条指令(此处指令省略)执行后CPU中相关寄存器中内容的变化。</p>
-<p>提示：可用E命令和A命令以两种方式将指令写入内存</p>
-<p>（2）将下面3条指令写入从2000：0开始的内存单元中，利用这3条指令计算2的8次方。</p>
-<p>mov ax,1</p>
-<p>add ax,ax</p>
-<p>jmp 2000:0003</p>
-<p>（3）查看内存中的内容</p>
-<p>（4）向内存从B8100H开始的单元中填写数据</p>
-<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p>（1）使用debug，将下面的程序写入内存，逐条执行，观察每条指令(此处指令省略)执行后CPU中相关寄存器中内容的变化。</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_205601.png" alt="写入内存"></p>
-<p>（2）将下面3条指令写入从2000：0开始的内存单元中，利用这3条指令计算2的8次方。</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_210154.png" alt="用A命令写入指令"></p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_20230304_211335.png"></p>
-<p>执行八次即可得到2的8次方</p>
+                <h3 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h3><h4 id="什么是动态规划（Dynamic-Programming）"><a href="#什么是动态规划（Dynamic-Programming）" class="headerlink" title="什么是动态规划（Dynamic Programming）"></a>什么是动态规划（Dynamic Programming）</h4><p>动态规划用于解决有很多子问题的问题</p>
+<p>动态规划中每一个状态一定是由上一个状态推导出来的</p>
+<h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><p>1.确定dp数组以及下标的含义</p>
+<p>2.确定递推公式</p>
+<p>3.dp数组如何初始化</p>
+<p>4.确定遍历顺序</p>
+<p>5.举例推导dp数组</p>
+<h3 id="509-斐波那契数"><a href="#509-斐波那契数" class="headerlink" title="509.斐波那契数"></a>509.斐波那契数</h3><p><strong>动态规划</strong></p>
+<p>1.确定dp数组以及下标的含义</p>
+<p>dp[i]的定义是：第i个数的斐波那契数值是dp[i]</p>
+<p>2.确定递推公式</p>
+<p><strong>状态转移方程 dp[i] &#x3D; dp[i-1] + dp[i-2]</strong></p>
+<p>3.dp数组如何初始化</p>
+<p>本题初始化条件 dp[0]&#x3D;0, dp[1]&#x3D;1</p>
+<p>4.确定遍历顺序</p>
+<p>dp[i]依赖dp[i-1], dp[i-2]</p>
+<p>那么遍历的顺序一定是从前向后遍历的</p>
+<p>5.举例推导dp数组</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int fib(int n)
+&#123;
+    if(n&lt;&#x3D;1) return n;
+    vector&lt;int&gt; dp(n+1);
+    dp[0]&#x3D;0; dp[1]&#x3D;1;
+    for(int i&#x3D;1;i&lt;&#x3D;n;i++)
+    &#123;
+        dp[i] &#x3D; dp[i-1]+dp[i-2];
+    &#125;
+    return dp[n];
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="70-爬楼梯"><a href="#70-爬楼梯" class="headerlink" title="70.爬楼梯"></a>70.爬楼梯</h3><p>1.确定dp数组以及下标的含义</p>
+<p>dp[i]:爬到第i层楼梯由dp[i]种方法</p>
+<p>2.确定递推公式</p>
+<p>若要上到第i阶台阶，最后一步一定是从第i-1阶或第i-2阶上到第i阶</p>
+<p>那么可知</p>
+<p>递推公式为dp[i] &#x3D; dp[i-1] dp[i-2]</p>
+<p>3.dp数组如何初始化</p>
+<p>dp[1] &#x3D; 1</p>
+<p>dp[2] &#x3D; 2</p>
+<p>4.确定遍历顺序</p>
+<p>从前向后</p>
+<p>5.举例推导dp数组</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int climbStairs(int n)&#123;
+    if(n &lt;&#x3D; 1) return n;
+    vector&lt;int&gt; dp(n+1);
+    dp[1] &#x3D; 1;
+    dp[2] &#x3D; 2;
+    for(int i&#x3D;3;i&lt;&#x3D;n;i++)
+    &#123;
+        dp[i] &#x3D; dp[i-1] - dp[i-2];
+    &#125;
+    return dp[n];
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="746-使用最小花费爬楼梯"><a href="#746-使用最小花费爬楼梯" class="headerlink" title="746.使用最小花费爬楼梯"></a>746.使用最小花费爬楼梯</h3><p>1.确定dp数组以及下标的含义</p>
+<p>到达第i台阶所花费最少体力为dp[i]</p>
+<p>2.确定递推公式</p>
+<p>dp[i] &#x3D; min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2])</p>
+<p>3.dp数组初始化</p>
+<p>dp[0] &#x3D; 0</p>
+<p>dp[1] &#x3D; 0</p>
+<p>4.确定遍历顺序</p>
+<p>5.举例推导dp数组</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int minCostClimbingStairs(vecror&lt;int&gt;&amp; cost)
+&#123;
+    vector&lt;int&gt; dp(cost,size());
+    dp[0] &#x3D; 0;
+    dp[1] &#x3D; 0;
+    for(int i&#x3D;2;i&lt;cost.size();i++)
+    &#123;
+        dp[i] &#x3D; min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2]);
+    &#125;
+    return dp[cost.size()];
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="62-不同路径"><a href="#62-不同路径" class="headerlink" title="62.不同路径"></a>62.不同路径</h3><p>1.确定dp数组以及下标含义</p>
+<p>从（0，0）出发，到（i，j）的路径数</p>
+<p>2.确定递推公式</p>
+<p>dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - 1]</p>
+<p>3.dp数组初始化</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for(int i&#x3D;0;i&lt;m;i++) dp[i][0] &#x3D; 1;
+for(int j&#x3D;0;j&lt;n;j++) dp[0][j] &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>4.确定遍历顺序</p>
+<p>从左至右一层一层遍历</p>
+<p>5.举例推导</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int uniquePath(int m, int n)&#123;
+    vector&lt;vector&lt;int&gt;&gt; dp(m,vector&lt;int&gt;(n, 0));
+    for(int i&#x3D;0;i&lt;m;i++) dp[i][0] &#x3D; 1;
+    for(int j&#x3D;0;j&lt;n;j++) dp[0][j] &#x3D; 1;
+    for(int i&#x3D;1;i&lt;m;i++)
+    &#123;
+        for(int j&#x3D;1;j&lt;n;j++)
+        &#123;
+            dp[i][j] &#x3D; dp[i-1][j] + dp[i][j-1];
+        &#125;
+        return dp[m-1][n-1];
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="63-不同路径Ⅱ"><a href="#63-不同路径Ⅱ" class="headerlink" title="63.不同路径Ⅱ"></a>63.不同路径Ⅱ</h3><p>1.确定dp数组以及下标含义</p>
+<p>含义与上一题相同</p>
+<p>2.确定递推公式</p>
+<p>如果有障碍，路径数应为0</p>
+<p>3.dp数组初始化</p>
+<p>与上一题类似，障碍前的路径数都为1，障碍后的都为0</p>
+<p>4.确定遍历顺序</p>
+<p>从左到右一层一层遍历</p>
+<p>5.举例推导dp数组</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int uniquePathsWithObstacles(vector&lt;vector&lt;int&gt;&gt;&amp; obstacleGrid)
+&#123;
+    int m &#x3D; obstacleGrid.size();
+    int n &#x3D; obstacleGrid[0].size();
+    if (obstacleGrid[m - 1][n - 1] &#x3D;&#x3D; 1 || obstacleGrid[0][0] &#x3D;&#x3D; 1) &#x2F;&#x2F;如果在起点或终点出现了障碍，直接返回0            
+    return 0;
+    
+    vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n,0));
+    for(int i&#x3D;0;i&lt;m &amp;&amp; obstacleGrid[i][0]&#x3D;&#x3D;0;i++) dp[i][0] &#x3D; 1;
+    for(int j&#x3D;0lj&lt;n &amp;&amp; obstacleGrid[0][j]&#x3D;&#x3D;0;j++) dp[0][j] &#x3D; 1;
+    for(int i&#x3D;1;i&lt;m;i++)
+    &#123;
+        for(int j&#x3D;1;j&lt;n;j++)
+        &#123;
+            if(obstacleGrid[i][j]&#x3D;&#x3D;1) contine;
+            dp[i][j] &#x3D; dp[i-1][j] + dp[i][j-1];
+        &#125;
+    &#125;
+    return dp[m-1][n-1];
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="343-整数拆分"><a href="#343-整数拆分" class="headerlink" title="343.整数拆分"></a>343.整数拆分</h3><ol>
+<li></li>
+</ol>
+<p>2.确定递推公式</p>
+<p>从1遍历j，有两种渠道得到dp[i]</p>
+<p>一个是j*(i-j)直接相乘</p>
+<p>一个是j*dp[i-j],相当于拆分(i-j)</p>
+<p>3.dp初始化</p>
+<p>dp[2] &#x3D; 1</p>
+<p>4.确定遍历顺序</p>
+<p>从前向后</p>
+<p>5.举例推导</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int integerBreak(int n)
+&#123;
+    vector&lt;int&gt; dp(n+1);
+    dp[2] &#x3D; 1;
+    for(int i&#x3D;3;i&lt;&#x3D;n;i++)
+    &#123;
+        for(int j&#x3D;1;j&lt;&#x3D;i&#x2F;2;j++)
+        &#123;
+            dp[i]&#x3D;max(dp[i],max((i-j)*j, dp[i-j]*j));
+&#125;
+    &#125;
+    return dp[n];
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="01背包理论基础"><a href="#01背包理论基础" class="headerlink" title="01背包理论基础"></a>01背包理论基础</h3><h4 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h4><p>有n件物品和一个最多能背重量为w的背包。第i件物品的重量是weight[i]，得到的价值是value[i]。每件物品只能使用一次，求解将哪些物品装入背包里价值总和最大。</p>
+<h4 id="二维dp数组01背包"><a href="#二维dp数组01背包" class="headerlink" title="二维dp数组01背包"></a>二维dp数组01背包</h4><p>1.确定dp数组以及下标含义</p>
+<p><strong>dp[i] [j]表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少</strong></p>
+<p>2.确定递推公式</p>
+<p>可以有两个方向推出dp[i] [j]</p>
+<p><strong>不放物品i：</strong>由dp[i-1] [j]推出，即背包容量为j，里面不放物品i的最大价值，此时dp[i] [j]就是dp[i-1] [j]。</p>
+<p><strong>放物品i：</strong>由dp[i-1] [j-weight[i]]推出，**dp[i-1] [j-weight[i]]<strong>为背包容量为</strong>j-weight[i]<strong>的时候不放物品i的最大价值，那么</strong>dp[i-1] [j-weight[i]+value[i]]**，就是背包放物品i得到的最大价值。</p>
+<p>所以递推公式为</p>
+<p><strong>dp[i] [j] &#x3D; max(dp[i-1] [j], dp[i-1] [j-weight[i]]+value[i])</strong></p>
+<p>3.dp数组如何初始化</p>
+<p>背包容量j为0的话，即dp[i] [0]，无论选取哪些物品，背包价值总和一定为0</p>
+<p>当i为零时</p>
+<p>j&lt;weight[0]时，dp[0] [j]应该是0</p>
+<p>当j &gt;&#x3D; weight[0]时，dp[0] [j]应该是value[0]</p>
+<p>4.确定遍历顺序</p>
+<p>先遍历物品或者先遍历背包都可以</p>
+<p>先遍历物品的代码</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for(int i&#x3D;1;i&lt;weight.size();i++)
+&#123;
+    for(int j&#x3D;0;j &lt;&#x3D; bagweight;j++)
+    &#123;
+        if(j&lt;weight)
+            dp[i][j] &#x3D; dp[i-1][j];
+        
+        else
+            dp[i][j] &#x3D; max(dp[i-1][j], dp[i-1][j-weight[i]]+value[i]);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>先遍历背包的代码</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for(int j&#x3D;0;j &lt;&#x3D; bagweight;j++)
+&#123;
+    for(int i&#x3D;1;i &lt; weight.size();i++)
+    &#123;
+        if(j &lt; weight[i])
+            dp[i][j] &#x3D; dp[i-1][j];
+        else
+            dp[i][j] &#x3D; max(dp[i-1][j], dp[i-1][j-weight[i]]+value[i]);
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>完整代码</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void bag01()
+&#123;
+    vector&lt;int&gt; weight &#x3D; &#123;1,3,4&#125;;
+    vector&lt;int&gt; value &#x3D; &#123;15,20,30&#125;;
+    int bagweight &#x3D;  4;
+    
+    vector&lt;vector&lt;int&gt;&gt; dp(weight.size(), vector&lt;int&gt;(bagweight + 1, 0));
+    
+    for(int j &#x3D; weight[0];j &lt;&#x3D; bagweight;j++)
+    &#123;
+        dp[0][j] &#x3D; value[0];
+    &#125;
+    
+    for(int i&#x3D;1;i&lt;weight.size();i++)
+    &#123;
+        for(int j&#x3D;0;j&lt;&#x3D;bagweight;j++)
+        &#123;
+         	if(j &lt; weight[i])   
+                dp[i][j] &#x3D; dp[i-1][j];
+            else
+                dp[i][j] &#x3D; max(dp[i-1][j], dp[i-1][j-weight[i]] + value[i]);
+        &#125;
+    &#125;
+    cout&lt;&lt;dp[weight.size() - 1][bagweight]&lt;&lt;endl;
+&#125;
+int main()
+&#123;
+    bag01();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="01背包理论基础（滚动数组）"><a href="#01背包理论基础（滚动数组）" class="headerlink" title="01背包理论基础（滚动数组）"></a>01背包理论基础（滚动数组）</h3><h4 id="一维dp数组（滚动数组）"><a href="#一维dp数组（滚动数组）" class="headerlink" title="一维dp数组（滚动数组）"></a>一维dp数组（滚动数组）</h4><p> 如果把dp[i-1]那一层拷贝到dp[i]上，表达式可以是：dp[i] [j] &#x3D; max(dp[i] [j], dp[i] [j - weight[i]] + value[i])</p>
+<p>可以直接改为一个一维数组</p>
+<p>1.确定dp数组的定义 </p>
+<p>在一维dp数组中，dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]。</p>
+<p>2.一维数组的递推公式</p>
+<p>dp[j]为容量为j的背包所背的最大价值</p>
+<p>dp[j]可以通过dp[j - weight[i]]推导出来，dp[j - weight[i]]表示容量为j - weight[i]的背包所背的最大价值</p>
+<p>dp[j - weight[i]] + value[i]表示容量为j - 物品i重量的背包 + 物品i的价值</p>
+<p>即 容量为j的背包，放入了物品i了之后的价值即：dp[j]</p>
+<p>此时，dp[j]有两个选择，</p>
+<p>一个是 不放物品i，值取自己，相当于dp[i-1] [j]</p>
+<p>一个是 放入物品i，值取dp[j - weight[i]] + value[i]</p>
+<p>递推公式为</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">dp[j] &#x3D; max(dp[j], dp[j - weight[i]] + value[i]);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>3.一维dp数组如何初始化</p>
+<p>dp[0] &#x3D; 0</p>
+<p>dp数组在推导的时候一定是取价值最大的数，要比题目给的价值小，这样才能让dp数组在递归公式的过程中取的最大的价值，而不是被初始值覆盖</p>
+<p>4.一维dp数组遍历顺序</p>
+<p><strong>一维dp遍历背包应该从大到小遍历（倒序遍历）</strong></p>
+<p>在二维数组中，右下角的值依赖上一层左上角的值，因此需要保证左边的值仍是上一层的，从右向左覆盖</p>
+<p><strong>倒序遍历保证物品i只被放入一次</strong></p>
+<p><strong>必须先遍历物品再遍历背包容量</strong></p>
+<p>如果背包遍历放在上一层，那么每个dp[j]就只会放入一个物品</p>
+<p>5.举例推导</p>
+<p>完整代码</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void bag01_Onedimensional()
+&#123;
+    vector&lt;int&gt; weight &#x3D; &#123;1,3,4&#125;;
+    vector&lt;int&gt; value - &#123;15,20,30&#125;;
+    int bagweight &#x3D; 4;
+    
+    vector&lt;int&gt; dp(bagweight +1,0);
+    for(int i&#x3D;0;i &lt; weight.size();i++)
+    &#123;
+        for(int j&#x3D;bagweight;j &gt;&#x3D; weight[i];j--)
+        &#123;
+            dp[j] &#x3D; max(dp[j], dp[j - weight[i]] + value[i]);
+        &#125;
+    &#125;
+    cout&lt;&lt;dp[bagweight]&lt;&lt;endl;
+&#125;
+int main()
+&#123;
+    baag01_Onedimensional();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
 
                 
             </div>
@@ -489,7 +735,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://realhuameng.github.io/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/">http://realhuameng.github.io/2023/03/04/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-yi/</a>
+                    <a href="http://realhuameng.github.io/2023/03/27/suan-fa-shua-ti-ji-lu-dong-tai-gui-hua/">http://realhuameng.github.io/2023/03/27/suan-fa-shua-ti-ji-lu-dong-tai-gui-hua/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -607,13 +853,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/03/11/hui-bian-yu-yan-di-san-ban-wang-shuang-shi-yan-er/">
+                <a href="/2023/04/03/python-numpy-ku-xiang-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="汇编语言（第三版）王爽—实验二">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="python-numpy库详解">
                         
-                        <span class="card-title">汇编语言（第三版）王爽—实验二</span>
+                        <span class="card-title">python-numpy库详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -624,7 +870,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-11
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-03
                         </span>
                         <span class="publish-author">
                             
@@ -644,13 +890,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/24/suan-fa-shua-ti-ji-lu-zi-fu-chuan/">
+                <a href="/2023/03/24/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-tao-jie-zi-bian-cheng-zuo-ye/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="算法刷题记录—字符串">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="计算机网络自顶向下—第二章—套接字编程作业">
                         
-                        <span class="card-title">算法刷题记录—字符串</span>
+                        <span class="card-title">计算机网络自顶向下—第二章—套接字编程作业</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -661,7 +907,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-24
                             </span>
                         <span class="publish-author">
                             

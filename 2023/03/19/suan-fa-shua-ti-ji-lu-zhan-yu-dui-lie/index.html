@@ -384,14 +384,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-21
+                    2023-05-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    345
+                    1.4k
                 </div>
                 
 
@@ -469,6 +469,163 @@ public:
  &#125; 
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="150-逆波兰表达式"><a href="#150-逆波兰表达式" class="headerlink" title="150.逆波兰表达式"></a>150.逆波兰表达式</h3><blockquote>
+<p>字符串有关的函数</p>
+<p>1.stoi()</p>
+<p>将字符串转换为整型</p>
+<p>2.stoll()</p>
+<p>将字符串转换为long long</p>
+<p>3.stof()</p>
+<p>将字符串转换为float</p>
+<p>4.stod()</p>
+<p>将字符串转换为double<a target="_blank" rel="noopener" href="https://www.comap-math.com/mcm/2023Certs/2303164.pdf">https://www.comap-math.com/mcm/2023Certs/2303164.pdf</a></p>
+</blockquote>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution&#123;
+public:
+    int evalRPN(vector&lt;string&gt;&amp; tokens)&#123;
+		stack&lt;long long&gt; st;
+        for(int i&#x3D;0;i &lt; tokens.size();i++)
+        &#123;
+            if(tokens[i] &#x3D;&#x3D; &quot;+&quot; || tokens[i] &#x3D;&#x3D; &quot;-&quot; || tokens &#x3D;&#x3D; &quot;*&quot; || tokens &#x3D;&#x3D; &quot;&#x2F;&quot;)&#123;
+                long long num1 &#x3D; st.top();
+                st.pop();
+                long long num2 &#x3D; st.top();
+                st.pop();
+                if(tokens[i] &#x3D;&#x3D; &quot;+&quot;) st.push(num1 + num2);
+                if(tokens[i] &#x3D;&#x3D; &quot;-&quot;) st.push(num2 - num1);
+                if(tokens[i] &#x3D;&#x3D; &quot;*&quot;) st.push(num2 * num1);
+                if(tokens[i] &#x3D;&#x3D; &quot;&#x2F;&quot;) st.push(num2 &#x2F; num1);
+                
+            	&#125;
+            else&#123;
+                st.push(stoll(tokens[i]));
+            &#125;
+		&#125;
+        int result &#x3D; st.top();
+        st.pop();
+        return result;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="239-滑动窗口最大值"><a href="#239-滑动窗口最大值" class="headerlink" title="239.滑动窗口最大值"></a>239.滑动窗口最大值</h3><p>对于此题，我们需要一个队列，随着窗口移动，队列一进一出，每次移动调用que.pop()（滑动窗口移除元素）、que.push()（滑动窗口添加元素）、que.front()（返回最大值）</p>
+<p><strong>该队列只维护有可能成为窗口里最大值的元素（单调队列）</strong></p>
+<p>单调队列如何配合窗口进行移动：</p>
+<ol>
+<li><p>pop(value)：<strong>窗口移除的元素value &#x3D; 队列出口元素，则弹出元素，否则不进行任何操作</strong></p>
+</li>
+<li><p>push(value)：<strong>push的元素value &gt; 入口元素的值，弹出入口元素，直到push元素的数值 &lt;&#x3D; 队列入口元素的数值</strong></p>
+</li>
+<li><p>que.front()返回窗口最大值</p>
+</li>
+</ol>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution&#123;
+private:
+    class Myqueue&#123;
+        public:
+        	deque&lt;int&gt; que;
+        	void pop(int value)
+            &#123;
+                if(!que.empty &amp;&amp; value &#x3D;&#x3D; que.front())
+                    que.pop_front();
+            &#125;
+        	void push(int value)
+            &#123;
+                while(!que.empty &amp;&amp; value &gt; que.front())
+                &#123;
+                    que.pop_back();
+                &#125;
+                que.push_back(value);
+            &#125;
+        int front()
+        &#123;
+            return que.front();
+        &#125;
+        
+    &#125;;
+
+public:
+    vector&lt;int&gt; maxSlidingWindow(vector&lt;int&gt;&amp; nums, int k)
+    &#123;
+        Myqueue que;
+        vector&lt;int&gt; result;
+        for(int i&#x3D;0;i &lt; k;i++)
+        &#123;
+            que.push(nums[i]);
+        &#125;
+        result.push_back(que.front());
+        for(int i&#x3D;k;i &lt; nums.size();i++)
+        &#123;
+            que.pop(nums[i-k]);
+            que.push(nums[i]);
+            result.push_back(que.front());
+        &#125;
+        return result;
+    &#125;
+    
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="347-前k个高频元素"><a href="#347-前k个高频元素" class="headerlink" title="347.前k个高频元素"></a>347.前k个高频元素</h3><ol>
+<li>利用map进行元素频率的统计</li>
+<li>利用priority_queue对频率进行排列</li>
+</ol>
+<blockquote>
+<p>优先级队列内部元素自动依照元素的权值排列</p>
+<p>缺省情况下priority_queue利用max_heap完成对元素的排列，该大顶堆是以vector为表现形式的complete binary tree</p>
+<p>本题利用小顶堆来实现</p>
+</blockquote>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution&#123;
+public:
+    class mycomparison&#123;
+        public:
+        	bool operator()(const pair&lt;int,int&gt;&amp; lhs, const pair&lt;int,int&gt;&amp; rhs)
+            &#123;
+                return lhs.second &gt; rhs.second;
+            &#125;
+    &#125;;
+    
+    vector&lt;int&gt; topKFrequent(vector&lt;int&gt;&amp; nums, int k)
+    &#123;
+        unordered_map&lt;int, int&gt; map;
+        for(int i&#x3D;0;i  &lt; nums.size();i++)
+        &#123;
+            map[nums[i]]++;
+        &#125;
+        priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt; ,mycomparison&gt; que;
+        for(unordered_map&lt;int, int&gt;::iterator it&#x3D;map.begin();it!&#x3D;map.end();it++)
+        &#123;
+            que.push(*it);
+            if(que.size()&gt;k)
+                que.pop();
+        &#125;
+        vector&lt;int&gt; result(k);
+        for(int i&#x3D;k-1;i&gt;&#x3D;0;i--)
+        &#123;
+            result[i] &#x3D; que.top().first;
+            que.pop()
+        &#125;
+        
+        return result;
+        
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><h4 id="括号匹配"><a href="#括号匹配" class="headerlink" title="括号匹配"></a>括号匹配</h4><p>匹配左括号时，右括号先入栈，只需要比较当前元素和栈顶相不相等</p>
+<h4 id="字符串去重"><a href="#字符串去重" class="headerlink" title="字符串去重"></a>字符串去重</h4><p>将字符串顺序放到一个栈中，如果相同的话栈就弹出</p>
+<h4 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h4><p>相邻字符串的消除问题</p>
+<h4 id="滑动窗口最大值"><a href="#滑动窗口最大值" class="headerlink" title="滑动窗口最大值"></a>滑动窗口最大值</h4><p>队列没有必要维护窗口里的所有元素，只需要维护可能成为窗口里最大值的元素，同时保证队列里的元素数值时由大到小的</p>
+<p>设计单调队列时，pop和push的操作要保持以下原则：</p>
+<ol>
+<li>pop(value)：如果窗口移除的元素value等于单调队列的出口元素，那么队列弹出元素，否则不用进行任何操作</li>
+<li>push(value)：如果push的元素value大于入口元素的数值，那么就将队列出口的元素弹出，直到push元素的数值小于等于队列入口元素的数值为止</li>
+</ol>
+<h4 id="求前K个高频元素"><a href="#求前K个高频元素" class="headerlink" title="求前K个高频元素"></a>求前K个高频元素</h4><p>unordered_map计算频率</p>
+<p>利用priority_queue完成对元素的排序</p>
 
                 
             </div>
@@ -854,7 +1011,7 @@ public:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">12.5k</span>
+                        class="white-color">23k</span>
             
             
             
