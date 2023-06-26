@@ -1,0 +1,1543 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="计算机网络自顶向下—第二章—套接字编程作业, Hexo">
+    <meta name="description" content="网站http://www.pearsonhighered.com/cs-resource可以找到作业的全面细节
+作业文档翻译以及解答参考
+https://github.com/jzplp/Computer-Network-A-Top-Dow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>计算机网络自顶向下—第二章—套接字编程作业 | Hexo</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hexo</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/realhuameng" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/realhuameng" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机网络自顶向下—第二章—套接字编程作业</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-06-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-03-31
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.6k
+                </div>
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><strong>网站<a target="_blank" rel="noopener" href="http://www.pearsonhighered.com/cs-resource%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0%E4%BD%9C%E4%B8%9A%E7%9A%84%E5%85%A8%E9%9D%A2%E7%BB%86%E8%8A%82">http://www.pearsonhighered.com/cs-resource可以找到作业的全面细节</a></strong></p>
+<p>作业文档翻译以及解答参考</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jzplp/Computer-Network-A-Top-Down-Approach-Answer">https://github.com/jzplp/Computer-Network-A-Top-Down-Approach-Answer</a></p>
+<h1 id="作业1：Web服务器"><a href="#作业1：Web服务器" class="headerlink" title="作业1：Web服务器"></a>作业1：Web服务器</h1><p><strong>在这个编程作业中，你将用Python语言开发一个简单的Web服务器，它仅能处理一个请求。具体而言，你的Web服务器将：（1）当一个客户（浏览器）联系时创建一个连接套接字；（2）从这个连接接收HTTP请求；（3）解释该请求以确定所请求的特定文件；（4）从服务器的文件系统获得请求的文件；（5）创建一个由请求的文件组成的HTTP响应报文，报文前面有首部行；（6）经TCP连接向请求的浏览器发送响应。如果浏览器请求一个在该服务器中不存在的文件，服务器应当返回一个“404 Not Found”差错报文。在配套网站中，我们提供了用于该服务器的框架代码。你的任务是完善该代码，运行你的服务器，通过在不同主机上运行的浏览器发送请求来测试服务器。如果运行你服务器的主机上已经有一个Web服务器在运行，你应当为该Web服务器使用一个不同于80端口的其他端口。</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+serverSocket <span class="token operator">=</span>socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span> 
+<span class="token comment">#socket类实例化，第一个参数是地址族（默认是socket.AF_INET,指定使用IPv4协议）；第二个参数是流（默认是socket.SOCK_STREAM,指定面向流的TCP协议）；第三个参数默认是0</span>
+serverPort<span class="token operator">=</span><span class="token number">6789</span><span class="token comment">#设置端口号为6789</span>
+serverSocket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span>serverPort<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#将服务器套接字与端口号6789绑定</span>
+serverSocket<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">#聆听来自客户端的请求，参数定义请求最大数（至少为1）</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Ready to serve...'</span><span class="token punctuation">)</span>
+    connectionSocket<span class="token punctuation">,</span> addr <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">#调用accept方法，创建名为connectionSocket的新的套接字供特定的客户使用</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        message <span class="token operator">=</span> connectionSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token comment">#获得客户端发送的报文，设定要发送的字节数</span>
+        filename <span class="token operator">=</span> message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token comment">#获得客户请求的文件名</span>
+        f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        outputdata <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">#向客户端发送http首部</span>
+        header <span class="token operator">=</span> <span class="token string">'http/1.1 200 OK\nConnection: close\nContent-Type: text/html\nContent-Length: %d\n\n'</span> <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        connectionSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>header<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            connectionSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>outputdata<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        connectionSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">#报文发送完毕后关闭连接</span>
+    <span class="token keyword">except</span> IOError<span class="token punctuation">:</span><span class="token comment">#错误提示</span>
+        outputdata <span class="token operator">=</span> <span class="token string">'http/1.1 404 Not Found\r\n\r\n'</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            connectionSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>outputdata<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>emcode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            
+        connectionSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+severSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+        
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在本地浏览器输入localhost:6789&#x2F;f.html</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-24%20174512.png" alt="发送成功"></p>
+<p><strong>可选练习</strong></p>
+<p><strong>1.目前，这个Web服务器一次只处理一个HTTP请求。请实现一个能够同时处理多个请求的多线程服务器。使用线程，首先创建一个主线程，在固定端口监听客户端请求。当从客户端收到TCP连接请求时，它将通过另一个端口建立TCP连接，并在另外的单独线程中为客户端请求提供服务。这样在每个请求&#x2F;响应对的独立线程中将有一个独立的TCP连接。</strong></p>
+<p>程序中需要用到python的threading模块进行多线程编程</p>
+<blockquote>
+<p>在代码中引用threading模块</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> threading<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="创建thread对象"><a href="#创建thread对象" class="headerlink" title="创建thread对象"></a>创建thread对象</h3><p>每个thread对象代表一个线程，在每个线程中我们可以让程序处理不同的任务</p>
+<p>1.直接创建thread对象</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">threading</span><span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>group<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> target<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> kwargs<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">,</span> daemon<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>thread构造方法中，需要将一个callable对象赋值给target，线程才能正常运行</p>
+<p>调用start()方法启动thread对象</p>
+<p><strong>thread的名字</strong></p>
+<p>每个thread都有一个name的属性，代表的就是线程的名字，可以在构造方法中赋值</p>
+<p>默认为“Thread-number”的形式</p>
+<p>可以通过is_alive的方法查询线程是否还在运行</p>
+<p>在主线程结束时，若要使子线程也立即结束，可在子线程调用start()方法之前设置deamon的值为true</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span> 
+<span class="token keyword">import</span> threading 
+serverSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_IENT<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span><span class="token comment">#实例化socket类 </span>
+<span class="token comment">#设置接收请求的端口号 </span>
+serverPort <span class="token operator">=</span> <span class="token number">1111</span> 
+serverSocket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span>serverPort<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#绑定 </span>
+serverSocekt<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span>  
+<span class="token keyword">def</span> <span class="token function">function</span><span class="token punctuation">(</span>connectionSocket<span class="token punctuation">)</span><span class="token punctuation">:</span>     
+    <span class="token keyword">try</span><span class="token punctuation">:</span>         
+        message <span class="token operator">=</span> connectionSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>         
+        filename <span class="token operator">=</span> message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>         
+        f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>         
+        outputdata <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>         
+        header <span class="token operator">=</span> <span class="token string">' HTTP/1.1 200 OK\nConnection: close\nContent-Type: text/html\nContent-Length: %d\n\n'</span> <span class="token operator">%</span> <span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span><span class="token punctuation">)</span>                       connectionSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>header<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>         
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>     
+            connectionSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>outputdata<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>             
+            connectionSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>      
+     <span class="token keyword">except</span> IOError<span class="token punctuation">:</span>         
+        outputdata <span class="token operator">=</span> <span class="token string">'HTTP/1.1 404 Not Found\r\n\r\n'</span>         
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>             
+            connectionSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>outputdata<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>          
+            connectionSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+            
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span> <span class="token string">'Ready to serve...'</span><span class="token punctuation">)</span>     
+    connectionSocket<span class="token punctuation">,</span> addr <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>     
+    thread <span class="token operator">=</span> threading<span class="token punctuation">.</span>Thread<span class="token punctuation">(</span>target<span class="token operator">=</span>webProcess<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>connectionSocket<span class="token punctuation">,</span> <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#多线程     </span>
+    thread<span class="token punctuation">.</span>start<span class="token punctuation">(</span><span class="token punctuation">)</span>   
+serverSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>**2.不使用浏览器，编写自己的HTTP客户端来测试你的服务器。您的客户端将使用一个TCP连接用于连接到服务器，向服务器发送HTTP请求，并将服务器响应显示出来。您可以假定发送的HTTP请求将使用GET方法。    客户端应使用命令行参数指定服务器IP地址或主机名，服务器正在监听的端口，以及被请求对象在服务器上的路径。以下是运行客户端的输入命令格式。 **</p>
+<blockquote>
+<p>client.py server_host server_port filename</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span> 
+serverName <span class="token operator">=</span> <span class="token string">'192.0.0.0'</span> 
+serverPort <span class="token operator">=</span> <span class="token number">6789</span> 
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_IENT<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span> clientSocket<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>serverName<span class="token punctuation">,</span>serverPort<span class="token punctuation">)</span><span class="token punctuation">)</span>  
+outputdata <span class="token operator">=</span> <span class="token string">'GET /f.html HTTP/1.1\r\n Host: 192.168.137.1\r\n\r\n'</span> clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>outputdata<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+data <span class="token operator">=</span> <span class="token number">1</span> 
+<span class="token keyword">while</span> data<span class="token punctuation">:</span>     
+    data <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span>  
+    
+clientSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h1 id="作业2：UDP-ping程序"><a href="#作业2：UDP-ping程序" class="headerlink" title="作业2：UDP ping程序"></a>作业2：UDP ping程序</h1><p><strong>在这个编程作业中，你将用python编写一个客户ping程序。该客户将发送一个简单的ping报文，接受一个从服务器返回的对应pong报文，并确定从该客户发送ping报文到接收到pong报文为止的时延。该时延称为往返时延（RTT）。由该客户和服务器提供的功能类似于在现代操作系统中可用的标准ping程序。然而，标准的ping使用互联网控制报文协议（ICMP）。此时我们将创建一个非标准（但简单的）基于UDP的ping程序。</strong></p>
+<p><strong>你的ping程序经UDP向目标服务器发送10个ping报文。对于每个报文，当对应的pong报文返回时，你的客户要确定和打印RTT。因为UDP是一个不可靠的协议，由客户发送的分组可能会丢失。为此，客户不能无限期地等待对ping报文的回答。客户等待服务器回答的时间至多为一秒；如果没有收到回答，客户假定该分组丢失并相应的打印一条报文。</strong></p>
+<p><strong>在此作业中，你将给出服务器的完整代码，你的任务是编写客户代码，可以随意地从服务器代码中剪贴代码行。</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#UDPserver.py</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> random <span class="token comment">#随机数生成</span>
+
+serverSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+serverSocket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span> <span class="token number">1111</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+                  rand <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span>
+                  message<span class="token punctuation">,</span> address <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+                  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"收到来自 %s 的报文：（%s）"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>address<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"随机数是：%d"</span> <span class="token operator">%</span> rand<span class="token punctuation">)</span>
+                  message <span class="token operator">=</span> message<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                  
+                  <span class="token keyword">if</span> rand <span class="token operator">&lt;</span> <span class="token number">4</span>
+                     comtinue
+                  serverSocket<span class="token punctuation">.</span>sendto<span class="token punctuation">(</span>message<span class="token punctuation">,</span> address<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#UDPclient.py</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> time
+
+serverName <span class="token operator">=</span> <span class="token string">'localhost'</span>
+serverPort <span class="token operator">=</span> <span class="token number">1111</span>
+
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        time_start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">#开始计时</span>
+        message <span class="token operator">=</span> <span class="token string">'Ping *'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>time_start<span class="token punctuation">)</span> <span class="token comment">#要发送的ping报文</span>
+        clientSocket<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">#超时处理时间设置为1s</span>
+        clientSocket<span class="token punctuation">.</span>sendto<span class="token punctuation">(</span>message<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span><span class="token number">1111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            modified<span class="token punctuation">,</span> serveraddress <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+            Time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> time_start <span class="token comment">#计算RTT</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'cost'</span><span class="token punctuation">,</span> Time<span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span> timeout<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Request Time Out'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            
+clientSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>编写程序时遇到的问题与解决方法：</p>
+<p>1.将服务器端代码与客户端代码运行后，客户端收到的消息一直为“Request Time Out”，将except后错误类型改为timeout解决</p>
+<p><strong>可选练习</strong></p>
+<p>**1.目前，程序计算每个数据包的往返时间（RTT），并单独打印出来。请按照标准ping程序的模式修改。您需要在客户端每次ping后显示最小，最大和平均RTT。另外，还需计算丢包率（百分比）。 **</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span> 
+<span class="token keyword">import</span> time  
+serverName <span class="token operator">=</span> <span class="token string">'localhost'</span> 
+serverPort <span class="token operator">=</span> <span class="token number">1111</span> 
+recvnum<span class="token operator">=</span><span class="token number">0</span> 
+<span class="token builtin">max</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> 
+<span class="token builtin">min</span> <span class="token operator">=</span> <span class="token number">2</span> 
+aver <span class="token operator">=</span> <span class="token number">0</span> 
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span> 
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>     
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">:</span>              
+        time_start <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>             
+        message <span class="token operator">=</span> <span class="token string">'Ping *'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>time_start<span class="token punctuation">)</span>            
+        clientSocket<span class="token punctuation">.</span>settimeout<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>             
+        clientSocket<span class="token punctuation">.</span>sendto<span class="token punctuation">(</span>message<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span> <span class="token number">1111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>              
+        <span class="token keyword">try</span><span class="token punctuation">:</span>                 
+            modified<span class="token punctuation">,</span> serveraddress <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>                   
+            Time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span> time_start                 
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'cost'</span><span class="token punctuation">,</span> Time<span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">)</span>                 
+            recvnum<span class="token operator">+=</span><span class="token number">1</span>                 
+            aver <span class="token operator">+=</span>Time                
+            <span class="token keyword">if</span><span class="token punctuation">(</span>Time<span class="token operator">></span><span class="token builtin">max</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                     
+                <span class="token builtin">max</span><span class="token operator">=</span>Time                 
+            <span class="token keyword">if</span><span class="token punctuation">(</span>Time<span class="token operator">&lt;</span><span class="token builtin">min</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                     
+                <span class="token builtin">min</span><span class="token operator">=</span>Time              
+         <span class="token keyword">except</span> timeout<span class="token punctuation">:</span>                 
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Request Time Out'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"丢失率"</span><span class="token punctuation">,</span><span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token operator">-</span>recvnum<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span><span class="token operator">/</span>recvnum<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%"</span><span class="token punctuation">)</span> 
+<span class="token keyword">if</span><span class="token punctuation">(</span>recvnum<span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"最短"</span><span class="token punctuation">,</span> <span class="token builtin">min</span><span class="token punctuation">,</span> <span class="token string">"最长"</span><span class="token punctuation">,</span> <span class="token builtin">max</span><span class="token punctuation">,</span> <span class="token string">"平均"</span><span class="token punctuation">,</span> aver<span class="token operator">/</span>recvnum<span class="token punctuation">)</span>  
+clientSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>2.  UDP Ping的另一个类似的应用是UDP Heartbeat。心跳可用于检查应用程序是否已启动并运行，并报告单向丢包。客户端在UDP数据包中将一个序列号和当前时间戳发送给正在监听客户端心跳的服务器。服务器收到数据包后，计算时差，报告丢包（若发生）。如果心跳数据包在指定的一段时间内丢失，我们可以假设客户端应用程序已经停止。实现UDP Heartbeat（客户端和服务器端）。您需要修改给定的UDPPingerServer.py和您自己的UDP ping客户端。</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#server</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+serverSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+serverSocket<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">'localhost'</span><span class="token punctuation">,</span> <span class="token number">1111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    message<span class="token punctuation">,</span> address <span class="token operator">=</span> serverSocekt<span class="token punctuation">.</span>recvfrom<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    message <span class="token operator">=</span> message<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    message <span class="token operator">=</span> message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    timeDiff <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token builtin">float</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"RTT is"</span><span class="token punctuation">,</span> timeDiff<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#client</span>
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> time
+serverName <span class="token operator">=</span> <span class="token string">'localhost'</span>
+serverPort <span class="token operator">=</span> <span class="token number">1111</span>
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">)</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    time1 <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    outputdata <span class="token operator">=</span> <span class="token string">'Heartbeat'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>time1<span class="token punctuation">)</span>
+    clientSocket<span class="token punctuation">.</span>seendto<span class="token punctuation">(</span>outputdata<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>serverName<span class="token punctuation">,</span> serverPort<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="作业三：邮件客户"><a href="#作业三：邮件客户" class="headerlink" title="作业三：邮件客户"></a>作业三：邮件客户</h1><p><strong>这个编程作业的目的是创建一个向任何接收方发送电子邮件的简单邮件客户。你的客户将必须与邮件服务器（如谷歌的电子邮件服务器）创建一个TCP连接，使用SMTP协议与邮件服务器进行交谈，经该邮件服务器向某接收方（如你的朋友）发送一个电子邮件报文，最后关闭与该邮件服务器的TCP连接。</strong></p>
+<p><strong>对本作业，配套的web站点为你的客户提供了框架代码。你的任务是完善该代码并通过向不同的用户账户发送电子邮件来测试你的客户。你也可以尝试通过不同的服务器（例如谷歌的邮件服务器和你所在的大学的邮件服务器）进行发送</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> socekt <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">import</span> base64
+mailserver <span class="token operator">=</span> <span class="token string">'smtp.qq.com'</span> <span class="token comment">#你所用邮件服务器的地址</span>
+mailUser <span class="token operator">=</span> <span class="token string">'aaa'</span>
+mailFromAddress <span class="token operator">=</span> <span class="token string">'aaa@qq.com'</span>
+mailPassword <span class="token operator">=</span> <span class="token string">'******'</span> <span class="token comment">#可以在邮箱设置授权码，使用授权码登录</span>
+mailToAddress <span class="token operator">=</span> <span class="token string">'bbb@163.com'</span>
+
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>
+clientSocket<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>mailserver<span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#qq的smtp端口号</span>
+
+recv <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+<span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'220'</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"220 reply not received from server"</span><span class="token punctuation">)</span>
+    
+    
+helloCommand <span class="token operator">=</span> <span class="token string">'HELO mailserver\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>helloCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv1 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv1 <span class="token operator">=</span> recv1<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv1<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv1<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span>
+    	<span class="token keyword">break</span><span class="token punctuation">;</span>
+
+        
+loginCommand <span class="token operator">=</span> <span class="token string">'AUTH LOGIN\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>loginCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'334'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+userCommand <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>mailUser<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">b'\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span>：
+	clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>userCommand<span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'334'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+passCommand <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>mailPassword<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">b'\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>passCommand<span class="token punctuation">)</span>
+    recv <span class="token operator">=</span> client<span class="token punctuation">.</span>socket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+	recv <span class="token operator">=</span> recv<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'235'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+mailfromCommand <span class="token operator">=</span> <span class="token string">'MAIL FROM: &lt;aaa@qq.com>\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>mailfromCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv2 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv2 <span class="token operator">=</span> recv2<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv2<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv2<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+rcptCommand <span class="token operator">=</span> <span class="token string">'RCPT TO: &lt;bbb@163.com>\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>rcptCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv3 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv3 <span class="token operator">=</span> recv3<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv3<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv3<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+dataCommand <span class="token operator">=</span> <span class="token string">'DATA\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>DataCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv4 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv4 <span class="token operator">=</span> recv4<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv4<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv4<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'354'</span>
+    	<span class="token keyword">break</span>
+        
+        
+messageCommand <span class="token operator">=</span> <span class="token string">'\r\ni am doing my computer networking homework\r\n:)\r\n'</span>
+clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>messageCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+endCommand <span class="token operator">=</span> <span class="token string">'\r\n.\r\n'</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocket<span class="token punctuation">.</span>send<span class="token punctuation">(</span>endCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv5 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv5 <span class="token operator">=</span> recv5<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv5<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv5<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'250'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+        
+        
+quitCommand <span class="token operator">=</span> <span class="token string">'QUIT\r\n'</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    clientSocekt<span class="token punctuation">.</span>send<span class="token punctuation">(</span>quitCommand<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    recv6 <span class="token operator">=</span> clientSocket<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+    recv6 <span class="token operator">=</span> recv6<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>recv6<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> recv5<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'221'</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+
+clientSocket<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-25%20230712.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-25%20233953.png"></p>
+<p><strong>可选练习：</strong></p>
+<p><strong>1.类似Google邮件的服务器（如地址：smtp.gmail.com，端口：587））要求您的客户端在发送MAIL FROM命令之前，需要为了身份验证和安全原因添加传输层安全（TLS）或安全套接字层（SSL）。将TLS &#x2F; SSL命令添加到现有的命令中，并使用上述地址和端口为Google邮件服务器实现客户端。</strong></p>
+<p>代码部分只需在上一题基础上稍作更改</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#导入ssl模块</span>
+<span class="token keyword">import</span> ssl
+<span class="token comment">#创建套接字</span>
+context <span class="token operator">=</span> ssl<span class="token punctuation">.</span>create_default_context<span class="token punctuation">(</span><span class="token punctuation">)</span>
+clientSocket <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>
+clientSocket<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>mailserver<span class="token punctuation">,</span> <span class="token number">465</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+clientSocketSSL <span class="token operator">=</span> context<span class="token punctuation">.</span>wrap_socket<span class="token punctuation">(</span>clientSocket<span class="token punctuation">,</span> server_hostname<span class="token operator">=</span>mailserver<span class="token punctuation">)</span>
+
+<span class="token comment">#套接字变成clientSocketSSL</span>
+<span class="token comment">#需要更改的部分</span>
+recv <span class="token operator">=</span> clientSocketSSL<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+clientSocketSSL<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token operator">**</span><span class="token operator">*</span>Command<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+clientSocketSSL<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>2.您当前的SMTP邮件客户端只能在电子邮件正文中发送文本消息。修改您的客户端，使其可以发送包含文本和图像的电子邮件。</strong></p>
+<h1 id="作业四：多线程web代理服务器"><a href="#作业四：多线程web代理服务器" class="headerlink" title="作业四：多线程web代理服务器"></a>作业四：多线程web代理服务器</h1><p><strong>在这个编程作业中，你将研发一个简单的web代理服务器。当你的代理服务器从一个浏览器接收到对某对象的HTTP请求，它生成对相同对象的一个新的HTTP请求并向初始服务器发送。当该代理服务器从初始服务器接收到具有该对象的HTTP响应时，它生成一个包括该对象的新HTTP响应，并发送给该客户。这个代理将是多线程的，使其在相同时间能够处理多个请求。</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os 
+<span class="token keyword">from</span> socket <span class="token keyword">import</span> <span class="token operator">*</span> 
+<span class="token keyword">import</span> sys  
+
+<span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">:</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Usage : "python ProxyServer.py server_ip"\n[server_ip : It is the IP Address Of Proxy Server'</span> <span class="token punctuation">)</span>     
+    sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> 
+
+<span class="token comment">#创建服务器套接字，与端口绑定，保持倾听 </span>
+tcpSerSock <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span> 
+tcpSerPort <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tcpSerSock<span class="token punctuation">.</span>bind<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> tcpSerPort<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+tcpSerSock<span class="token punctuation">.</span>listen<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>  
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'ready to serve...'</span><span class="token punctuation">)</span>     
+    tcpCliSock<span class="token punctuation">,</span> addr <span class="token operator">=</span> tcpSerSock<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'received a connection from:'</span><span class="token punctuation">,</span> addr<span class="token punctuation">)</span>    
+    message <span class="token operator">=</span> tcpCliSock<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"message: "</span><span class="token punctuation">,</span> message<span class="token punctuation">)</span>     
+    <span class="token keyword">if</span><span class="token punctuation">(</span>message <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">)</span>         
+    	<span class="token keyword">continue</span>     
+    <span class="token keyword">print</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    
+    filename <span class="token operator">=</span> message<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>partition<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> 
+    <span class="token keyword">print</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span>     
+    fileExist <span class="token operator">=</span> <span class="token string">'false'</span>     
+    filetouse <span class="token operator">=</span> <span class="token string">"/"</span> <span class="token operator">+</span> filename     
+    <span class="token keyword">print</span><span class="token punctuation">(</span>filetouse<span class="token punctuation">)</span>     
+    <span class="token keyword">try</span><span class="token punctuation">:</span>         
+        f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"WEB/"</span><span class="token punctuation">,</span> filetouse<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span>         
+        outputdata <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>         
+        fileExist <span class="token operator">=</span> <span class="token string">"true"</span>        
+        tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"HTTP/1.0 200 OK \r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>         
+        tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"Content-type:text/html\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>         
+        tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span>outputdata<span class="token punctuation">)</span>         
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'read from cache'</span><span class="token punctuation">)</span>      
+    <span class="token keyword">except</span> IOError<span class="token punctuation">:</span>         
+        <span class="token keyword">if</span> fileExist <span class="token operator">==</span> <span class="token string">'false'</span><span class="token punctuation">:</span>             
+            c <span class="token operator">=</span> socket<span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">)</span>            
+            hosten <span class="token operator">=</span> filename<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"www."</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>             
+            <span class="token keyword">print</span><span class="token punctuation">(</span>hosten<span class="token punctuation">)</span>             
+            <span class="token keyword">try</span><span class="token punctuation">:</span>                 
+                serverName <span class="token operator">=</span> hosten<span class="token punctuation">.</span>partition<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>                 
+                serverPort <span class="token operator">=</span> <span class="token number">80</span>                 
+                c<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span>serverName<span class="token punctuation">,</span> serverPort<span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                askfile <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>filename<span class="token punctuation">.</span>partition<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>                 
+                fileobj <span class="token operator">=</span> c<span class="token punctuation">.</span>makefile<span class="token punctuation">(</span><span class="token string">'rwb'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>                 
+                fileobj<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"GET"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> askfile<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"HTTP/1.0\r\nHost: "</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\r\n\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                serverRespnse <span class="token operator">=</span> fileobj<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>                  
+                filename <span class="token operator">=</span> <span class="token string">"WEB/"</span> <span class="token operator">+</span> filename                 
+                filesplit <span class="token operator">=</span> filename<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>                 
+                <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>filesplit<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>                     
+                   <span class="token keyword">if</span> notos<span class="token punctuation">.</span>path<span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>filesplit<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    os<span class="token punctuation">.</span>makedirs<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>filesplit<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                 tmpFile <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">"wb"</span><span class="token punctuation">)</span>                 
+                 <span class="token keyword">print</span><span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>                 
+                 serverResponse <span class="token operator">=</span> serverResponse<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">b'\r\n\r\n'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>                 
+                 <span class="token keyword">print</span><span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>                 
+                 tmpFile<span class="token punctuation">.</span>write<span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>                 
+                 tmpFile<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>                 
+                 tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"HTTP/1.1 200 OK\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                 tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"Content-Type:text/html\r\n\r\n"</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>                 
+                    tcpCliSock<span class="token punctuation">.</span>send<span class="token punctuation">(</span>serverResponse<span class="token punctuation">)</span>             
+              <span class="token keyword">except</span><span class="token punctuation">:</span>                 
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"illegal request"</span><span class="token punctuation">)</span>             
+                c<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>         
+            <span class="token keyword">else</span><span class="token punctuation">:</span>             
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"net error"</span><span class="token punctuation">)</span>     
+          tcpCliSock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+  tcpCliSock<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">John Doe</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://realhuameng.github.io/2023/06/25/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-tao-jie-zi-bian-cheng-zuo-ye/">http://realhuameng.github.io/2023/06/25/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-tao-jie-zi-bian-cheng-zuo-ye/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">John Doe</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/06/25/ji-suan-ji-wang-luo-zi-ding-xiang-xia-di-er-zhang-bu-fen-xi-ti/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="计算机网络自顶向下—第二章部分习题">
+                        
+                        <span class="card-title">计算机网络自顶向下—第二章部分习题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/06/25/mei-sai-hui-tu-jie-shao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="美赛绘图介绍">
+                        
+                        <span class="card-title">美赛绘图介绍</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Hexo<br />'
+            + '文章作者: John Doe<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <a href="/about" target="_blank">John Doe</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">25.5k</span>
+            
+            
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2023";
+                        var startMonth = "2";
+                        var startDate = "4";
+                        var startHour = "9";
+                        var startMinute = "8";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/realhuameng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1263313190@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1263313190" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1263313190" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
