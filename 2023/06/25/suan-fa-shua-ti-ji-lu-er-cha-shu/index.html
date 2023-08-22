@@ -386,14 +386,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-26
+                    2023-07-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.5k
                 </div>
                 
 
@@ -908,6 +908,28 @@ public:
     &#125;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101.对称二叉树"></a>101.对称二叉树</h3><p>递归法</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution&#123;
+public:
+    bool compare(TreeNode* left, TreeNode* right)
+    &#123;
+        if(left !&#x3D; NULL &amp;&amp; right &#x3D;&#x3D; NULL) return false;
+        else if(left &#x3D;&#x3D; NULL &amp;&amp; right !&#x3D; NULL) return false;
+        else if(left &#x3D;&#x3D; NULL &amp;&amp; right &#x3D;&#x3D; NULL) return true;
+        else if(left-&gt;val !&#x3D; right-&gt;val) return false;
+        
+        bool outside &#x3D; compare(left-&gt;left, right-&gt;right);
+        bool inside &#x3D; compare(left-&gt;right, right-&gt;left);
+        bool isSame &#x3D; outside &amp;&amp; inside;
+        return isSame;
+    &#125;
+    bool isSysmmetric(TreeNode* root)
+    &#123;
+        if(root &#x3D;&#x3D; NULL) return true;
+        return compare(root-&gt;left, root-&gt;right);
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -1293,7 +1315,7 @@ public:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">25.5k</span>
+                        class="white-color">37.4k</span>
             
             
             
