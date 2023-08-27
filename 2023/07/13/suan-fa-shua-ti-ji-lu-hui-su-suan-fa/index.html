@@ -387,14 +387,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-13
+                    2023-08-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    627
+                    1.4k
                 </div>
                 
 
@@ -542,7 +542,121 @@ public:
     &#125;
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="39-组合总和"><a href="#39-组合总和" class="headerlink" title="39.组合总和"></a>39.组合总和</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution
+&#123;
+private:
+    vector&lt;vector&lt;int&gt;&gt; result;
+    vector&lt;int&gt; path;
+    void backtracking(vector&lt;int&gt;&amp; candicates, int target, int sum, int startindex)
+    &#123;
+        if(sum &#x3D;&#x3D; target)
+        &#123;
+            result.push_back(path);
+            return;
+            
+        &#125;
+        for(int i&#x3D;startindex;i &lt; candicates.size() &amp;&amp; sum + candicates[i]&lt;&#x3D;target;i++)
+        &#123;
+            sum+&#x3D;candicates[i];
+            path.push_back(candicates[i]);
+            backtracking(candicates, target, sum, i);
+            sum-&#x3D;candicates[i];
+            path.pop_back();
+        &#125;
+    &#125;
+public:
+    vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;&amp; candicates, int target)
+    &#123;
+        result.clear();
+        path.clear();
+        sort(candicates.begin(), candicates.end());
+        backtracking(candicates, target, 0, 0);
+        return result;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="40-组合总和Ⅱ"><a href="#40-组合总和Ⅱ" class="headerlink" title="40.组合总和Ⅱ"></a>40.组合总和Ⅱ</h3><p>去重的是同一树层上使用过的，同一树枝上都是同一组合的元素，不用去重</p>
+<p>并且需要对数组进行<strong>排序</strong></p>
+<p><strong>如果candidates[i] &#x3D;&#x3D; candidates[i-1]且used[i-1] &#x3D;&#x3D; false，说明前一个树枝，使用了candidatea[i-1]，也就是说同一树层使用过candidates[i-1]</strong></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
+private:
+    vector&lt;vector&lt;int&gt;&gt; result;
+    vector&lt;int&gt; path;
+    void backtracking(vector&lt;int&gt;&amp; candidates, int target, int sum, int startIndex, vector&lt;bool&gt;&amp; used) &#123;
+        if (sum &#x3D;&#x3D; target) &#123;
+            result.push_back(path);
+            return;
+        &#125;
+        for (int i &#x3D; startIndex; i &lt; candidates.size() &amp;&amp; sum + candidates[i] &lt;&#x3D; target; i++) &#123;
+            &#x2F;&#x2F; used[i - 1] &#x3D;&#x3D; true，说明同一树枝candidates[i - 1]使用过
+            &#x2F;&#x2F; used[i - 1] &#x3D;&#x3D; false，说明同一树层candidates[i - 1]使用过
+            &#x2F;&#x2F; 要对同一树层使用过的元素进行跳过
+            if (i &gt; 0 &amp;&amp; candidates[i] &#x3D;&#x3D; candidates[i - 1] &amp;&amp; used[i - 1] &#x3D;&#x3D; false) &#123;
+                continue;
+            &#125;
+            sum +&#x3D; candidates[i];
+            path.push_back(candidates[i]);
+            used[i] &#x3D; true;
+            backtracking(candidates, target, sum, i + 1, used); &#x2F;&#x2F; 和39.组合总和的区别1，这里是i+1，每个数字在每个组合中只能使用一次
+            used[i] &#x3D; false;
+            sum -&#x3D; candidates[i];
+            path.pop_back();
+        &#125;
+    &#125;
+
+public:
+    vector&lt;vector&lt;int&gt;&gt; combinationSum2(vector&lt;int&gt;&amp; candidates, int target) &#123;
+        vector&lt;bool&gt; used(candidates.size(), false);
+        path.clear();
+        result.clear();
+        &#x2F;&#x2F; 首先把给candidates排序，让其相同的元素都挨在一起。
+        sort(candidates.begin(), candidates.end());
+        backtracking(candidates, target, 0, 0, used);
+        return result;
+    &#125;
+&#125;;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="131-分割回文串"><a href="#131-分割回文串" class="headerlink" title="131.分割回文串"></a>131.分割回文串</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Solution &#123;
+private:
+    vector&lt;vector&lt;string&gt;&gt; result;
+    vector&lt;string&gt; path; &#x2F;&#x2F; 放已经回文的子串
+    void backtracking (const string&amp; s, int startIndex) &#123;
+        &#x2F;&#x2F; 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了
+        if (startIndex &gt;&#x3D; s.size()) &#123;
+            result.push_back(path);
+            return;
+        &#125;
+        for (int i &#x3D; startIndex; i &lt; s.size(); i++) &#123;
+            if (isPalindrome(s, startIndex, i)) &#123;   &#x2F;&#x2F; 是回文子串
+                &#x2F;&#x2F; 获取[startIndex,i]在s中的子串
+                string str &#x3D; s.substr(startIndex, i - startIndex + 1);
+                path.push_back(str);
+            &#125; else &#123;                                &#x2F;&#x2F; 不是回文，跳过
+                continue;
+            &#125;
+            backtracking(s, i + 1); &#x2F;&#x2F; 寻找i+1为起始位置的子串
+            path.pop_back(); &#x2F;&#x2F; 回溯过程，弹出本次已经添加的子串
+        &#125;
+    &#125;
+    bool isPalindrome(const string&amp; s, int start, int end) &#123;
+        for (int i &#x3D; start, j &#x3D; end; i &lt; j; i++, j--) &#123;
+            if (s[i] !&#x3D; s[j]) &#123;
+                return false;
+            &#125;
+        &#125;
+        return true;
+    &#125;
+public:
+    vector&lt;vector&lt;string&gt;&gt; partition(string s) &#123;
+        result.clear();
+        path.clear();
+        backtracking(s, 0);
+        return result;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="93-复原IP地址"><a href="#93-复原IP地址" class="headerlink" title="93.复原IP地址"></a>93.复原IP地址</h3>
                 
             </div>
             <hr/>
@@ -927,7 +1041,7 @@ public:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">37.4k</span>
+                        class="white-color">39.7k</span>
             
             
             
