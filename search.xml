@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>【MIT6.S081】-Lab3</title>
+      <link href="/2023/09/19/mit6.s081-lab3/"/>
+      <url>/2023/09/19/mit6.s081-lab3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Lab-page-tables"><a href="#Lab-page-tables" class="headerlink" title="Lab: page tables"></a>Lab: page tables</h1><p>在本实验中，您将探索页表并修改它们以简化将数据从用户空间复制到内核空间的功能。</p><blockquote><p>在开始编码之前，请阅读xv6书的第3章以及相关文件：</p><ul><li>kern&#x2F;memlayout.h，它描述了内存的布局。 </li><li>kern&#x2F;vm.c，其中包含大部分虚拟内存（VM）代码。 </li><li>kernel&#x2F;kalloc.c，其中包含用于分配和释放物理内存的代码。</li></ul></blockquote><p>切换到pgtbl分支来开始实验</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> fetch$ <span class="token function">git</span> checkout pgtbl$ <span class="token function">make</span> clean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h2 id="Print-a-page-table"><a href="#Print-a-page-table" class="headerlink" title="Print a page table"></a>Print a page table</h2><p>帮助你学习RISC-V页表，并可能帮助未来的调试，你的第一个任务是编写一个打印页表内容的函数。</p><blockquote><p>定义一个名为vmprint()的函数。它应该接受一个pagetable_t参数，并以下面描述的格式打印该pagetable。</p><p>在exec.c中，在return argc之前插入if(p-&gt;pid&#x3D;&#x3D;1) vmprint(p-&gt;pagetable)，以打印第一个进程的页表。如果您通过make grade的pte打印测试，则获得此任务的全部学分。</p></blockquote><p>现在当您启动xv6时，它应该打印出类似于这样的输出，描述了第一个进程的页表，此时它刚刚完成了exec()ing init的过程：</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-09-19%20162439.png"></p><p>第一行显示了vmprint的参数。之后，每个PTE都有一行，包括引用树中更深层次的页表页的PTE。每个PTE行都以一些” ..”缩进，表示其在树中的深度。每个PTE行显示其页表页中的PTE索引、pte位和从PTE中提取的物理地址。不要打印无效的PTE。在上面的示例中，顶层页表页具有条目0和255的映射。下一级的条目0只有索引0被映射，而该索引0的底层具有条目0、1和2的映射。</p><p>您的代码可能会产生与上面显示的物理地址不同的地址。 条目数和虚拟地址应该是相同的。</p><blockquote><p>一些提示：  </p><ul><li>您可以将vmprint()放在kernel&#x2F;vm.c中。 </li><li>使用文件kernel&#x2F;riscv.h末尾的宏。 </li><li>函数freewalk可能会给您灵感。 </li><li>在kernel&#x2F;defs.h中定义vmprint的原型，以便您可以从exec.c中调用它。 </li><li>在printf调用中使用%p来打印出完整的64位十六进制PTEs和地址，如示例所示。</li></ul></blockquote><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-09-19%20164406.png" alt="freewalk函数"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【MIT6.S081】-Lab2</title>
       <link href="/2023/08/23/mit6.s081-lab2/"/>
       <url>/2023/08/23/mit6.s081-lab2/</url>
