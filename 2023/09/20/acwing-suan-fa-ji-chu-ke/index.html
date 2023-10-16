@@ -189,9 +189,43 @@ int bsearch_2(int l, int r)
 &#x2F;&#x2F;对于每一个a[i]，相当于插入了一个数，可以直接调用insert函数即可<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="差分矩阵"><a href="#差分矩阵" class="headerlink" title="差分矩阵"></a>差分矩阵</h3><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-09-25%20210003.png"></p>
-<h3 id="双指针算法"><a href="#双指针算法" class="headerlink" title="双指针算法"></a>双指针算法</h3><p>利用i与j的单调关系来降低时间复杂度</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20133432.png"></p>
+<h3 id="双指针算法"><a href="#双指针算法" class="headerlink" title="双指针算法"></a>双指针算法</h3><h4 id="利用i与j的单调关系来降低时间复杂度"><a href="#利用i与j的单调关系来降低时间复杂度" class="headerlink" title="利用i与j的单调关系来降低时间复杂度"></a>利用i与j的单调关系来降低时间复杂度</h4><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20133432.png"></p>
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20134034.png"></p>
-<p>最长连续不重复子序列问题</p>
-<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20143727.png"></p>
-<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-09-20</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/09/20/acwing-suan-fa-ji-chu-ke/,Realhuameng,Acwing算法基础课,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/10/11/java-xue-xi/" title="Java学习">Post anterior</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/09/19/mit6.s081-lab3/" title="【MIT6.S081】-Lab3">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
+<h4 id="最长连续不重复子序列问题"><a href="#最长连续不重复子序列问题" class="headerlink" title="最长连续不重复子序列问题"></a>最长连续不重复子序列问题</h4><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20143727.png"></p>
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><h4 id="n的二进制表示中，第k位是几"><a href="#n的二进制表示中，第k位是几" class="headerlink" title="n的二进制表示中，第k位是几"></a>n的二进制表示中，第k位是几</h4><ol>
+<li>先把第k位移到最后一位 x&gt;&gt;K</li>
+<li>看个位是几 x&amp;1</li>
+</ol>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int main()
+&#123;
+    int n&#x3D;10;
+    for(int k&#x3D;3;k&gt;&#x3D;0;k--) cout&lt;&lt;(n &gt;&gt; k &amp; 1); &#x2F;&#x2F;输出1010
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="lowbit-x-：返回x的最后一位"><a href="#lowbit-x-：返回x的最后一位" class="headerlink" title="**lowbit(x)**：返回x的最后一位"></a>**lowbit(x)**：返回x的最后一位</h4><p><strong>原理：x&amp;-x &#x3D; x&amp;(~x+1)</strong></p>
+<p>x&#x3D;1010 </p>
+<p><em>lowbit</em>(x)&#x3D;10</p>
+<p>x&#x3D;101000</p>
+<p><em>lowbit</em>(x)&#x3D;1000</p>
+<h3 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h3><p>只用到大量数据之间的相对关系</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20161646.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20161640.png"></p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">vector&lt;int&gt; alls; &#x2F;&#x2F;存储所有待离散化的值
+sort(alls.begins(), alls.end());
+alls.erase(unique(alls.begin(), alls.end()), alls.end()); &#x2F;&#x2F;去重
+
+&#x2F;&#x2F;二分求出x对应的离散化的值
+int find(int x)
+&#123;
+    int l&#x3D;0, i&#x3D;alls.size()-1;
+    while(l&lt;r)
+    &#123;
+        int mid &#x3D; l + r &gt;&gt; 1;
+        if(alls[mid]&gt;&#x3D;x) r&#x3D;mid;
+        else l &#x3D; mid + 1;
+    &#125;
+    return r + 1;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="区间合并"><a href="#区间合并" class="headerlink" title="区间合并"></a>区间合并</h3><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-16%20171937.png"></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-09-20</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/09/20/acwing-suan-fa-ji-chu-ke/,Realhuameng,Acwing算法基础课,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/10/11/java-xue-xi/" title="Java学习">Post anterior</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/09/19/mit6.s081-lab3/" title="【MIT6.S081】-Lab3">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
