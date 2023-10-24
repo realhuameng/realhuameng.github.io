@@ -8,10 +8,12 @@ Chapter 1: Oper"><meta name="keywords" content="C++,Linux,Java,Go"><meta content
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Arquivo</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>【MIT6.S81】-Lab1</a></h3></div><div class="post-content"><p>课程链接</p>
 <p><strong>MIT6.S081</strong>：<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2020/overview.html">https://pdos.csail.mit.edu/6.828/2020/overview.html</a></p>
 <p>在做到lab3时卡壳，准备重新看一下前面的内容再继续实验，感觉对前面的内容理解的还是不透彻，所以在文档中加入一些6.S081的相关内容</p>
-<h1 id="Chapter-1-Operating-system-interfaces"><a href="#Chapter-1-Operating-system-interfaces" class="headerlink" title="Chapter 1: Operating system interfaces"></a>Chapter 1: Operating system interfaces</h1><p>**int fork(): **创建一个新的进程，在父进程中返回子进程的PID， 在子进程中返回0</p>
+<h1 id="Chapter-1-Operating-system-interfaces"><a href="#Chapter-1-Operating-system-interfaces" class="headerlink" title="Chapter 1: Operating system interfaces"></a>Chapter 1: Operating system interfaces</h1><h2 id="1-1-process-and-memory"><a href="#1-1-process-and-memory" class="headerlink" title="1.1 process and memory"></a>1.1 process and memory</h2><blockquote>
+<p>**int fork(): **创建一个新的进程，在父进程中返回子进程的PID， 在子进程中返回0</p>
 <p>**int exit(int status): **终止现有的进程，释放资源，将结束进程的状态报告给wait()</p>
 <p>**int wait(int *status): **返回刚刚结束的子进程的PID，将子进程的退出状态复制到传入wait()的地址，若调用wait的进程无子进程，则返回-1，若无子进程终止，则继续等待</p>
 <p>**int exec(char *file, char *argv[]): **加载文件并传参运行</p>
+</blockquote>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"echo"</span><span class="token punctuation">;</span>
@@ -33,7 +35,35 @@ argv<span class="token punctuation">[</span><span class="token number">2</span><
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-18%20161831.png"></p>
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-18%20161903.png"></p>
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-18%20161929.png"></p>
-<h1 id="Lab-Xv6-and-Unix-utilities"><a href="#Lab-Xv6-and-Unix-utilities" class="headerlink" title="Lab: Xv6 and Unix utilities"></a>Lab: Xv6 and Unix utilities</h1><h3 id="Lab-guidance"><a href="#Lab-guidance" class="headerlink" title="Lab guidance"></a>Lab guidance</h3><p>调试技巧</p>
+<blockquote>
+<p>当shell开始运行时，main函数首先通过getcmd来获取用户输入，接着调用fork，创建一个子进程，在子进程中调用runcmd函数，runcmd函数再通过exec来运行用户输入的命令，在exec中会调用exit来退出子进程返回到父进程，对应的是父进程的wait函数。</p>
+</blockquote>
+<h2 id="1-2-I-x2F-O-and-file-descriptors"><a href="#1-2-I-x2F-O-and-file-descriptors" class="headerlink" title="1.2 I&#x2F;O and file descriptors"></a>1.2 I&#x2F;O and file descriptors</h2><blockquote>
+<p>文件描述符是一个小整数，表示进程可以读取或写入的内核管理对象。</p>
+</blockquote>
+<p>文件描述符将不同的文件抽象成字节流。</p>
+<p>xv6 内核使用文件描述符作为每个进程表的索引，以便每个进程都有一个从零开始的文件描述符的私有空间。通常情况下，0代表读，1代表写，2代表错误。</p>
+<p>&#x3D;&#x3D;新分配的文件描述符始终是当前进程中编号最小的未使用描述符。&#x3D;&#x3D;</p>
+<p>下图中，子进程会关闭0，再将0用于input.txt，cat在使用0来执行</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-20%20101621.png"></p>
+<blockquote>
+<p>为什么fork和exec要分别定义为不同的系统调用？</p>
+<p>将fork和exec分开定义可以再不干扰主shell I&#x2F;O设置的情况下重定向子进程的I&#x2F;O</p>
+</blockquote>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-20%20103047.png"></p>
+<p>&#x3D;&#x3D;两个文件描述符共享offset的情况：这两个文件描述符是必须从fork或者dup调用中的原始文件描述符中产生的&#x3D;&#x3D;</p>
+<h2 id="1-3-pipe"><a href="#1-3-pipe" class="headerlink" title="1.3 pipe"></a>1.3 pipe</h2><blockquote>
+<p>A pipe is a small kernel buffer exposed to processes as a pair of file descriptors, one for reading and one for writing.</p>
+<p>管道是一个小的内核缓冲区，作为一对文件描述符暴露给进程，一个用于读取，一个用于写入。</p>
+</blockquote>
+<p><strong>wc中对pipe的简单应用：</strong></p>
+<p>如果pipe的读端无可读数据，pipe等待数据写入或等待写入端的所有文件描述符关闭，在后一种情况下，read 将返回 0，就像已到达数据文件末尾一样，所以及时关闭pipe的写端是很有必要的</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-20%20105442.png"></p>
+<p>xv6<strong>shell</strong>实现管道如下图代码所示(user&#x2F;sh.c:100)，例如grep fork sh.c | wc -1</p>
+<p>和wc中类似，子进程创建pipe连接”|“的左右两端</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-18%20161454.png"></p>
+<h2 id="1-4-file-system"><a href="#1-4-file-system" class="headerlink" title="1.4 file system"></a>1.4 file system</h2><p>这部分内容比较简单，xv6 book中已详细说明，此处不再赘述。</p>
+<h1 id="Lab-Xv6-and-Unix-utilities"><a href="#Lab-Xv6-and-Unix-utilities" class="headerlink" title="Lab: Xv6 and Unix utilities"></a>Lab: Xv6 and Unix utilities</h1><h2 id="Lab-guidance"><a href="#Lab-guidance" class="headerlink" title="Lab guidance"></a>Lab guidance</h2><p>调试技巧</p>
 <p>以下是调试解决方案的一些提示：</p>
 <ul>
 <li>确保您了解 C 和指针。 Kernighan 和 Ritchie 所著的《C 编程语言（第二版）》一书对 C 进行了简洁的描述。<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2019/lec/pointers.c">这里</a>有一些有用的指针练习。 除非您已经精通 C 语言，否则请勿跳过或浏览上面的指针练习。 如果你不真正理解 C 中的指针，你将在实验室中遭受难以言喻的痛苦和痛苦，然后最终以艰难的方式理解它们。 相信我们; 你不想知道什么是“艰难的道路”。</li>
@@ -68,7 +98,7 @@ argv<span class="token punctuation">[</span><span class="token number">2</span><
 <p>输入<em>gdb-multiarch</em></p>
 <p>接下来就可以进行调试了</p>
 <p><strong>退出qemu</strong>：按下ctrl - a 放开后按x（之前一直搞错，要放开ctrl - a以后在按x）</p>
-<h3 id="Lab-Xv6-and-Unix-utilities-1"><a href="#Lab-Xv6-and-Unix-utilities-1" class="headerlink" title="Lab: Xv6 and Unix utilities"></a>Lab: Xv6 and Unix utilities</h3><h4 id="Sleep"><a href="#Sleep" class="headerlink" title="Sleep"></a>Sleep</h4><p>为 xv6 实现 UNIX 程序 sleep； sleep应该暂停用户指定的ticks。 时钟周期是 xv6 内核定义的时间概念，即定时器芯片两次中断之间的时间。 您的解决方案应该位于文件user&#x2F;sleep.c中</p>
+<h2 id="Sleep"><a href="#Sleep" class="headerlink" title="Sleep"></a>Sleep</h2><p>为 xv6 实现 UNIX 程序 sleep； sleep应该暂停用户指定的ticks。 时钟周期是 xv6 内核定义的时间概念，即定时器芯片两次中断之间的时间。 您的解决方案应该位于文件user&#x2F;sleep.c中</p>
 <p>原文如下</p>
 <blockquote>
 <p>Implement the UNIX program <code>sleep</code> for xv6; your <code>sleep</code> should pause for a user-specified number of ticks. A tick is a notion of time defined by the xv6 kernel, namely the time between two interrupts from the timer chip. Your solution should be in the file <code>user/sleep.c</code>.</p>
@@ -119,7 +149,7 @@ argv<span class="token punctuation">[</span><span class="token number">2</span><
 <p>此外，还要在Makefile的UPROGS中加入sleep函数</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token variable">$U</span>/_sleep<span class="token punctuation">\</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h4 id="Pingpong"><a href="#Pingpong" class="headerlink" title="Pingpong"></a>Pingpong</h4><p>编写一个程序，使用 UNIX 系统调用通过一对管道（每个方向一个）在两个进程之间“pingpong”一个字节。 父进程应向子进程发送一个字节； 子进程应打印“<pid>：已收到 ping”，其中 <pid> 是其进程 ID，将管道上的字节写入到父进程，然后退出； 父进程应该从子进程读取字节，打印“<pid>：收到 pong”，然后退出。 您的解决方案应该位于文件 user&#x2F;pingpong.c 中。</p>
+<h2 id="Pingpong"><a href="#Pingpong" class="headerlink" title="Pingpong"></a>Pingpong</h2><p>编写一个程序，使用 UNIX 系统调用通过一对管道（每个方向一个）在两个进程之间“pingpong”一个字节。 父进程应向子进程发送一个字节； 子进程应打印“<pid>：已收到 ping”，其中 <pid> 是其进程 ID，将管道上的字节写入到父进程，然后退出； 父进程应该从子进程读取字节，打印“<pid>：收到 pong”，然后退出。 您的解决方案应该位于文件 user&#x2F;pingpong.c 中。</p>
 <p>原文如下</p>
 <blockquote>
 <p>Write a program that uses UNIX system calls to ‘’ping-pong’’ a byte between two processes over a pair of pipes, one for each direction. The parent should send a byte to the child; the child should print “<pid>: received ping”, where <pid> is its process ID, write the byte on the pipe to the parent, and exit; the parent should read the byte from the child, print “<pid>: received pong”, and exit. Your solution should be in the file <code>user/pingpong.c</code>.</p>
@@ -211,7 +241,7 @@ argv<span class="token punctuation">[</span><span class="token number">2</span><
 	
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="Primes"><a href="#Primes" class="headerlink" title="Primes"></a>Primes</h4><p>使用管道编写素数筛的并发版本。这个想法源自 Unix 管道的发明者 Doug McIlroy。<a target="_blank" rel="noopener" href="http://swtch.com/~rsc/thread/">本页</a>中间的图片和周围的文字解释了如何操作。您的解决方案应该位于文件 user&#x2F;primes.c 中。</p>
+<h2 id="Primes"><a href="#Primes" class="headerlink" title="Primes"></a>Primes</h2><p>使用管道编写素数筛的并发版本。这个想法源自 Unix 管道的发明者 Doug McIlroy。<a target="_blank" rel="noopener" href="http://swtch.com/~rsc/thread/">本页</a>中间的图片和周围的文字解释了如何操作。您的解决方案应该位于文件 user&#x2F;primes.c 中。</p>
 <p>原文如下</p>
 <blockquote>
 <p>Write a concurrent version of prime sieve using pipes. This idea is due to Doug McIlroy, inventor of Unix pipes. The picture halfway down <a target="_blank" rel="noopener" href="http://swtch.com/~rsc/thread/">this page</a> and the surrounding text explain how to do it. Your solution should be in the file <code>user/primes.c</code>.</p>
@@ -294,7 +324,7 @@ argv<span class="token punctuation">[</span><span class="token number">2</span><
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>编写一个简单版本的 UNIX 查找程序：查找目录树中具有特定名称的所有文件。您的解决方案应该位于文件 user&#x2F;find.c 中。</p>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>编写一个简单版本的 UNIX 查找程序：查找目录树中具有特定名称的所有文件。您的解决方案应该位于文件 user&#x2F;find.c 中。</p>
 <blockquote>
 <p>Write a simple version of the UNIX find program: find all the files in a directory tree with a specific name. Your solution should be in the file <code>user/find.c</code>.</p>
 </blockquote>
