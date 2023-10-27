@@ -10,8 +10,8 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Archivo</a></li><li><a href="/links">Enlaces</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Java学习</a></h3></div><div class="post-content"><p>此篇笔记只记录部分细节和重要内容</p>
-<h3 id="Java文档注释"><a href="#Java文档注释" class="headerlink" title="Java文档注释"></a>Java文档注释</h3><p>注释内容可以被JDK提供的工具javadoc所解析</p>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Arquivo</a></li><li><a href="/links">Links</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Java学习</a></h3></div><div class="post-content"><p>此篇笔记只记录部分细节和重要内容</p>
+<h1 id="Java文档注释"><a href="#Java文档注释" class="headerlink" title="Java文档注释"></a>Java文档注释</h1><p>注释内容可以被JDK提供的工具javadoc所解析</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">javadoc <span class="token parameter variable">-d</span> 文件夹名 <span class="token parameter variable">-xx</span> <span class="token parameter variable">-yy</span> Demo.java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
@@ -25,13 +25,12 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>@param：说明一个方法的参数</p>
 <p>……</p>
 </blockquote>
-<h3 id="Java代码规范"><a href="#Java代码规范" class="headerlink" title="Java代码规范"></a>Java代码规范</h3><ul>
+<h1 id="Java代码规范"><a href="#Java代码规范" class="headerlink" title="Java代码规范"></a>Java代码规范</h1><ul>
 <li>对于类、方法的注释，用javadoc来写</li>
 <li>&#x3D;&#x3D;shift+tab：整体右移&#x3D;&#x3D;</li>
 </ul>
 <p>……</p>
-<h3 id="Java可变参数"><a href="#Java可变参数" class="headerlink" title="Java可变参数"></a>Java可变参数</h3><p>Java允许将同一个类中的多个同名同功能的但是参数个数不同的方法，封装成一个方法</p>
-<p><strong>基本语法</strong></p>
+<h1 id="Java可变参数"><a href="#Java可变参数" class="headerlink" title="Java可变参数"></a>Java可变参数</h1><p>Java允许将同一个类中的多个同名同功能的但是参数个数不同的方法，封装成一个方法</p>
 <p>访问修饰符 返回类型 方法名（数据类型… 形参名）{</p>
 <p>}</p>
 <blockquote>
@@ -41,7 +40,7 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>可变参数可以和普通类型的参数一起放在形参列表，但必须保证可变参数在最后</p>
 <p>一个形参列表中只能出现一个可变参数</p>
 </blockquote>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>主要作用：完成新对象的初始化</p>
+<h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><p>主要作用：完成新对象的初始化</p>
 <p>[修饰符] 方法名(形参列表)</p>
 <p>​	方法体；</p>
 <p><em>构造方法没有返回值</em></p>
@@ -52,7 +51,7 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>1.默认初始化</p>
 <p>2.显式初始化</p>
 <p>3.构造方法初始化</p>
-<h3 id="Javap"><a href="#Javap" class="headerlink" title="Javap"></a>Javap</h3><p>对指定的class文件进行反编译</p>
+<h1 id="Javap"><a href="#Javap" class="headerlink" title="Javap"></a>Javap</h1><p>对指定的class文件进行反编译</p>
 <p><strong>使用格式</strong></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">javap <span class="token operator">&lt;</span>options<span class="token operator">></span> <span class="token operator">&lt;</span>classes<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -62,19 +61,19 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>-v -verbose：输出附加信息</p>
 <p>-p -private：显示所有类和成员</p>
 </blockquote>
-<h3 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h3><p>this关键字可以用来访问本类的属性、方法、构造器</p>
+<h1 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h1><p>this关键字可以用来访问本类的属性、方法、构造器</p>
 <p>this用于区分当前类的属性和局部变量</p>
 <p>语法：this(参数列表)，只在构造器中使用（<strong>必须放在第一条语句</strong>）</p>
 <p>只能在类定义的方法中使用</p>
-<h3 id="常用包"><a href="#常用包" class="headerlink" title="常用包"></a>常用包</h3><p>java.lang：默认引入</p>
+<h1 id="常用包"><a href="#常用包" class="headerlink" title="常用包"></a>常用包</h1><p>java.lang：默认引入</p>
 <p>java.util：工具包</p>
 <p>java.net：网络包</p>
 <p>java.awt：界面开发GUI</p>
-<h3 id="面向对象编程—封装"><a href="#面向对象编程—封装" class="headerlink" title="面向对象编程—封装"></a>面向对象编程—封装</h3><p>（1）将属性进行私有化</p>
+<h1 id="面向对象编程—封装"><a href="#面向对象编程—封装" class="headerlink" title="面向对象编程—封装"></a>面向对象编程—封装</h1><p>（1）将属性进行私有化</p>
 <p>（2）提供一个公共的set方法，用于对属性判断并赋值</p>
 <p>（3）提供一个公共的get方法用于获取属性的值</p>
 <p><em>可以将构造器与setXxx结合来实现对属性的控制</em></p>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>&#x3D;&#x3D;ctrl+H快速查看继承关系&#x3D;&#x3D;</p>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>&#x3D;&#x3D;ctrl+H快速查看继承关系&#x3D;&#x3D;</p>
 <p>&#x3D;&#x3D;ctrl+B快速定位&#x3D;&#x3D;</p>
 <blockquote>
 <p>1.子类必须调用父类的构造器，完成父类的初始化</p>
@@ -85,7 +84,7 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>6.父类构造器的调用不限于直接父类</p>
 <p>7.Java中是单继承机制</p>
 </blockquote>
-<h3 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h3><p>super代表父类的引用，用于访问父类属性的方法、属性、构造器</p>
+<h1 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h1><p>super代表父类的引用，用于访问父类属性的方法、属性、构造器</p>
 <blockquote>
 <p>super.属性名</p>
 <p>访问父类的属性，但不能访问私有属性</p>
@@ -95,7 +94,7 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>访问父类的构造器，只能放在第一句，只能出现一句</p>
 <p>super的访问不限于父类，遵循就近原则</p>
 </blockquote>
-<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><ol>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><ol>
 <li><p>方法的重写和重载</p>
 </li>
 <li><p>一个对象的编译类型和运行类型可以不一致</p>
@@ -118,15 +117,14 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <li><p>instanceOf比较操作符，用于判断对象的类型是否是某类型或为某类型的子类型</p>
 </li>
 </ol>
-<h3 id="Java的动态绑定机制"><a href="#Java的动态绑定机制" class="headerlink" title="Java的动态绑定机制"></a>Java的动态绑定机制</h3><ol>
+<h1 id="Java的动态绑定机制"><a href="#Java的动态绑定机制" class="headerlink" title="Java的动态绑定机制"></a>Java的动态绑定机制</h1><ol>
 <li>当&#x3D;&#x3D;调用对象方法&#x3D;&#x3D;的时候，该方法会和该对象的内存地址&#x2F;运行类型绑定</li>
 <li>当&#x3D;&#x3D;调用对象属性&#x3D;&#x3D;时，&#x3D;&#x3D;没有动态绑定机制&#x3D;&#x3D;，哪里声明，哪里使用</li>
 </ol>
-<h3 id="多态数组"><a href="#多态数组" class="headerlink" title="多态数组"></a>多态数组</h3><p>数组的定义类型为父类类型，数组内保存的元素实际为子类类型</p>
+<h1 id="多态数组"><a href="#多态数组" class="headerlink" title="多态数组"></a>多态数组</h1><p>数组的定义类型为父类类型，数组内保存的元素实际为子类类型</p>
 <p>当需要调用子类的特有方法时，要先将父类类型向下转型为子类类型后再进行调用</p>
-<h3 id="多态参数"><a href="#多态参数" class="headerlink" title="多态参数"></a>多态参数</h3><p>方法定义的形参类型为父类类型，实参类型允许为子类类型</p>
-<h3 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h3><p>&#x3D;&#x3D;equals方法&#x3D;&#x3D;</p>
-<p>默认判断的是地址是否相等，子类中往往重写该方法，用于判断&#x3D;&#x3D;内容&#x3D;&#x3D;是否相等</p>
+<h1 id="多态参数"><a href="#多态参数" class="headerlink" title="多态参数"></a>多态参数</h1><p>方法定义的形参类型为父类类型，实参类型允许为子类类型</p>
+<h1 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h1><h2 id="equals方法"><a href="#equals方法" class="headerlink" title="equals方法"></a>equals方法</h2><p>默认判断的是地址是否相等，子类中往往重写该方法，用于判断&#x3D;&#x3D;内容&#x3D;&#x3D;是否相等</p>
 <blockquote>
 <p>&#x3D;&#x3D;与equals的对比：</p>
 <p>&#x3D;&#x3D;既可以判断基本类型也可以判断引用类型</p>
@@ -134,21 +132,107 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 </blockquote>
 <p>由于person并没有重写equals方法，所以最后一条语句返回False</p>
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-25%20140624.png"></p>
-<p>&#x3D;&#x3D;hashcode&#x3D;&#x3D;</p>
-<ul>
+<h2 id="hashcode"><a href="#hashcode" class="headerlink" title="hashcode"></a>hashcode</h2><ul>
 <li>提高哈希结构容器的效率</li>
 <li>两个指向同一对象的引用，哈希值相同</li>
 <li>集合中也可以重写hashcode方法</li>
 </ul>
-<p>&#x3D;&#x3D;toString&#x3D;&#x3D;</p>
-<p>返回对象的字符串表示</p>
+<h2 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h2><p>返回对象的字符串表示</p>
 <p>默认返回：全类名( getclass()+getname() 包名+类名 )+@+哈希值的十六进制( Integer.toHexString(hashCode()) )</p>
 <p>子类往往重写toString方法，用于返回对象的信息</p>
 <p><strong>使用快捷键alt+insert-&gt;toString</strong></p>
 <p>直接输出一个对象时，会默认调用toString方法</p>
-<p>&#x3D;&#x3D;finalize&#x3D;&#x3D;</p>
-<p>当垃圾回收器不存在对该对象的更多引用时，由对象的垃圾回收器调用此方法</p>
+<h2 id="finalize"><a href="#finalize" class="headerlink" title="finalize"></a>finalize</h2><p>当垃圾回收器不存在对该对象的更多引用时，由对象的垃圾回收器调用此方法</p>
 <p>子类可以重写该方法来做一些释放资源的操作</p>
 <p>垃圾回收机制的调用是由系统来决定，也可以通过System.gc()主动触发垃圾回收机制</p>
 <p>finalize方法也可快捷键直接生成</p>
-</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-10-11</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/10/11/java-xue-xi/,Realhuameng,Java学习,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/09/20/acwing-suan-fa-ji-chu-ke/" title="Acwing算法基础课">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
+<h1 id="类变量"><a href="#类变量" class="headerlink" title="类变量"></a>类变量</h1><p>类变量是随着类的加载而创建，所以即使没有创建对象叶也可以访问</p>
+<h2 id="static变量：对象共享"><a href="#static变量：对象共享" class="headerlink" title="static变量：对象共享"></a>static变量：对象共享</h2><p>jdk7前静态类变量放在方法区中，此后的版本放在堆中class实例的尾部</p>
+<h1 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h1><p>访问修饰符 static 数据返回类型 方法名(){}</p>
+<p>static 访问修饰符 数据返回类型 方法名(){}</p>
+<p>静态方法只能访问静态变量或静态方法</p>
+<p>&#x3D;&#x3D;当方法中不涉及到任何和对象相关的成员，则可以将方法设计成静态方法，提高开发效率&#x3D;&#x3D;</p>
+<p>类方法中不允许使用和恶对象有关的关键字，比如this、super</p>
+<h1 id="main方法"><a href="#main方法" class="headerlink" title="main方法"></a>main方法</h1><p>&#x3D;&#x3D;public static void main(String[] args)&#x3D;&#x3D;</p>
+<p>Java虚拟机调用类的main方法</p>
+<p>该方法接收String类型的数组参数，该数组中保存执行Java命令时传递给所运行的类的参数</p>
+<h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><p>没有方法名，没有返回，没有参数，只有方法体，不用通过对象或类显式调用，而是加载类时，或创建对象时隐式调用</p>
+<p>先调用代码块，再调用构造器</p>
+<blockquote>
+<p>static代码块也叫静态代码块，随着类的加载执行且只执行一次，只能调用静态成员</p>
+<p>普通代码块每创建一个对象就执行，可以调用任意成员</p>
+<p>只使用类的静态成员时，普通代码块不会被执行</p>
+</blockquote>
+<p>静态代码块和静态属性初始化调用的优先级一样，如果有多个静态代码块和多个静态变量初始化，则按他们定义的顺序调用，普通代码块也是如此</p>
+<blockquote>
+<p>为什么代码的执行顺序为静态代码块、普通代码块、构造器？</p>
+<p>每个类的构造方法前隐含super()和普通代码块的调用</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">//(1)super()</span>
+        <span class="token comment">//(2)调用普通代码块</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"调用构造器"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>静态相关的代码块，属性初始化，在类加载时就已经执行完毕，所以优先于构造器和普通代码块</p>
+</blockquote>
+<p>调用一个子类对象时的调用顺序：</p>
+<ol>
+<li>父类的静态代码块和静态属性&#x3D;&#x3D;（先进行类的加载）&#x3D;&#x3D;（加载父类）</li>
+<li>子类的静态代码块和静态属性（加载子类）</li>
+<li>父类的普通代码块和普通属性初始化</li>
+<li>父类的构造方法</li>
+<li>子类的普通代码块和普通属性初始化</li>
+<li>子类的构造方法</li>
+</ol>
+<h2 id="类什么时候被加载"><a href="#类什么时候被加载" class="headerlink" title="类什么时候被加载"></a>类什么时候被加载</h2><ol>
+<li>创建对象实例</li>
+<li>创建子类对象实例，父类也会被加载</li>
+<li>使用类的静态成员时</li>
+</ol>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h2><blockquote>
+<p>采取一定的方法保证在整个软件系统中，对某一类只存在一个对象实例，并且该类只提供一个取得其对象实例的方法</p>
+</blockquote>
+<h3 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h3><ol>
+<li>构造器私有化</li>
+<li>类的内部创建对象（该对象是static）</li>
+<li>提供一个公共的static方法，返回该对象</li>
+</ol>
+<h3 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h3><p>可能存在线程安全问题</p>
+<ol>
+<li>构造器私有化</li>
+<li>定义一个静态属性对象</li>
+<li>提供一个public的static方法，当对象还未被创建时，返回一个对象</li>
+<li>当用户使用getInstance时，才返回对象；后面再次调用时，再返回同一个对象</li>
+</ol>
+<h2 id="模板设计模式"><a href="#模板设计模式" class="headerlink" title="模板设计模式"></a>模板设计模式</h2><h1 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h1><p>访问修饰符 final 返回类型 方法名</p>
+<p>使用final的情况：</p>
+<ol>
+<li>不希望类被继承时</li>
+<li>不希望父类的某个方法被子类重写&#x2F;覆盖时</li>
+<li>不希望某个属性的值被修改</li>
+<li>不希望某个局部变量被修改</li>
+</ol>
+<blockquote>
+<p>final修饰的属性又叫常量，一般用XX_XX命名</p>
+<p>final修饰的属性在定义时，&#x3D;&#x3D;必须赋初值&#x3D;&#x3D;，并且以后不能再修改，可以在如下位置赋值：定义时、构造器中、代码块中</p>
+<p>如果final修饰的属性是静态的，初始化的位置只能是：定义时、在静态代码块中，不能在构造器中复制</p>
+<p>final类不能继承，但是可以实例化对象</p>
+<p>如果类不是final类，但是含有final方法，该方法虽然不能重写，但是可以继承</p>
+<p>一般来说，当一个类已经是final类，就没有必要将方法修饰为final方法</p>
+<p>final不能修饰构造方法</p>
+<p>final往往和static一起使用，因为不会导致类加载，底层编译器进行了优化处理</p>
+<p>final类：包装类（Integer、Double、Float），String</p>
+</blockquote>
+<h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><p>解决父类方法不确定的问题</p>
+<blockquote>
+<p>当一个类中存在抽象方法时，需要将该类声明为abstract类</p>
+<p>抽象类不能被实例化且抽象类可以没有abstract方法</p>
+<p>abstract只修饰类和方法</p>
+<p>抽象类可以有任意成员</p>
+<p>抽象方法不能有主体</p>
+<p>如果一个类继承了抽象类，则它必须实现抽象类的所有抽象方法，除非它自己也声明为抽象类</p>
+<p>抽象方法不能使用private、final、static来修饰</p>
+</blockquote>
+<p>P402</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-10-11</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/10/11/java-xue-xi/,Realhuameng,Java学习,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/09/20/acwing-suan-fa-ji-chu-ke/" title="Acwing算法基础课">Próximo post</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
