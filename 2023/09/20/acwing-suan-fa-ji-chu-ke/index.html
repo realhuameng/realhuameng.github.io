@@ -235,7 +235,7 @@ int head, e[N], ne[N], idx;
 &#x2F;&#x2F;初始化
 void init()
 &#123;
-    head &#x3D; -1;
+    head &#x3D; -1；
     idx &#x3D; 0;
 &#125;
 &#x2F;&#x2F;插入头节点后
@@ -265,6 +265,7 @@ void remove(int x)
 <h3 id="双链表"><a href="#双链表" class="headerlink" title="双链表"></a>双链表</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int e[N], l[N], r[N], idx;
 &#x2F;&#x2F;初始化
 void init()&#123;
+    &#x2F;&#x2F;0是左端点，1是右端点
     r[0] &#x3D; 1;
     l[1] &#x3D; 0;
     idx &#x3D; 2;
@@ -282,7 +283,7 @@ void add(int k, int x)&#123;
 void remove(int k)&#123;
     r[l[k]] &#x3D; r[k];
     l[r[k]] &#x3D; l[k];
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="2-栈和队列"><a href="#2-栈和队列" class="headerlink" title="2.栈和队列"></a>2.栈和队列</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;***************栈******************
 int stk[N], tt;
