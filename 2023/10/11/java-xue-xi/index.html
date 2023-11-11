@@ -61,6 +61,7 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>-v -verbose：输出附加信息</p>
 <p>-p -private：显示所有类和成员</p>
 </blockquote>
+<h1 id="类的五大成员"><a href="#类的五大成员" class="headerlink" title="类的五大成员"></a>类的五大成员</h1><p>属性、方法、构造器、代码块、内部类</p>
 <h1 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h1><p>this关键字可以用来访问本类的属性、方法、构造器</p>
 <p>this用于区分当前类的属性和局部变量</p>
 <p>语法：this(参数列表)，只在构造器中使用（<strong>必须放在第一条语句</strong>）</p>
@@ -121,6 +122,8 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <li>当&#x3D;&#x3D;调用对象方法&#x3D;&#x3D;的时候，该方法会和该对象的内存地址&#x2F;运行类型绑定</li>
 <li>当&#x3D;&#x3D;调用对象属性&#x3D;&#x3D;时，&#x3D;&#x3D;没有动态绑定机制&#x3D;&#x3D;，哪里声明，哪里使用</li>
 </ol>
+<h1 id="Instanceof"><a href="#Instanceof" class="headerlink" title="Instanceof"></a>Instanceof</h1><p>判断运行类型</p>
+<p>子类 instanceof 父类类型</p>
 <h1 id="多态数组"><a href="#多态数组" class="headerlink" title="多态数组"></a>多态数组</h1><p>数组的定义类型为父类类型，数组内保存的元素实际为子类类型</p>
 <p>当需要调用子类的特有方法时，要先将父类类型向下转型为子类类型后再进行调用</p>
 <h1 id="多态参数"><a href="#多态参数" class="headerlink" title="多态参数"></a>多态参数</h1><p>方法定义的形参类型为父类类型，实参类型允许为子类类型</p>
@@ -152,7 +155,7 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <p>static 访问修饰符 数据返回类型 方法名(){}</p>
 <p>静态方法只能访问静态变量或静态方法</p>
 <p>&#x3D;&#x3D;当方法中不涉及到任何和对象相关的成员，则可以将方法设计成静态方法，提高开发效率&#x3D;&#x3D;</p>
-<p>类方法中不允许使用和恶对象有关的关键字，比如this、super</p>
+<p>类方法中不允许使用和对象有关的关键字，比如this、super</p>
 <h1 id="main方法"><a href="#main方法" class="headerlink" title="main方法"></a>main方法</h1><p>&#x3D;&#x3D;public static void main(String[] args)&#x3D;&#x3D;</p>
 <p>Java虚拟机调用类的main方法</p>
 <p>该方法接收String类型的数组参数，该数组中保存执行Java命令时传递给所运行的类的参数</p>
@@ -214,25 +217,160 @@ javadoc -d 文件夹名 -xx -yy Demo.java
 <li>不希望某个局部变量被修改</li>
 </ol>
 <blockquote>
-<p>final修饰的属性又叫常量，一般用XX_XX命名</p>
-<p>final修饰的属性在定义时，&#x3D;&#x3D;必须赋初值&#x3D;&#x3D;，并且以后不能再修改，可以在如下位置赋值：定义时、构造器中、代码块中</p>
-<p>如果final修饰的属性是静态的，初始化的位置只能是：定义时、在静态代码块中，不能在构造器中复制</p>
-<p>final类不能继承，但是可以实例化对象</p>
-<p>如果类不是final类，但是含有final方法，该方法虽然不能重写，但是可以继承</p>
-<p>一般来说，当一个类已经是final类，就没有必要将方法修饰为final方法</p>
-<p>final不能修饰构造方法</p>
-<p>final往往和static一起使用，因为不会导致类加载，底层编译器进行了优化处理</p>
-<p>final类：包装类（Integer、Double、Float），String</p>
+<ol>
+<li>final修饰的属性又叫常量，一般用XX_XX命名</li>
+<li>final修饰的属性在定义时，&#x3D;&#x3D;必须赋初值&#x3D;&#x3D;，并且以后不能再修改，可以在如下位置赋值：定义时、构造器中、代码块中</li>
+<li>如果final修饰的属性是静态的，初始化的位置只能是：定义时、在静态代码块中，不能在构造器中复制</li>
+<li>final类不能继承，但是可以实例化对象</li>
+<li>如果类不是final类，但是含有final方法，该方法虽然不能重写，但是可以继承</li>
+<li>一般来说，当一个类已经是final类，就没有必要将方法修饰为final方法</li>
+<li>final不能修饰构造方法</li>
+<li>final往往和static一起使用，因为不会导致类加载，底层编译器进行了优化处理</li>
+<li>final类：包装类（Integer、Double、Float），String</li>
+</ol>
 </blockquote>
 <h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><p>解决父类方法不确定的问题</p>
 <blockquote>
-<p>当一个类中存在抽象方法时，需要将该类声明为abstract类</p>
-<p>抽象类不能被实例化且抽象类可以没有abstract方法</p>
-<p>abstract只修饰类和方法</p>
-<p>抽象类可以有任意成员</p>
-<p>抽象方法不能有主体</p>
-<p>如果一个类继承了抽象类，则它必须实现抽象类的所有抽象方法，除非它自己也声明为抽象类</p>
-<p>抽象方法不能使用private、final、static来修饰</p>
+<ol>
+<li>当一个类中存在抽象方法时，需要将该类声明为abstract类</li>
+<li>抽象类不能被实例化且抽象类可以没有abstract方法</li>
+<li>abstract只修饰类和方法</li>
+<li>抽象类可以有任意成员</li>
+<li>抽象方法不能有主体</li>
+<li>如果一个类继承了抽象类，则它必须实现抽象类的所有抽象方法，除非它自己也声明为抽象类</li>
+<li>抽象方法不能使用private、final、static来修饰</li>
+</ol>
 </blockquote>
-<p>P402</p>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>给出一些没有实现的方法，封装到一起，到某个类要使用的时候，再实现这些方法</p>
+<h2 id="接口使用细节"><a href="#接口使用细节" class="headerlink" title="接口使用细节"></a>接口使用细节</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">interface</span> interfacename<span class="token punctuation">&#123;</span>
+    属性；
+    方法；<span class="token comment">//抽象方法，默认实现方法，静态方法</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> classname <span class="token keyword">implements</span> 接口<span class="token punctuation">&#123;</span>
+    属性；
+    方法；
+    必须实现接口的抽象方法，可以省略abtract关键字
+        
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>JDK7.0前，接口里的所有方法都没有方法体，都是抽象方法</p>
+<p>JDK8.0后接口可以有静态static方法，即可以有方法的具体实现；也可以有默认实现方法，使用default关键字修饰</p>
+<blockquote>
+<ol>
+<li>接口不能实例化</li>
+<li>接口中的所有方法是publlic方法</li>
+<li>一个普通类实现接口，必须实现接口的所有方法（快捷键alt+enter）</li>
+<li>抽象类实现接口，可以实现接口的方法</li>
+<li>一个类可以同时实现多个接口</li>
+<li>接口中的属性，只能是final的，而且是public static final修饰符</li>
+<li>接口不能继承，但可以继承多个别的接口</li>
+<li>接口只能是public或default修饰</li>
+<li>接口类型的变量可以指向实现了该接口的对象实例</li>
+</ol>
+</blockquote>
+<h2 id="接口的多态特性"><a href="#接口的多态特性" class="headerlink" title="接口的多态特性"></a>接口的多态特性</h2><ol>
+<li><p>多态参数</p>
+</li>
+<li><p>多态数组</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Usb</span><span class="token punctuation">[</span><span class="token punctuation">]</span> usbs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Usb</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+usbs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">phone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+usbs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">camera</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<h2 id="接口的多态传递"><a href="#接口的多态传递" class="headerlink" title="接口的多态传递"></a>接口的多态传递</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InterfacePolyPass</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">IG</span> ig <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">T</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//如果IG继承了IH接口，而T实现了IG接口</span>
+        <span class="token comment">//实际上相当于T也实现了IG接口</span>
+        <span class="token class-name">IH</span> ih <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">T</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">interface</span> <span class="token class-name">IH</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">void</span> <span class="token function">hi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">interface</span> <span class="token class-name">IG</span> <span class="token keyword">extends</span> <span class="token class-name">IH</span><span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">T</span> <span class="token keyword">implements</span> <span class="token class-name">IG</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">hi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> 
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h1><p>一个类的内部完整的嵌套了另一个类的结构，被嵌套的类被称为内部类，嵌套的其他类成为外部类</p>
+<p>内部类可以直接访问私有属性</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Outer</span><span class="token punctuation">&#123;</span> <span class="token comment">//外部类</span>
+    <span class="token keyword">class</span> <span class="token class-name">Inner</span><span class="token punctuation">&#123;</span>
+        
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">class</span> <span class="token class-name">Other</span><span class="token punctuation">&#123;</span> <span class="token comment">//外部其他类</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="内部类的分类"><a href="#内部类的分类" class="headerlink" title="内部类的分类"></a>内部类的分类</h2><p>定义在外部类&#x3D;&#x3D;局部位置&#x3D;&#x3D;</p>
+<ol>
+<li>局部内部类（有类名）</li>
+<li>&#x3D;&#x3D;匿名内部类（没有类名）&#x3D;&#x3D;</li>
+</ol>
+<p>定义在外部类&#x3D;&#x3D;成员位置&#x3D;&#x3D;</p>
+<ol>
+<li>成员内部类（无static修饰）</li>
+<li>静态内部类（使用static修饰）</li>
+</ol>
+<h3 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h3><p>本质是一个类</p>
+<p>定义在局部位置有类名</p>
+<ol>
+<li><p>可以直接访问外部类成员，包括私有成员</p>
+</li>
+<li><p>不能添加访问修饰符，但可以用final修饰因为它是局部变量</p>
+</li>
+<li><p>作用域：仅在定义它的方法或代码块中</p>
+</li>
+<li><p>外部类访问局部内部类的成员</p>
+<p>访问方式：创建对象再访问&#x3D;&#x3D;在作用域内&#x3D;&#x3D;</p>
+</li>
+<li><p>外部其他类不能访问局部内部类</p>
+</li>
+<li><p>外部类和局部内部类的成员重名时，默认遵循就近原则，如果想访问外部类的成员，可以使用（外部类名.this.成员）来访问</p>
+<p>外部类名.this本质是外部类的对象</p>
+</li>
+</ol>
+<h3 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h3><p>定义在外部类的局部位置，没有类名</p>
+<p>如果一个类仅会被使用一次，可以使用匿名内部类简化开发</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">new</span> 类或接口<span class="token punctuation">(</span>参数列表<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-11%20151013.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-11%20151121.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-11%20151612.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-11%20151635.png"></p>
+<p><strong>使用细节</strong></p>
+<p>1.调用匿名内部类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">cry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//匿名内部类本身也是返回对象</span>
+
+<span class="token class-name">A</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2.可以直接访问外部类的所有成员，包括私有</p>
+<p>3.不能添加访问修饰符</p>
+<p>4.作用域：在定义它的方法或代码块中</p>
+<p>5.外部其他类不能访问局部内部类 </p>
+<p>6.外部类和局部内部类的成员重名时，默认遵循就近原则，如果想访问外部类的成员，可以使用（外部类名.this.成员）来访问     外部类名.this本质是外部类的对象</p>
+<p>7.可以当作实参直接传递</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token function">f1</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">IL</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>p419</p>
 </div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-10-11</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/10/11/java-xue-xi/,Realhuameng,Java学习,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/10/29/jian-zhi-offer-shua-ti-ji-lu/" title="剑指offer刷题记录">Post anterior</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/09/20/acwing-suan-fa-ji-chu-ke/" title="Acwing算法基础课">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
