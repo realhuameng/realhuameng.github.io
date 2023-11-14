@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Hua Meng,1263313190@qq.com"><title>JavaWeb学习 · Realhuameng</title><meta name="description" content="JDBC在工程文件中导入需要使用的mysql jar包，选择add as library
+或在pom.xml添加相关依赖
+
+MySQL Connector&amp;#x2F;J 8.x 版本使用的驱动类名是 com.mysql.cj.jdbc.Driver
+
+
+JDBC APIDriverManager1."><meta name="keywords" content="C++,Linux,Java,Go"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Archivo</a></li><li><a href="/links">Enlaces</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>JavaWeb学习</a></h3></div><div class="post-content"><h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><p>在工程文件中导入需要使用的mysql jar包，选择add as library</p>
+<p>或在pom.xml添加相关依赖</p>
+<blockquote>
+<p>MySQL Connector&#x2F;J 8.x 版本使用的驱动类名是 com.mysql.cj.jdbc.Driver</p>
+</blockquote>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-13%20144208.png"></p>
+<h2 id="JDBC-API"><a href="#JDBC-API" class="headerlink" title="JDBC API"></a>JDBC API</h2><h3 id="DriverManager"><a href="#DriverManager" class="headerlink" title="DriverManager"></a>DriverManager</h3><p>1.注册驱动</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//注册驱动 </span>
+<span class="token comment">//static void </span>
+<span class="token function">registerDriver</span><span class="token punctuation">(</span><span class="token class-name">Driver</span> driver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//mysql5后可以省略 </span>
+<span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>mysql<span class="token punctuation">.</span>cj<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span></span>Driver</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2.获取连接</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//static Connection  </span>
+<span class="token comment">//获取连接 </span>
+<span class="token function">getConnection</span><span class="token punctuation">(</span><span class="token class-name">String</span> url<span class="token punctuation">,</span> <span class="token class-name">String</span> user<span class="token punctuation">,</span> <span class="token class-name">String</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-13%20145331.png"></p>
+<h3 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a>Connection</h3><p>1.获取执行SQL的对象</p>
+<ul>
+<li><p>普通执行SQL对象</p>
+<p>Statement createStatement()</p>
+</li>
+<li><p>预编译SQL的执行SQL对象：防止SQL注入</p>
+<p>PreparedStatement prepareStatement(sql)</p>
+</li>
+<li><p>执行存储过程的对象</p>
+<p>CallableStatement prepareCall(sql)</p>
+</li>
+</ul>
+<p>2.事务管理</p>
+<ul>
+<li><p>MYSQL事务管理</p>
+</li>
+<li><p>JDBC事务管理</p>
+<p>开启事务setAutoCommit(boolean autoCommit)</p>
+<p>提交事务commit()</p>
+<p>回滚事务：rollback()</p>
+</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-11-13</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/11/13/javaweb-xue-xi/,Realhuameng,JavaWeb学习,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/11/13/ssm-kuang-jia-xue-xi/" title="SSM框架学习">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

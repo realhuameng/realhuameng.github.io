@@ -1,19 +1,24 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Hua Meng,1263313190@qq.com"><title>【MIT6.S081】-Lab3 · Realhuameng</title><meta name="description" content="第一次做page table只做完了第一个实验，到第二个实验卡住，又重新看了前两个实验和xv6前三章的内容，有了新的理解，因此参考xv6 book将指导书中的内容大致总结在文档中，方便后续查看
-由于Chapter 2的内容比较容易理解，此处仅总结部分内容
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Hua Meng,1263313190@qq.com"><title>【MIT6.S081】-Lab3 · Realhuameng</title><meta name="description" content="由于Chapter 2的内容比较容易理解，此处仅总结部分内容
 很好的课程翻译的文章：
-https://mi"><meta name="keywords" content="C++,Linux,Java,Go"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- hexo injector head_end start -->
+https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081
+课程链接：
+MIT6.S081：https://pdos.csail.mit.edu/6."><meta name="keywords" content="C++,Linux,Java,Go"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首頁</a></li><li><a href="/about">關於</a></li><li><a href="/archives">歸檔</a></li><li><a href="/links">連結</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>【MIT6.S081】-Lab3</a></h3></div><div class="post-content"><p>第一次做page table只做完了第一个实验，到第二个实验卡住，又重新看了前两个实验和xv6前三章的内容，有了新的理解，因此参考xv6 book将指导书中的内容大致总结在文档中，方便后续查看</p>
-<p>由于Chapter 2的内容比较容易理解，此处仅总结部分内容</p>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Archivo</a></li><li><a href="/links">Enlaces</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>【MIT6.S081】-Lab3</a></h3></div><div class="post-content"><p>由于Chapter 2的内容比较容易理解，此处仅总结部分内容</p>
 <p>很好的课程翻译的文章：</p>
 <p><a target="_blank" rel="noopener" href="https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081">https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081</a></p>
 <p>课程链接：</p>
 <p>MIT6.S081：<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2020/overview.html">https://pdos.csail.mit.edu/6.828/2020/overview.html</a></p>
 <p>b站课程视频（中字）：</p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19k4y1C7kA/?spm_id_from=333.337.search-card.all.click&vd_source=340915f3230d1ae45078727ac8d6732f">https://www.bilibili.com/video/BV19k4y1C7kA/?spm_id_from=333.337.search-card.all.click&amp;vd_source=340915f3230d1ae45078727ac8d6732f</a></p>
-<h1 id="Chapter-2：Operating-system-organization"><a href="#Chapter-2：Operating-system-organization" class="headerlink" title="Chapter 2：Operating system organization"></a>Chapter 2：Operating system organization</h1><p>操作系统必须满足三个要求：复用、隔离和交互</p>
+<h1 id="Chapter-2：Operating-system-organization"><a href="#Chapter-2：Operating-system-organization" class="headerlink" title="Chapter 2：Operating system organization"></a>Chapter 2：Operating system organization</h1><p>虚拟地址va：VPN+oddset</p>
+<p>物理地址paPPN+offset</p>
+<p>页内偏移量offset：决定一页的大小</p>
+<p>物理页帧：page frame</p>
+<p>虚拟页面号：virtual page number</p>
+<p>操作系统必须满足三个要求：复用、隔离和交互</p>
 <h2 id="2-1-Abstracting-physical-resources"><a href="#2-1-Abstracting-physical-resources" class="headerlink" title="2.1 Abstracting physical resources"></a>2.1 Abstracting physical resources</h2><p>为了实现隔离，避免让应用直接接触硬件资源，操作系统将资源抽象为服务</p>
 <p>Unix 进程使用 exec 来构建它们的内存映像，而不是直接与物理内存交互。 这允许操作系统决定将进程放置在内存中的位置</p>
 <p>Unix 进程之间的许多形式的交互都是通过文件描述符发生的。 文件描述符不仅抽象了许多细节（例如，管道或文件中数据的存储位置），而且还以简化交互的方式定义。</p>
@@ -95,6 +100,14 @@ https://mi"><meta name="keywords" content="C++,Linux,Java,Go"><meta content="wid
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-01%20220434.png"></p>
 <p>关于kfree函数</p>
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-01%20221422.png"></p>
+<h2 id="3-6-Process-address-space"><a href="#3-6-Process-address-space" class="headerlink" title="3.6 Process address space"></a>3.6 Process address space</h2><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20113740.png"></p>
+<p>堆栈是一个单页，并显示由 exec 创建的初始内容。 包含命令行参数的字符串以及指向它们的指针数组位于刚刚被调用的 main(argc, argv) 处。</p>
+<p>xv6 在堆栈正下方放置了一个无效的保护页。 如果用户堆栈溢出并且进程尝试使用堆栈下方的地址，则硬件将生成页面错误异常，因为映射无效。</p>
+<h2 id="3-7-Code：exec"><a href="#3-7-Code：exec" class="headerlink" title="3.7 Code：exec"></a>3.7 Code：exec</h2><p>exec实际是一个系统调用，用于创建用户地址空间</p>
+<p>exec利用存储的文件来初始化用户地址空间</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20114537.png"></p>
+<p>exec每次只分配一个堆栈页，它将参数字符串复制到堆栈顶部，将指向这些参数的指针记录在ustack中</p>
+<p>映像完成后，，exec提交新页表，释放旧页表</p>
 <h1 id="Lab-page-tables"><a href="#Lab-page-tables" class="headerlink" title="Lab: page tables"></a>Lab: page tables</h1><p>在本实验中，您将探索页表并修改它们以简化将数据从用户空间复制到内核空间的功能。</p>
 <blockquote>
 <p>在开始编码之前，请阅读xv6书的第3章以及相关文件：</p>
@@ -109,9 +122,7 @@ https://mi"><meta name="keywords" content="C++,Linux,Java,Go"><meta content="wid
 $ <span class="token function">git</span> checkout pgtbl
 $ <span class="token function">make</span> clean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-
-
-<h3 id="Print-a-page-table"><a href="#Print-a-page-table" class="headerlink" title="Print a page table"></a>Print a page table</h3><p>帮助你学习RISC-V页表，并可能帮助未来的调试，你的第一个任务是编写一个打印页表内容的函数。</p>
+<h2 id="Print-a-page-table"><a href="#Print-a-page-table" class="headerlink" title="Print a page table"></a>Print a page table</h2><p>帮助你学习RISC-V页表，并可能帮助未来的调试，你的第一个任务是编写一个打印页表内容的函数。</p>
 <blockquote>
 <p>定义一个名为vmprint()的函数。它应该接受一个pagetable_t参数，并以下面描述的格式打印该pagetable。</p>
 <p>在exec.c中，在return argc之前插入if(p-&gt;pid&#x3D;&#x3D;1) vmprint(p-&gt;pagetable)，以打印第一个进程的页表。如果您通过make grade的pte打印测试，则获得此任务的全部学分。</p>
@@ -140,7 +151,7 @@ $ <span class="token function">make</span> clean<span aria-hidden="true" class="
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-09-20%20204203.png"></p>
 <p>运行qemu后</p>
 <p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-10-09%20203948.png"></p>
-<h3 id="A-kernel-page-table-per-process"><a href="#A-kernel-page-table-per-process" class="headerlink" title="A kernel page table per process"></a>A kernel page table per process</h3><p>Xv6 有一个内核页表，每当它在内核中执行时就会使用该页表。 </p>
+<h2 id="A-kernel-page-table-per-process"><a href="#A-kernel-page-table-per-process" class="headerlink" title="A kernel page table per process"></a>A kernel page table per process</h2><p>Xv6 有一个内核页表，每当它在内核中执行时就会使用该页表。 </p>
 <p>内核页表是到物理地址的直接映射，这样内核虚拟地址x就映射到物理地址x。</p>
 <p> Xv6 还为每个进程的用户地址空间提供一个单独的页表，仅包含该进程的用户内存的映射，从虚拟地址零开始。 由于内核页表不包含这些映射，因此用户地址在内核中无效。 </p>
 <p>因此，当内核需要使用系统调用中传递的用户指针（例如传递给 write() 的缓冲区指针）时，内核必须首先将指针转换为物理地址。 本节和下一节的目标是允许内核直接取消引用用户指针。</p>
@@ -151,15 +162,31 @@ $ <span class="token function">make</span> clean<span aria-hidden="true" class="
 <blockquote>
 <p>一些建议：  </p>
 <ul>
-<li>为进程的内核页表添加一个字段。 </li>
+<li>在struct proc中为进程的内核页表添加一个字段。 </li>
 <li>为了为新进程生成一个内核页表，一种合理的方法是实现一个修改过的kvminit版本，该版本生成一个新的页表，而不是修改kernel_pagetable。您将希望从allocproc中调用此函数。 </li>
 <li>确保每个进程的内核页表都有一个映射到该进程的内核堆栈的条目。在未修改的xv6中，所有的内核堆栈都在procinit中设置。您需要将某些或所有这些功能移动到allocproc中。 </li>
 <li>修改scheduler()函数，将进程的内核页表加载到核心的satp寄存器中（参见kvminithart以获取灵感）。不要忘记在调用w_satp()之后调用sfence_vma()。 </li>
 <li>当没有进程运行时，scheduler()函数应使用kernel_pagetable。 </li>
 <li>在freeproc中释放进程的内核页表。 </li>
 <li>您需要一种方法来释放页表，而不会同时释放叶子物理内存页。 vmprint可能对调试页表很有用。</li>
-<li>可以修改xv6函数或添加新函数；您可能需要在至少kernel&#x2F;vm.c和kernel&#x2F;proc.c中进行修改。 （但是，请不要修改kernel&#x2F;vmcopyin.c、kernel&#x2F;stats.c、user&#x2F;usertests.c和user&#x2F;stats.c。） </li>
-<li>缺少的页表映射可能会导致内核遇到页错误。它将打印一个包含sepc&#x3D;0x00000000XXXXXXXX的错误。您可以通过在kernel&#x2F;kernel.asm中搜索XXXXXXXX来找出故障发生的位置。</li>
+<li>可以修改xv6函数或添加新函数；您可能需要在至少<code>kernel/vm.c</code>和<code>kernel/proc.c</code>中进行修改。 （但是，请不要修改kernel&#x2F;vmcopyin.c、kernel&#x2F;stats.c、user&#x2F;usertests.c和user&#x2F;stats.c。） </li>
+<li>缺少的页表映射可能会导致内核遇到页错误。它将打印一个包含sepc&#x3D;0x00000000XXXXXXXX的错误。您可以通过在<code>kernel/kernel.asm</code>中搜索XXXXXXXX来找出故障发生的位置。</li>
 </ul>
 </blockquote>
-</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-09-19</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/09/19/mit6.s081-lab3/,Realhuameng,【MIT6.S081】-Lab3,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/09/20/acwing-suan-fa-ji-chu-ke/" title="Acwing算法基础课">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/08/23/mit6.s081-lab2/" title="【MIT6.S081】-Lab2">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
+<p>在<code>kernel/proc.h</code>的<code>struct proc</code>中添加<code>kpagetable</code>字段</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20143438.png"></p>
+<p>仿照<code>kvminit()</code>，在<code>kernel/vm.c</code>中添加<code>proc_kvminit()</code>函数，初始化内核页表</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20150223.png"></p>
+<p>将<code>procinit</code>函数中映射内核栈的代码迁移到<code>allocproc</code>函数（<code>kernel/proc.c</code>）中  在<code>allocproc</code>函数中生成进程的内核页表，然后添加关于该进程对应的内核栈映射。</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20150722.png"></p>
+<p>修改<code>scheduler</code>函数（<code>kernel/proc.c</code>）加载进程的内核页表到核心的satp寄存器。</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20151212.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20151333.png"></p>
+<p><code>kvmpa</code>函数（<code>kernel/vm.c</code>）完成内核虚拟地址到物理地址的转换，因此需要更改其中用到的内核页表。<img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20151656.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20151812.png"></p>
+<p>释放进程的内核页表</p>
+<p><code>freeproc</code>函数（<code>kernel/proc.c</code>）中添加如下代码：</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20152127.png"></p>
+<p><code>proc_free_kernel_pagetable</code>函数（<code>kernel/proc.c</code>）调用<code>uvmunmap</code>函数（<code>kernel/vm.c</code>）解除映射关系，调用<code>uvmfree</code>函数（<code>kernel/vm.c</code>）释放内核页表所占物理内存。</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-14%20152947.png"></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-09-19</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/09/19/mit6.s081-lab3/,Realhuameng,【MIT6.S081】-Lab3,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/09/20/acwing-suan-fa-ji-chu-ke/" title="Acwing算法基础课">Post anterior</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/08/23/mit6.s081-lab2/" title="【MIT6.S081】-Lab2">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
