@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Hua Meng,1263313190@qq.com"><title>SpringBoot+VUE全栈开发 · Realhuameng</title><meta name="description" content="maven配置官网下载IDEA2020支持的maven版本此处下载的为maven3.6.3
+修改配置文件解压下载的zip文件
+找到conf文件夹下的setting.xml
+修改资源文件保存地址
+默认在C盘用户文件夹
+
+修改镜像
+
+与IDEA集成使用修改配置路径
+file-&amp;gt;setting-&amp;g"><meta name="keywords" content="C++,Linux,Java,Go"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">Home</a></li><li><a href="/about">Sobre</a></li><li><a href="/archives">Archivo</a></li><li><a href="/links">Enlaces</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>SpringBoot+VUE全栈开发</a></h3></div><div class="post-content"><h1 id="maven配置"><a href="#maven配置" class="headerlink" title="maven配置"></a>maven配置</h1><h2 id="官网下载IDEA2020支持的maven版本"><a href="#官网下载IDEA2020支持的maven版本" class="headerlink" title="官网下载IDEA2020支持的maven版本"></a>官网下载IDEA2020支持的maven版本</h2><p>此处下载的为maven3.6.3</p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>解压下载的zip文件</p>
+<p>找到conf文件夹下的setting.xml</p>
+<p>修改资源文件保存地址</p>
+<p>默认在C盘用户文件夹</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20135707.png"></p>
+<p>修改镜像</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20135917.png"></p>
+<h2 id="与IDEA集成使用"><a href="#与IDEA集成使用" class="headerlink" title="与IDEA集成使用"></a>与IDEA集成使用</h2><p>修改配置路径</p>
+<p>file-&gt;setting-&gt;build,execution,deployment-&gt;build tools-&gt;maven-&gt;maven home directory</p>
+<p>修改配置文件</p>
+<p>file-&gt;setting-&gt;build,execution,deployment-&gt;build tools-&gt;maven-&gt;user setting files(勾选override)</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20140539.png"></p>
+<h1 id="开发环境热部署"><a href="#开发环境热部署" class="headerlink" title="开发环境热部署"></a>开发环境热部署</h1><p>实际的项目开发调试过程中会频繁地修改后台类文件，导致需要重新编译、重新启动。</p>
+<p>Spring Boot提供了spring-boot-devtools组件，无需重启Spring Boot应用即可重新编译、启动项目</p>
+<p>devtools会监听classpath下的文件变动，出发restart类加载器重新加载该类</p>
+<p>并不是所有的更改都需要重启应用</p>
+<p>在pom.xml配置文件中添加dev-tools依赖</p>
+<p>使用option &#x3D; true表示依赖不会传递</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20153038.png"></p>
+<p>在application.properties中添加</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20153304.png"></p>
+<p>如果使用IDEA开发，要在setting中勾选build project automatically，调出maintenance页面，registry，勾选complier.automake.allow.when.app.running</p>
+<h1 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h1><p>Sprint Boot提供@Controller和@Restcontroller两种注解来标识此类负责接收和处理http请求</p>
+<p>请求页面和数据@Controller</p>
+<p>仅请求数据@RestController</p>
+<h2 id="Restcontroller"><a href="#Restcontroller" class="headerlink" title="@Restcontroller"></a>@Restcontroller</h2><p>将返回的对象数据转换为JSON格式</p>
+<h1 id="路由映射"><a href="#路由映射" class="headerlink" title="路由映射"></a>路由映射</h1><p>@Requestmapping注解负责URL的路由映射，可以添加到类或方法上</p>
+<p>常用属性参数：</p>
+<ul>
+<li>value：请求URL的路径，支持URL模板、正则表达式</li>
+<li>method：HTTP请求方法</li>
+<li>consumes：请求的媒体类型</li>
+<li>produces：响应的媒体类型</li>
+<li>params，headers：请求的参数及请求头的值</li>
+</ul>
+<h1 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h1><p>默认静态资源目录：</p>
+<p>classpath:&#x2F;static&#x2F;目录</p>
+<p>自定义过滤规则和静态资源位置：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">spring<span class="token punctuation">.</span>mvc<span class="token punctuation">.</span><span class="token keyword">static</span><span class="token operator">-</span>path<span class="token operator">-</span>pattern <span class="token operator">=</span><span class="token operator">/</span>dirname<span class="token comment">/**</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">spring<span class="token punctuation">.</span>web<span class="token punctuation">.</span>resources<span class="token punctuation">.</span><span class="token keyword">static</span><span class="token operator">-</span>locations<span class="token operator">=</span>classpath<span class="token operator">:</span><span class="token operator">/</span>dirname<span class="token operator">/</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="文件上传原理"><a href="#文件上传原理" class="headerlink" title="文件上传原理"></a>文件上传原理</h1><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20162921.png"></p>
+<p>Spring Boot的tomcat限制了请求文件的大小，每个文件配置最大为1Mb。单次请求的文件总数不能大于10Mb</p>
+<p>在application.properties中更改默认值</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20163432.png"></p>
+<h1 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h1><p>功能：</p>
+<p>权限检查</p>
+<p>性能监控</p>
+<p>通用行为</p>
+<p>Spring Boot定义了HandlerInterceptor接口来自定义拦截器的功能</p>
+<p>HandlerInterceptor接口定义了preHandle、postHandle、afterCompletion三种方法</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-05%20165309.png"></p>
+<h1 id="拦截器注册"><a href="#拦截器注册" class="headerlink" title="拦截器注册"></a>拦截器注册</h1><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-18%20162015.png"></p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-18%20162044.png"></p>
+<h1 id="构建RESTful服务"><a href="#构建RESTful服务" class="headerlink" title="构建RESTful服务"></a>构建RESTful服务</h1><p>每个URI代表一种资源</p>
+<p>客户端使用GET获取 POST新建 PUT更新 DELETE删除四种方式表示操作方式对服务端资源进行操作</p>
+<p>资源的表现形式是JSON或HTML</p>
+<h2 id="SpringBoot实现RESTful-API"><a href="#SpringBoot实现RESTful-API" class="headerlink" title="SpringBoot实现RESTful API"></a>SpringBoot实现RESTful API</h2><p>spring-boot-starter-web组件提供了与REST操作方式对应的注解</p>
+<p><code>@GetMapping</code></p>
+<p><code>@PostMapping</code></p>
+<p><code>@PutMapping</code></p>
+<p><code>@DeleteMapping</code></p>
+<p><code>@PatchMapping</code></p>
+<p>RESTful架构中，每个网址代表一种资源，所以URI中建议不要包含动词</p>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-18%20163550.png"></p>
+<h1 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h1><p>用于生成、描述、调用和可视化RESTful风格的web服务</p>
+<p>swagger能够自动生成完善的RESTful API 文档，并可以根据后台代码的修改同步更新，同时生成完整的测试页面来调试API</p>
+<h2 id="配置swagger"><a href="#配置swagger" class="headerlink" title="配置swagger"></a>配置swagger</h2><h3 id="添加依赖："><a href="#添加依赖：" class="headerlink" title="添加依赖："></a>添加依赖：</h3><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-18%20164053.png"></p>
+<h3 id="添加配置文件"><a href="#添加配置文件" class="headerlink" title="添加配置文件"></a>添加配置文件</h3><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-18%20164147.png"></p>
+<h3 id="启动项目访问-http-127-0-0-1-8080-swagger-ui-html-打开可视化测试页面"><a href="#启动项目访问-http-127-0-0-1-8080-swagger-ui-html-打开可视化测试页面" class="headerlink" title="启动项目访问 http://127.0.0.1:8080/swagger-ui.html 打开可视化测试页面"></a>启动项目访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/swagger-ui.html">http://127.0.0.1:8080/swagger-ui.html</a> 打开可视化测试页面</h3><h2 id="swagger提供的注解"><a href="#swagger提供的注解" class="headerlink" title="swagger提供的注解"></a>swagger提供的注解</h2><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-18%20164543.png"></p>
+<h1 id="MybatisPlus"><a href="#MybatisPlus" class="headerlink" title="MybatisPlus"></a>MybatisPlus</h1><h2 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h2><p>对象关系映射</p>
+<p>使用描述对象和数据库之间的映射的元数据将程序中的对象自动持久化到关系数据库中</p>
+<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-11-19%20093527.png"></p>
+<h2 id="配置数据库的相关信息"><a href="#配置数据库的相关信息" class="headerlink" title="配置数据库的相关信息"></a>配置数据库的相关信息</h2><p><img src="C:\Users\huameng\AppData\Roaming\Typora\typora-user-images\image-20231119093648258.png" alt="image-20231119093648258"></p>
+<h2 id="添加-MapperScan注解"><a href="#添加-MapperScan注解" class="headerlink" title="添加@MapperScan注解"></a>添加@MapperScan注解</h2><p>添加mapper package后</p>
+<p>在启动类中添加</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@MapperScan</span><span class="token punctuation">(</span><span class="token string">"com.xx.mapper"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MybatisplusDemoApp</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span> <span class="token class-name">MybatisplusDemoApp</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="Mybatis-CRUD注解"><a href="#Mybatis-CRUD注解" class="headerlink" title="Mybatis CRUD注解"></a>Mybatis CRUD注解</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Insert</span> 
+<span class="token annotation punctuation">@Update</span>
+<span class="token annotation punctuation">@Delete</span>
+<span class="token annotation punctuation">@Select</span> <span class="token comment">//查询</span>
+<span class="token annotation punctuation">@Result</span> <span class="token comment">//结果集封装</span>
+<span class="token annotation punctuation">@Results</span> 
+<span class="token annotation punctuation">@One</span> <span class="token comment">//一对一结果集封装</span>
+<span class="token annotation punctuation">@Many</span> <span class="token comment">//一对多结果集封装</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>mybatis</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//usermapper.java</span>
+<span class="token annotation punctuation">@Mapper</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">UserMapper</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Select</span><span class="token punctuation">(</span><span class="token string">"select* from user"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//usercontroller.java</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserController</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">UserMapper</span> userMapper<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/user"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">//自动转为JSON</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> list <span class="token operator">=</span> userMapper<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> list<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在mybatisplus中，可以直接继承<code>BaseMappper&lt;T&gt;</code></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Mapper</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">UserMapper</span> <span class="token keyword">extends</span> <span class="token class-name">BaseMapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="MybatisPlus多表查询及分页查询"><a href="#MybatisPlus多表查询及分页查询" class="headerlink" title="MybatisPlus多表查询及分页查询"></a>MybatisPlus多表查询及分页查询</h1><h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Results</span> <span class="token comment">//代替&lt;resultmap>标签，可以加入单个或多个@Result注解</span>
+<span class="token annotation punctuation">@Result</span> <span class="token comment">//代替&lt;id>&lt;result>标签，可以使用以下属性</span>
+	      <span class="token comment">//-column、-property、-one、-many</span>
+<span class="token annotation punctuation">@One</span> <span class="token comment">//代替&lt;assocation> 使用格式：@Result(column="",property="",one=@One(select=""))</span>
+<span class="token annotation punctuation">@Many</span> <span class="token comment">//代替&lt;collection> 使用格式：@Result(column="",property="",many=@many(select=""))</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//UserMapper</span>
+<span class="token comment">//查询用户及其所有的订单</span>
+<span class="token annotation punctuation">@Select</span><span class="token punctuation">(</span>select <span class="token operator">*</span> from t_user<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Result</span><span class="token punctuation">(</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token annotation punctuation">@Result</span><span class="token punctuation">(</span>column <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">,</span> property <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@Result</span><span class="token punctuation">(</span>column <span class="token operator">=</span> <span class="token string">"username"</span><span class="token punctuation">,</span> property <span class="token operator">=</span> <span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@Result</span><span class="token punctuation">(</span>column <span class="token operator">=</span> <span class="token string">"password"</span><span class="token punctuation">,</span> property <span class="token operator">=</span> <span class="token string">"password"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@Result</span><span class="token punctuation">(</span>column <span class="token operator">=</span> <span class="token string">"birthday"</span><span class="token punctuation">,</span> property <span class="token operator">=</span> <span class="token string">"birthday"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@Result</span><span class="token punctuation">(</span>column <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">,</span> property <span class="token operator">=</span> <span class="token string">"order"</span><span class="token punctuation">,</span> javaType <span class="token operator">=</span> <span class="token class-name">Lis</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>
+               many <span class="token operator">=</span> <span class="token annotation punctuation">@Many</span><span class="token punctuation">(</span>select <span class="token operator">=</span> <span class="token string">"com.xxx.mapper.OrderMapper.selectByUid"</span><span class="token punctuation">)</span>
+               <span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//OrderMapper</span>
+<span class="token annotation punctuation">@Mapper</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OrderMapper</span> <span class="token keyword">extends</span> <span class="token class-name">BaseMapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Order</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Select</span><span class="token punctuation">(</span><span class="token string">"select * from t_order where uid = #&#123;uid&#125;"</span><span class="token punctuation">)</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Order</span><span class="token punctuation">></span></span> <span class="token function">selectByUid</span><span class="token punctuation">(</span><span class="token keyword">int</span> uid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><p>使用querywrapper</p>
+<p>queryWrapper提供不同的方法来进行条件查询</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//条件查询</span>
+<span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/user/find"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">findByCond</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">QueryWrapper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> queryWrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">QueryWrapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    queryWrapper<span class="token punctuation">.</span><span class="token function">eq</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">,</span> <span class="token string">"zhangsan"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectList</span><span class="token punctuation">(</span>queryMapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><h3 id="编写配置文件"><a href="#编写配置文件" class="headerlink" title="编写配置文件"></a>编写配置文件</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyBatisPlusConfig</span><span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">MyBatisPlusInterceptor</span> <span class="token function">paginationInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">MyBatisPlusInterceptor</span> interceptor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyBatisPlusInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">PaginationInnerInterceptor</span> paginationINterceptor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PaginationInnerInterceptor</span><span class="token punctuation">(</span><span class="token class-name">DbType</span><span class="token punctuation">.</span><span class="token constant">MYSQL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        interceptor<span class="token punctuation">.</span><span class="token function">addInnerInterceptor</span><span class="token punctuation">(</span>paginationINterceptor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> interceptor<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"findAll"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">IPage</span> <span class="token function">findAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> page <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectPage</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-11-05</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2023/11/05/springboot-vue-quan-zhan-kai-fa/,Realhuameng,SpringBoot+VUE全栈开发,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/11/11/wai-mai-xiang-mu-kai-fa-ri-zhi/" title="外卖管理系统开发日志">Post anterior</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/10/29/jian-zhi-offer-shua-ti-ji-lu/" title="剑指offer刷题记录">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
