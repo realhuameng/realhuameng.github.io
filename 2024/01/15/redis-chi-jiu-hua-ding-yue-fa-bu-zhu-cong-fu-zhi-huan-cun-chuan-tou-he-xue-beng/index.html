@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Hua Meng,1263313190@qq.com"><title>Redis-持久化、订阅发布、主从复制、缓存穿透和雪崩 · Realhuameng</title><meta name="description" content="Redis持久化RDB（Redis Database）
+RDB是什么
+
+在指定时间间隔内将内存中的数据集快照写入磁盘，恢复时是将快照文件直接读到内存里
+Redis会单独fork一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。
+整个"><meta name="keywords" content="C++,Linux,Java,Go"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Redis-持久化、订阅发布、主从复制、缓存穿透和雪崩</a></h3></div><div class="post-content"><h1 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h1><h2 id="RDB（Redis-Database）"><a href="#RDB（Redis-Database）" class="headerlink" title="RDB（Redis Database）"></a>RDB（Redis Database）</h2><blockquote>
+<p>RDB是什么</p>
+</blockquote>
+<p>在指定时间间隔内将内存中的数据集快照写入磁盘，恢复时是将快照文件直接读到内存里</p>
+<p>Redis会单独fork一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。</p>
+<p>整个过程中，主进程不进行任何I&#x2F;O操作，确保了极高的性能。</p>
+<p>如果需要大规模的数据的恢复，且对对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加高效</p>
+<p>RDB的缺点是最后一次持久化后的数据可能丢失。</p>
+<p>&#x3D;&#x3D;RDB保存的文件是dump.rdb&#x3D;&#x3D;</p>
+<blockquote>
+<p>如何恢复rdb文件？</p>
+</blockquote>
+<p>将rdb文件放在redis启动目录，redis启动的时候就会自动检查dump.rdb恢复其中的数据</p>
+<blockquote>
+<p>补充说明</p>
+</blockquote>
+<p>rdb适合大规模的数据恢复</p>
+<p>对数据的完整性要求不高</p>
+<p>需要一定的时间间隔进程操作</p>
+<p>fork进程的时候，会占用一定的内容空间</p>
+<h2 id="AOF（Append-Only-File）"><a href="#AOF（Append-Only-File）" class="headerlink" title="AOF（Append Only File）"></a>AOF（Append Only File）</h2><p>以日志的形式来记录每个写操作，将redis执行过的所有指令记录下来（读操作不记录），只许追加文件但不可以改写文件，redis重启后会根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作</p>
+<p>&#x3D;&#x3D;AOF保存的是appendonly.aof文件&#x3D;&#x3D;</p>
+<p>AOF默认是不开启的，需要手动配置，重启redis生效</p>
+<blockquote>
+<p>如何对aof文件进行修复？</p>
+</blockquote>
+<p>当aof文件有错误时，redis无法启动，需要进行修复</p>
+<p>使用&#x3D;&#x3D;redis-check-aof&#x3D;&#x3D;进行fix</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">redis-check-aof <span class="token parameter variable">--fix</span> appendonly.aof<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>补充说明</p>
+</blockquote>
+<p>可以设置每一次修改都同步，文件完整性高</p>
+<p>默认设置为每秒同步一次</p>
+<p>相对于数据文件来说，aof远远大于rdb，修复的速度比rdb慢</p>
+<p>由于aof运行效率比rdb慢，redis默认配置是rdb持久化</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ol>
+<li>RDB持久化方式能够在指定时间间隔内对数据进行快照存储</li>
+<li>AOF命令以redis协议追加每次写的操作到文件的末尾，redis还能对AOF文件进行后台重写，使得AOF文件的体积不至于过大</li>
+<li>只做缓存，如果只希望数据在服务器运行的时候存在，也可以不使用任何持久化</li>
+<li>同时开启两种持久化<ul>
+<li>在这种情况下，redis会优先载入AOF文件来恢复原始的数据，因为通常情况下AOF的数据集要比RDB保存的数据集要完整</li>
+<li>RDB数据不实时，同时使用两者时服务器重启也只会找AOF文件，但AOF可能有潜在的bug</li>
+</ul>
+</li>
+<li>因为RDB只用作后备用途，建议只在slave上持久化RDB文件，只保留<code>save 900 1</code></li>
+</ol>
+<h1 id="Redis发布订阅"><a href="#Redis发布订阅" class="headerlink" title="Redis发布订阅"></a>Redis发布订阅</h1><p>redis发布订阅是一种消息通信模式：发送者（pub）发送消息，订阅者（sub）接收消息</p>
+<p>redis客户端可以订阅任意数量的频道</p>
+<p>redis通过PUBLISH、SUBSCRIBE、PSUBSCRIBE等命令实现发布和订阅功能</p>
+<p>通过SUBSCRIBE命令订阅某频道后，redis-server里维护了一个字典，字典的键就是一个个频道，字典里的值是一个链表，链表中保存了所有订阅这个频道的客户端。</p>
+<p>通过PUBLISH命令向订阅者发送消息，redis-server会使用给定的频道作为键，在它所维护的频道字典中查找记录了订阅这个频道的所有客户端的链表，遍历这个链表，将消息发布给所有订阅者</p>
+<h1 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h1><p>主从复制，指将一台redis服务器的数据复制到其他的redis服务器，前者称为主节点，后者称为从节点。</p>
+<p>数据的复制是单向的，只能从主节点到从节点。</p>
+<p>默认情况下，每台redis服务器都是主节点，且一个主节点可以有多个从节点，一个从节点只能有一个主节点。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">info replication <span class="token comment"># 查看主从复制的信息</span>
+SLAVEOF <span class="token function">host</span> <span class="token number">6379</span> <span class="token comment"># 设置主机，使用命令行配置的主从，从机重启后就会变回主机</span>
+SLAVEOF no one <span class="token comment"># 取消主机设置</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>主从复制的作用</p>
+</blockquote>
+<ol>
+<li>数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式</li>
+<li>故障恢复：主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复</li>
+<li>复杂均衡</li>
+<li>实现高可用</li>
+</ol>
+<p> 复制配置文件，修改对应信息</p>
+<ol>
+<li>端口</li>
+<li>pid</li>
+<li>log文件名</li>
+<li>dump.rdb文件名</li>
+</ol>
+<p> 主机可以写，从机只能读，主机所有的数据都会被从机保存</p>
+<blockquote>
+<p>复制原理</p>
+</blockquote>
+<p>slave启动成功连接到master后会发送一个sync同步命令</p>
+<p>master接收到命令，启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕后，master将传送整个数据文件到slave，并完成一次完全同步</p>
+<p>&#x3D;&#x3D;全量复制：&#x3D;&#x3D;slave在接收到数据库文件数据后，将其存盘并加载到内存中</p>
+<p>&#x3D;&#x3D;增量复制：&#x3D;&#x3D;master继续将新的所有收集到的修改命令依次传给slave，完成同步</p>
+<p>只要是重新连接master，一次完全同步将被自动执行</p>
+<h1 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h1><p>自动切换主服务器的模式</p>
+<p>Redis2.8开始正式提供了Sentinel架构来解决这个问题</p>
+<p>哨兵模式能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库</p>
+<p>哨兵是一个独立的进程，作为进程，它会独立运行</p>
+<p>哨兵通过发送命令，等待Redis服务器响应，从而监控运行的多个Redis实例</p>
+<ul>
+<li>通过发送命令，让Redis服务器返回监控其运行状态</li>
+<li>当哨兵检测到master宕机，会自动将slave切换成master，然后通过发布订阅模式通知其他的服务器，修改配置文件，让他们切换主机</li>
+<li>可以使用多个哨兵进行监控，各个哨兵之间还可以互相监控，形成多哨兵模式</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> sentinel.conf <span class="token comment"># 配置哨兵配置文件</span>
+sentinel monitor myredis <span class="token number">127.0</span>.0.1 <span class="token number">6379</span> <span class="token number">1</span> <span class="token comment"># sentinel monitor 被监控的名称 host port 1</span>
+redis-sentinel<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>主机宕机后，哨兵通过投票算法选择从机中票数最高的从机作为主机</p>
+<p>主机重连后，会被归并到其他的主机下</p>
+<h1 id="Redis缓存穿透和雪崩"><a href="#Redis缓存穿透和雪崩" class="headerlink" title="Redis缓存穿透和雪崩"></a>Redis缓存穿透和雪崩</h1><h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><p>布隆过滤器：对所有可能查询的参数以hash形式存储，在控制层先进行校验，不符合则丢弃</p>
+<p>缓存空对象：当存储层不命中后，即使返回的空对象也将其缓存起来，同时会设置一个过期时间，之后再访问这个数据将会从缓存中获取，保护了后端数据源</p>
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><p>设置热点数据永不过期</p>
+<p>加互斥锁</p>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p>某个时间段，缓存集中过期失效</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2024-01-15</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2024/01/15/redis-chi-jiu-hua-ding-yue-fa-bu-zhu-cong-fu-zhi-huan-cun-chuan-tou-he-xue-beng/,Realhuameng,Redis-持久化、订阅发布、主从复制、缓存穿透和雪崩,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2024/01/20/shou-cuo-spring-chuang-jian-yi-ge-bean-rong-qi/" title="手搓Spring-01创建一个Bean容器">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2024/01/07/java-mian-shi-ba-gu/" title="JAVA面试八股">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
