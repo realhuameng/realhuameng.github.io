@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Hua Meng,1263313190@qq.com"><title>手搓Spring-01创建一个Bean容器 · Realhuameng</title><meta name="description" content="容器：IOC创建简单的Bean容器
+Spring Bean容器是什么？
+
+Spring包含并管理应用对象的配置和生命周期将一个Bean对象交给Spring后，该对象会被拆解后存放在Bean的定义中，存放后再由Spring统一进行装配，包括Bean对象的初始化、属性填充
+
+Bean容器的设计
+
+采用H"><meta name="keywords" content="C++,Linux,Java,Go"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Realhuameng</a></h3><div class="description"><p>Fake it till you make it.</p></div></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="http://github.com/realhuameng"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a target="_blank" rel="noopener" href="https://www.caicai.me"> CaiCai </a><span>&</span><a target="_blank" rel="noopener" href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首頁</a></li><li><a href="/about">關於</a></li><li><a href="/archives">歸檔</a></li><li><a href="/links">連結</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img src="/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>手搓Spring-01创建一个Bean容器</a></h3></div><div class="post-content"><h1 id="容器：IOC"><a href="#容器：IOC" class="headerlink" title="容器：IOC"></a>容器：IOC</h1><h2 id="创建简单的Bean容器"><a href="#创建简单的Bean容器" class="headerlink" title="创建简单的Bean容器"></a>创建简单的Bean容器</h2><blockquote>
+<p>Spring Bean容器是什么？</p>
+</blockquote>
+<p>Spring包含并管理应用对象的配置和生命周期将一个Bean对象交给Spring后，该对象会被拆解后存放在Bean的定义中，存放后再由Spring统一进行装配，包括Bean对象的初始化、属性填充</p>
+<blockquote>
+<p>Bean容器的设计</p>
+</blockquote>
+<p>采用HashMap作为Spring Bean的容器</p>
+<p>一个简单的Bean容器的实现需要Bean的定义、注册、获取三个步骤</p>
+<p>Spring Bean容器的设计基于Spring源码进行了简化</p>
+<ol>
+<li>BeanDefinition：定义Bean实例化信息，以一个Object存放对象</li>
+<li>BeanFactory：Bean对象的工厂</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><blockquote>
+<p>Bean定义</p>
+</blockquote>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20143513.png"></p>
+<p>简化的Bean定义中，暂时只用一个Object存放Bean对象</p>
+<blockquote>
+<p>Bean工厂</p>
+</blockquote>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20144018.png"></p>
+<p>简化的Bean工厂中实现了Bean注册、Bean的获取</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><blockquote>
+<p>准备一个测试的对象来对Spring容器进行测试</p>
+</blockquote>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20150639.png"></p>
+<blockquote>
+<p>测试用例</p>
+</blockquote>
+<p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20150731.png"></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2024-01-20</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2024/01/20/shou-cuo-spring-01-chuang-jian-yi-ge-bean-rong-qi/,Realhuameng,手搓Spring-01创建一个Bean容器,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2024/01/20/shou-cuo-spring-02-shi-xian-bean-de-ding-yi-zhu-ce-huo-qu/" title="手搓Spring-02实现Bean的定义、注册、获取">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2024/01/15/redis-chi-jiu-hua-ding-yue-fa-bu-zhu-cong-fu-zhi-huan-cun-chuan-tou-he-xue-beng/" title="Redis-持久化、订阅发布、主从复制、缓存穿透和雪崩">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

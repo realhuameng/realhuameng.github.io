@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>手搓Spring-03基于Cglib实现含构造函数的类实例化</title>
+      <link href="/2024/01/21/shou-cuo-spring-03-ji-yu-cglib-shi-xian-han-gou-zao-han-shu-de-lei-shi-li-hua/"/>
+      <url>/2024/01/21/shou-cuo-spring-03-ji-yu-cglib-shi-xian-han-gou-zao-han-shu-de-lei-shi-li-hua/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>单例设计模式</title>
       <link href="/2024/01/20/dan-li-she-ji-mo-shi/"/>
       <url>/2024/01/20/dan-li-she-ji-mo-shi/</url>
@@ -17,11 +30,11 @@
     
     
     <entry>
-      <title>手搓Spring-实现Bean的定义、注册、获取</title>
-      <link href="/2024/01/20/shou-cuo-spring-shi-xian-bean-de-ding-yi-zhu-ce-huo-qu/"/>
-      <url>/2024/01/20/shou-cuo-spring-shi-xian-bean-de-ding-yi-zhu-ce-huo-qu/</url>
+      <title>手搓Spring-02实现Bean的定义、注册、获取</title>
+      <link href="/2024/01/20/shou-cuo-spring-02-shi-xian-bean-de-ding-yi-zhu-ce-huo-qu/"/>
+      <url>/2024/01/20/shou-cuo-spring-02-shi-xian-bean-de-ding-yi-zhu-ce-huo-qu/</url>
       
-        <content type="html"><![CDATA[<h1 id="容器：IOC"><a href="#容器：IOC" class="headerlink" title="容器：IOC"></a>容器：IOC</h1><h2 id="实现Bean的定义、注册、获取"><a href="#实现Bean的定义、注册、获取" class="headerlink" title="实现Bean的定义、注册、获取"></a>实现Bean的定义、注册、获取</h2><p>将Spring Bean容器的功能进行完善，实现Bean容器关于Bean对象的注册和获取</p><p>把Bean的创建交给容器，另外考虑单例对象，在对象的二次获取中可以从内存中获取对象</p><p>此外还要完善基础容器框架的结构体</p><blockquote><p>Spring Bean容器的完善</p></blockquote><p>在Bean注册时只注册一个类信息，而不会把实例化信息注册到Bean容器中</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20182652.png"></p><blockquote><p>BeanDefinition</p></blockquote><p>将Object bean替换为Class，就可以把Bean的实例化操作放到容器中处理</p><blockquote><p>单例注册接口定义和实现</p></blockquote><p>定义一个获取单例对象的接口</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20184727.png"></p><p>在DefaultSingletonBeanRegistry中主要实现getSingleton方法，同时实现一个受保护的addSingleton方法，可以被继承此类的其他类调用</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20185310.png"></p><blockquote><p>抽象类定义模板方法AbstractBeanFactory</p></blockquote><p>AbstractBeanFactory继承了DefaultSingletonBeanRegistry，具备单例注册类方法</p><p>该方法对getBean的实现过程，主要是对单例Bean对象的获取以及在获取不到时拿到Bean的定义对Bean做实例化操作</p><p>getBean并没有自身去实现这些方法，而是定义了调用过程以及提供了调用方法</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20203524.png"></p><blockquote><p>实例化Bean类AbstractAutowireCapableBeanFactory</p></blockquote><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20204123.png"></p><p>处理完实例化后，调用addSingleton方法存放到单例对象的缓存中</p><blockquote><p>核心类实现DefaultListableBeanFactory</p></blockquote>]]></content>
+        <content type="html"><![CDATA[<h1 id="容器：IOC"><a href="#容器：IOC" class="headerlink" title="容器：IOC"></a>容器：IOC</h1><h2 id="实现Bean的定义、注册、获取"><a href="#实现Bean的定义、注册、获取" class="headerlink" title="实现Bean的定义、注册、获取"></a>实现Bean的定义、注册、获取</h2><p>将Spring Bean容器的功能进行完善，实现Bean容器关于Bean对象的注册和获取</p><p>把Bean的创建交给容器，另外考虑单例对象，在对象的二次获取中可以从内存中获取对象</p><p>此外还要完善基础容器框架的结构体</p><blockquote><p>Spring Bean容器的完善</p></blockquote><p>在Bean注册时只注册一个类信息，而不会把实例化信息注册到Bean容器中</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20182652.png"></p><blockquote><p>BeanDefinition</p></blockquote><p>将Object bean替换为Class，就可以把Bean的实例化操作放到容器中处理</p><blockquote><p>单例注册接口定义和实现</p></blockquote><p>定义一个获取单例对象的接口</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20184727.png"></p><p>在DefaultSingletonBeanRegistry中主要实现getSingleton方法，同时实现一个受保护的addSingleton方法，可以被继承此类的其他类调用</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20185310.png"></p><blockquote><p>抽象类定义模板方法AbstractBeanFactory</p></blockquote><p>AbstractBeanFactory继承了DefaultSingletonBeanRegistry，具备单例注册类方法</p><p>该方法对getBean的实现过程，主要是对单例Bean对象的获取以及在获取不到时拿到Bean的定义对Bean做实例化操作</p><p>getBean并没有自身去实现这些方法，而是定义了调用过程以及提供了调用方法</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20203524.png"></p><blockquote><p>实例化Bean类AbstractAutowireCapableBeanFactory</p></blockquote><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20204123.png"></p><p>处理完实例化后，调用addSingleton方法存放到单例对象的缓存中</p><blockquote><p>核心类实现DefaultListableBeanFactory</p></blockquote><p>DefaultListableBeanFactory继承AbstractAutowireCapableBeanFactory类，那么也就实现了BeanFactory和AbstractBeanFactory等功能</p><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-21%20125634.png"></p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-21%20131500.png"></p>]]></content>
       
       
       
@@ -31,8 +44,8 @@
     
     <entry>
       <title>手搓Spring-01创建一个Bean容器</title>
-      <link href="/2024/01/20/shou-cuo-spring-chuang-jian-yi-ge-bean-rong-qi/"/>
-      <url>/2024/01/20/shou-cuo-spring-chuang-jian-yi-ge-bean-rong-qi/</url>
+      <link href="/2024/01/20/shou-cuo-spring-01-chuang-jian-yi-ge-bean-rong-qi/"/>
+      <url>/2024/01/20/shou-cuo-spring-01-chuang-jian-yi-ge-bean-rong-qi/</url>
       
         <content type="html"><![CDATA[<h1 id="容器：IOC"><a href="#容器：IOC" class="headerlink" title="容器：IOC"></a>容器：IOC</h1><h2 id="创建简单的Bean容器"><a href="#创建简单的Bean容器" class="headerlink" title="创建简单的Bean容器"></a>创建简单的Bean容器</h2><blockquote><p>Spring Bean容器是什么？</p></blockquote><p>Spring包含并管理应用对象的配置和生命周期将一个Bean对象交给Spring后，该对象会被拆解后存放在Bean的定义中，存放后再由Spring统一进行装配，包括Bean对象的初始化、属性填充</p><blockquote><p>Bean容器的设计</p></blockquote><p>采用HashMap作为Spring Bean的容器</p><p>一个简单的Bean容器的实现需要Bean的定义、注册、获取三个步骤</p><p>Spring Bean容器的设计基于Spring源码进行了简化</p><ol><li>BeanDefinition：定义Bean实例化信息，以一个Object存放对象</li><li>BeanFactory：Bean对象的工厂</li></ol><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><blockquote><p>Bean定义</p></blockquote><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20143513.png"></p><p>简化的Bean定义中，暂时只用一个Object存放Bean对象</p><blockquote><p>Bean工厂</p></blockquote><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20144018.png"></p><p>简化的Bean工厂中实现了Bean注册、Bean的获取</p><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><blockquote><p>准备一个测试的对象来对Spring容器进行测试</p></blockquote><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20150639.png"></p><blockquote><p>测试用例</p></blockquote><p><img src="https://my-blog-realhuameng.oss-cn-hangzhou.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-20%20150731.png"></p>]]></content>
       
