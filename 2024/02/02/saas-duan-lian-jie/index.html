@@ -38,7 +38,7 @@
 <li>编辑短链接</li>
 <li>将短链接删除（回收站）</li>
 </ul>
-<h2 id="项目难点"><a href="#项目难点" class="headerlink" title="项目难点"></a>项目难点</h2><h3 id="使用布隆过滤器判断短链是否存在"><a href="#使用布隆过滤器判断短链是否存在" class="headerlink" title="使用布隆过滤器判断短链是否存在"></a>使用布隆过滤器判断短链是否存在</h3><p>定义一个布隆过滤器 <code>RBloomFilterConfiguration</code></p>
+<h2 id="项目难点"><a href="#项目难点" class="headerlink" title="项目难点"></a>项目难点</h2><h3 id="1-使用布隆过滤器判断短链是否存在"><a href="#1-使用布隆过滤器判断短链是否存在" class="headerlink" title="1.使用布隆过滤器判断短链是否存在"></a>1.使用布隆过滤器判断短链是否存在</h3><p>定义一个布隆过滤器 <code>RBloomFilterConfiguration</code></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
  * 布隆过滤器配置
  */</span>
@@ -103,8 +103,36 @@
         <span class="token keyword">return</span> shortUri<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="2-添加路由表完成跳转功能"><a href="#2-添加路由表完成跳转功能" class="headerlink" title="2.添加路由表完成跳转功能"></a>2.添加路由表完成跳转功能</h3><p>跳转功能：用户传来一个短链接，通过302重定向，跳转到原始链接对应的网址</p>
+<p>由于短链接分组是以gid作为分组标识进行分组的，而用户仅仅传来一个短链接，如何从数据库中获取到对应的记录呢？可以通过添加一个路由表来实现此功能</p>
+<blockquote>
+<p>如何实现？</p>
+</blockquote>
+<p>创建一个新表：t_link_goto，存储gid和shortUri，通过短链接找到gid，再通过gid找到原始网址</p>
+<h3 id="3-分布式锁避免缓存击穿问题"><a href="#3-分布式锁避免缓存击穿问题" class="headerlink" title="3.分布式锁避免缓存击穿问题"></a>3.分布式锁避免缓存击穿问题</h3><p>加redis的分布式锁并进行双重判定</p>
+<ol>
+<li>首先，通过<code>stringRedisTemplate.opsForValue().get(...)</code>方法从Redis中获取原始链接（<code>originLink</code>）。</li>
+<li>如果<code>originLink</code>为空（即Redis中没有对应的原始链接），则进入双重判定逻辑。</li>
+<li>在双重判定逻辑中，首先获取分布式锁（<code>RLock lock = redissonClient.getLock(...)</code>），确保只有一个线程可以执行后续操作。</li>
+<li>在获取锁之后，再次判定<code>originLink</code>是否为空。由于在获取锁之前可能有其他线程已经设置了原始链接，因此需要再次检查以避免重复操作。</li>
+<li>如果再次判定后发现<code>originLink</code>不为空，说明在获取锁之前已经有其他线程设置了原始链接，此时直接重定向到原始链接并返回。</li>
+<li>如果再次判定后<code>originLink</code>仍为空，则继续执行后续逻辑，包括从数据库查询相关信息、设置原始链接到Redis缓存中，并最终重定向到原始链接。</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">RLock</span> lock <span class="token operator">=</span> redissonClient<span class="token punctuation">.</span><span class="token function">getLock</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token constant">LOCK_GOTO_SHORT_LINK_KEY</span><span class="token punctuation">,</span> fullShortUrl<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="4-布隆过滤器搭配锁机制避免缓存穿透"><a href="#4-布隆过滤器搭配锁机制避免缓存穿透" class="headerlink" title="4.布隆过滤器搭配锁机制避免缓存穿透"></a>4.布隆过滤器搭配锁机制避免缓存穿透</h3><p>当大量请求访问缓存时，先判断请求key是否存在于布隆过滤器中，存在则查询数据库，不存在则返回空，由于布隆过滤器存在误判，再对请求的key进行判断，判断其是否为空值，为空则请求数据库；接着通过分布式锁仅让一个请求访问数据库，如果数据存在，则加载数据，新增进缓存，如果不存在则缓存空值。</p>
+<h3 id="5-通过缓存预热避免缓存雪崩、缓存穿透问题"><a href="#5-通过缓存预热避免缓存雪崩、缓存穿透问题" class="headerlink" title="5.通过缓存预热避免缓存雪崩、缓存穿透问题"></a>5.通过缓存预热避免缓存雪崩、缓存穿透问题</h3><p>创建短链接后</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">stringRedisTemplate<span class="token punctuation">.</span><span class="token function">opsForValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>
+                        fullShortUrl<span class="token punctuation">,</span> 
+                        requestParam<span class="token punctuation">.</span><span class="token function">getOriginUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        <span class="token class-name">LinkUtil</span><span class="token punctuation">.</span><span class="token function">getLinkCacheValidDate</span><span class="token punctuation">(</span>requestParam<span class="token punctuation">.</span><span class="token function">getValidDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span><span class="token constant">MILLISECONDS</span>
+                <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><h3 id="问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL"><a href="#问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL" class="headerlink" title="问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL"></a>问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL</h3><p>解决方法：由于使用了ShardingSphere进行分表，手动向数据库添加的用户记录是无法查询到的，只有通过接口测试向数据库中添加的用户记录，也就是通过用户注册功能添加的用户，才能被查询到。</p>
-<h3 id="问题：在开发用户中台调用功能时，接口测试提示连接失败"><a href="#问题：在开发用户中台调用功能时，接口测试提示连接失败" class="headerlink" title="问题：在开发用户中台调用功能时，接口测试提示连接失败"></a>问题：在开发用户中台调用功能时，接口测试提示连接失败</h3><p>解决方法：idea中要将project和admin同时启动，因为admin中调用的时project中的方法，两个要全部启动</p>
+
+<h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><h3 id="1-问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL"><a href="#1-问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL" class="headerlink" title="1.问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL"></a>1.问题：开发用户登录功能时，需要查询用户记录，查询的UserDO总为NULL</h3><p>解决方法：由于使用了ShardingSphere进行分表，手动向数据库添加的用户记录是无法查询到的，只有通过接口测试向数据库中添加的用户记录，也就是通过用户注册功能添加的用户，才能被查询到。</p>
+<h3 id="2-问题：在开发用户中台调用功能时，接口测试提示连接失败"><a href="#2-问题：在开发用户中台调用功能时，接口测试提示连接失败" class="headerlink" title="2.问题：在开发用户中台调用功能时，接口测试提示连接失败"></a>2.问题：在开发用户中台调用功能时，接口测试提示连接失败</h3><p>解决方法：idea中要将project和admin同时启动，因为admin中调用的时project中的方法，两个要全部启动</p>
 </div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2024-02-02</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://realhuameng.github.io/2024/02/02/saas-duan-lian-jie/,Realhuameng,SaaS短链接项目开发日志,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2024/02/03/shou-cuo-spring-08-ding-yi-biao-ji-lei-xing-aware-jie-kou-shi-xian-gan-zhi-rong-qi-dui-xiang/" title="手搓Spring-08定义标记类型Aware接口，实现感知容器对象">Post anterior</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2024/01/29/shou-cuo-spring-07-xiang-xu-ni-ji-zhu-ce-gou-zi-shi-xian-bean-dui-xiang-de-chu-shi-hua-he-xiao-hui-fang-fa/" title="手搓Spring-07向虚拟机注册钩子，实现Bean对象的初始化和销毁方法">Post siguiente</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
