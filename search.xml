@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title>面试准备</title>
-      <link href="/2024/02/28/mian-shi-zhun-bei/"/>
-      <url>/2024/02/28/mian-shi-zhun-bei/</url>
-      
-        <content type="html"><![CDATA[<h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>面试官您好，我叫XX，目前大三，就读于哈尔滨工程大学计算机科学与技术专业。在校期间，我自学了Java开发的相关技能和一些常用框架，比如Spring、SpringBoot以及MySQL数据库、Redis等，并且独立开发了Java后端项目，比如Saas短链接系统。另外，在大二大三时，我也参加了许多比赛，计算机方面的例如蓝桥杯，数学建模方面我参加了美国大学生数学建模比赛和全国大学生数学建模比赛。在日常的学习生活中，我是一个乐于钻研技术，敢于迎接挑战的人，平时喜欢通过博客来整理自己所学习的知识，希望在此次面试中能够得到您的认可，以上就是我的个人情况。</p><h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>引入：</p><p>短链接经常出现在咱们日常生活中，大家总是能在某些活动节日里收到各种营销短信，里边就会出现短链接。</p><p>简单介绍：</p><p>我在校开发的短链接项目主要功能是将用户提交的长URL通过特定的算法来转换成一个唯一的短标识符，将这个短标识符和用户发送的长URL关联起来保存到数据库中，当用户访问这个短链接时，短链接服务收到请求后会根据唯一标识符查找长URL，在将用户重定向到这个长URL。这样的短链接不仅更容易记忆和分享，还节省了字符空间，特别是一些限制字符数的场合。</p><p>模块介绍：</p><p>项目主要分为后管系统模块和主要的短链功能模块，后管系统包括对用户注册信息、登录的管理、中台联调，功能模块包括长短链接的转换、链接的存储。</p><p>技术选型：</p><p>采用最新的JDK17进行开发，技术架构包括SpringBoot、Redis、MySQL、ShardingSphere，使用ApiFox进行接口测试</p><p>开发难点：</p><p>海量存储的场景</p><p>ShardingSphere分库分表</p><p>海量并发</p><p>布隆过滤器搭配双重锁机制查询数据库，有效的避免了缓存击穿和缓存穿透。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>手搓Spring-11基于JDK、Cglib实现AOP切面</title>
       <link href="/2024/02/15/shou-cuo-spring-11-ji-yu-jdk-cglib-shi-xian-aop-qie-mian/"/>
       <url>/2024/02/15/shou-cuo-spring-11-ji-yu-jdk-cglib-shi-xian-aop-qie-mian/</url>
